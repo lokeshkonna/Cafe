@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Store</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+        --brown: #6a4034;
+        --dark-brown: #40251f;
+        --cream: #f8f5f0;
+    --white: #ffffff;
+        --text: #59443c;
+        --muted: #8b7b73;
+        --border: #e6dcd5;
+        --soft-brown: #f0e5de;
+        --shadow: 0 18px 45px rgba(64, 37, 31, 0.09);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "DM Sans", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    padding: 70px 30px;
+    background:
+        linear-gradient(135deg, rgba(106, 64, 52, 0.06) 0, transparent 35%),
+        linear-gradient(315deg, rgba(64, 37, 31, 0.04) 0, transparent 40%),
+        var(--cream);
+    color: var(--dark-brown);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: rgba(106, 64, 52, 0.06);
+    top: -150px;
+    right: -100px;
+    filter: blur(20px);
+    animation: floatingBackground 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(64, 37, 31, 0.035);
+    bottom: -150px;
+    left: -100px;
+    filter: blur(20px);
+    animation: floatingBackground 10s ease-in-out infinite reverse;
+    pointer-events: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 52px;
+    animation: headerReveal 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.header span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background: var(--dark-brown);
+    color: var(--cream);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 8px 25px rgba(64, 37, 31, 0.12);
+    animation: badgeFloat 3s ease-in-out infinite;
+}
+
+.header span::before {
+    content: "✦";
+    animation: spin 3s linear infinite;
+}
+
+.header h1 {
+    margin-top: 18px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -3px;
+    color: var(--dark-brown);
+}
+
+.header p {
+    max-width: 600px;
+    margin: 20px auto 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.food-card {
+    position: relative;
+    display: flex;
+    gap: 24px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: cardReveal 0.8s cubic-bezier(.2,.8,.2,1) forwards;
+    transition:
+        transform 0.5s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.5s ease,
+        border-color 0.4s ease;
+}
+
+.food-card:nth-child(1) { animation-delay: .1s; }
+.food-card:nth-child(2) { animation-delay: .2s; }
+.food-card:nth-child(3) { animation-delay: .3s; }
+.food-card:nth-child(4) { animation-delay: .4s; }
+.food-card:nth-child(5) { animation-delay: .5s; }
+.food-card:nth-child(6) { animation-delay: .6s; }
+.food-card:nth-child(7) { animation-delay: .7s; }
+.food-card:nth-child(8) { animation-delay: .8s; }
+.food-card:nth-child(9) { animation-delay: .9s; }
+.food-card:nth-child(10) { animation-delay: 1s; }
+
+.food-card:hover {
+    transform: translateY(-12px) scale(1.01);
+    box-shadow:
+        0 30px 80px rgba(64, 37, 31, 0.15),
+        0 5px 20px rgba(106, 64, 52, 0.08);
+    border-color: var(--brown);
+}
+
+.food-card::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    right: -100px;
+    top: -100px;
+    background: var(--soft-brown);
+    transition: 0.7s cubic-bezier(.2,.8,.2,1);
+}
+
+.food-card:hover::before {
+    width: 280px;
+    height: 280px;
+}
+
+.food-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.45),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: 0.8s ease;
+    pointer-events: none;
+}
+
+.food-card:hover::after {
+    left: 140%;
+}
+
+.image-box {
+    width: 220px;
+    min-width: 220px;
+    height: 285px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #eadfd8;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.food-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:
+        transform 0.8s cubic-bezier(.2,.8,.2,1),
+        filter 0.5s ease;
+}
+
+.food-card:hover .food-image {
+    transform: scale(1.12) rotate(1.5deg);
+    filter: saturate(1.08);
+}
+
+.badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 5;
+    padding: 7px 12px;
+    border-radius: 4px;
+    background: rgba(255,255,255,.94);
+    color: var(--brown);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+    animation: badgePulse 3s ease-in-out infinite;
+}
+
+.details {
+    position: relative;
+    z-index: 3;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+}
+
+.category {
+    color: var(--brown);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.food-name {
+    color: var(--dark-brown);
+    font-family: "Playfair Display", serif;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -.8px;
+    transition: color .3s ease;
+}
+
+.food-card:hover .food-name {
+    color: var(--brown);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #f59e0b;
+    font-size: 14px;
+}
+
+.rating span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.description {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.price-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2px;
+}
+
+.price {
+    color: var(--dark-brown);
+    font-size: 26px;
+    font-weight: 800;
+    transition: transform .3s ease;
+}
+
+.food-card:hover .price {
+    transform: translateX(3px);
+}
+
+.old-price {
+    color: #aeb6b1;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+
+.quantity-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quantity-label {
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fffdfa;
+}
+
+.quantity-control button {
+    width: 34px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    color: var(--brown);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .25s ease;
+}
+
+.quantity-control button:hover {
+    background: var(--brown);
+    color: white;
+}
+
+.quantity-control button:active {
+    transform: scale(.85);
+}
+
+.quantity-control input {
+    width: 36px;
+    height: 36px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--dark-brown);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.btn {
+    position: relative;
+    height: 43px;
+    border: none;
+    border-radius: 6px;
+    padding: 0 16px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    overflow: hidden;
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        box-shadow .3s ease;
+}
+
+.btn:active {
+    transform: scale(.94);
+}
+
+.wishlist {
+    width: 43px;
+    padding: 0;
+    background: var(--soft-brown);
+    color: var(--brown);
+    font-size: 20px;
+}
+
+.wishlist:hover {
+    background: var(--brown);
+    color: white;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 10px 25px rgba(106,64,52,.25);
+}
+
+.wishlist.active {
+    background: var(--dark-brown);
+    color: white;
+    animation: heartPop .45s ease;
+}
+
+.cart {
+    flex: 1;
+    background: var(--brown);
+    color: white;
+    box-shadow: 0 8px 22px rgba(106,64,52,.2);
+}
+
+.cart::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.2),
+        transparent
+    );
+    transition: .6s ease;
+}
+
+.cart:hover::before {
+    left: 100%;
+}
+
+.cart:hover {
+    background: var(--dark-brown);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(64,37,31,.3);
+}
+
+.buy-now {
+    flex: 1;
+    background: var(--cream);
+    color: var(--dark-brown);
+    border: 1px solid var(--border);
+}
+
+.buy-now:hover {
+    background: var(--dark-brown);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(64,37,31,.18);
+}
+
+@keyframes cardReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes headerReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes badgeFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+}
+
+@keyframes floatingBackground {
+    0%, 100% {
+        transform: translate(0,0);
+    }
+
+    50% {
+        transform: translate(25px,20px);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes heartPop {
+    0% {
+        transform: scale(.7);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 1100px) {
+    .food-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .food-card {
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
+    }
+}
+
+@media (max-width: 650px) {
+    body {
+        padding: 35px 15px;
+    }
+
+    .header {
+        margin-bottom: 40px;
+    }
+
+    .header h1 {
+        font-size: 40px;
+        letter-spacing: -2px;
+    }
+
+    .header p {
+        font-size: 13px;
+    }
+
+    .food-card {
+        flex-direction: column;
+        padding: 14px;
+        border-radius: 22px;
+    }
+
+    .image-box {
+        width: 100%;
+        min-width: 100%;
+        height: 250px;
+    }
+
+    .food-name {
+        font-size: 25px;
+    }
+
+    .actions {
+        width: 100%;
+    }
+
+    .btn {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .header h1 {
+        font-size: 34px;
+    }
+
+    .image-box {
+        height: 220px;
+    }
+
+    .actions {
+        display: grid;
+        grid-template-columns: 43px 1fr 1fr;
+    }
+}
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <span>Fresh • Delicious • Authentic</span>
+            <h1>Our Food Collection</h1>
+            <p>
+                Explore our delicious selection of freshly prepared dishes,
+                made with authentic ingredients and unforgettable flavors.
+            </p>
+        </div>
+
+        <div class="food-grid">
+
+            <div class="food-card">
+                <div class="image-box">
+                    <span class="badge">BEST SELLER</span>
+                    <img class="food-image"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaKIHdGwp0ei1-M01N24MERbBbrFgK8YrxX29OfV_Zjd64BM5RaB60G9SF&s=1024"
+                    alt="Chicken Biryani">
+                </div>
+
+                <div class="details">
+                    <span class="category">Indian Cuisine</span>
+                    <h2 class="food-name">Chicken Biryani</h2>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>4.9 (245)</span>
+                    </div>
+
+                    <p class="description">
+                        Aromatic basmati rice cooked with tender chicken and rich Indian spices.
+                    </p>
+
+                    <div class="price-box">
+                        <span class="price">₹250</span>
+                        <span class="old-price">₹299</span>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity</span>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q1', -1)">−</button>
+                            <input id="q1" value="1" readonly>
+                            <button onclick="changeQuantity('q1', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn wishlist">♡</button>
+                        <button class="btn cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="image-box">
+                    <span class="badge">POPULAR</span>
+                    <img class="food-image"
+                    src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
+                    alt="Samosa">
+                </div>
+
+                <div class="details">
+                    <span class="category">Indian Snacks</span>
+                    <h2 class="food-name">Crispy Samosa</h2>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>4.8 (189)</span>
+                    </div>
+
+                    <p class="description">
+                        Golden crispy pastry filled with spicy potatoes, peas and aromatic herbs.
+                    </p>
+
+                    <div class="price-box">
+                        <span class="price">₹80</span>
+                        <span class="old-price">₹100</span>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity</span>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q2', -1)">−</button>
+                            <input id="q2" value="1" readonly>
+                            <button onclick="changeQuantity('q2', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn wishlist">♡</button>
+                        <button class="btn cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="image-box">
+                    <span class="badge">NEW</span>
+                    <img class="food-image"
+                    src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80"
+                    alt="Pizza">
+                </div>
+
+                <div class="details">
+                    <span class="category">Italian Cuisine</span>
+                    <h2 class="food-name">Cheese Pizza</h2>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>4.7 (312)</span>
+                    </div>
+
+                    <p class="description">
+                        Delicious cheesy pizza topped with fresh vegetables and Italian herbs.
+                    </p>
+
+                    <div class="price-box">
+                        <span class="price">₹299</span>
+                        <span class="old-price">₹349</span>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity</span>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q3', -1)">−</button>
+                            <input id="q3" value="1" readonly>
+                            <button onclick="changeQuantity('q3', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn wishlist">♡</button>
+                        <button class="btn cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="image-box">
+                    <span class="badge">HOT</span>
+                    <img class="food-image"
+                    src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80"
+                    alt="Fried Rice">
+                </div>
+
+                <div class="details">
+                    <span class="category">Asian Cuisine</span>
+                    <h2 class="food-name">Veg Fried Rice</h2>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>4.6 (156)</span>
+                    </div>
+
+                    <p class="description">
+                        Flavorful fried rice tossed with fresh vegetables and delicious Asian sauces.
+                    </p>
+
+                    <div class="price-box">
+                        <span class="price">₹180</span>
+                        <span class="old-price">₹220</span>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity</span>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q4', -1)">−</button>
+                            <input id="q4" value="1" readonly>
+                            <button onclick="changeQuantity('q4', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn wishlist">♡</button>
+                        <button class="btn cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="image-box">
+                    <span class="badge">POPULAR</span>
+                    <img class="food-image"
+                    src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80"
+                    alt="Butter Chicken">
+                </div>
+
+                <div class="details">
+                    <span class="category">North Indian</span>
+                    <h2 class="food-name">Butter Chicken</h2>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>4.9 (278)</span>
+                    </div>
+
+                    <p class="description">
+                        Creamy and rich chicken curry prepared with butter, tomato and Indian spices.
+                    </p>
+
+                    <div class="price-box">
+                        <span class="price">₹320</span>
+                        <span class="old-price">₹380</span>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity</span>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q5', -1)">−</button>
+                            <input id="q5" value="1" readonly>
+                            <button onclick="changeQuantity('q5', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn wishlist">♡</button>
+                        <button class="btn cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="image-box">
+                    <span class="badge">FRESH</span>
+                    <img class="food-image"
+                    src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+                    alt="Burger">
+                </div>
+
+                <div class="details">
+                    <span class="category">Fast Food</span>
+                    <h2 class="food-name">Classic Burger</h2>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>4.8 (342)</span>
+                    </div>
+
+                    <p class="description">
+                        Juicy grilled patty layered with cheese, lettuce, tomato and special sauce.
+                    </p>
+
+                    <div class="price-box">
+                        <span class="price">₹220</span>
+                        <span class="old-price">₹270</span>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity</span>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q6', -1)">−</button>
+                            <input id="q6" value="1" readonly>
+                            <button onclick="changeQuantity('q6', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn wishlist">♡</button>
+                        <button class="btn cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="image-box">
+                    <span class="badge">SPECIAL</span>
+                    <img class="food-image"
+                    src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=800&q=80"
+                    alt="Pasta">
+                </div>
+
+                <div class="details">
+                    <span class="category">Italian Cuisine</span>
+                    <h2 class="food-name">Creamy Pasta</h2>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>4.7 (201)</span>
+                    </div>
+
+                    <p class="description">
+                        Creamy pasta tossed with parmesan cheese, herbs and a delicious white sauce.
+                    </p>
+
+                    <div class="price-box">
+                        <span class="price">₹280</span>
+                        <span class="old-price">₹330</span>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity</span>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q7', -1)">−</button>
+                            <input id="q7" value="1" readonly>
+                            <button onclick="changeQuantity('q7', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn wishlist">♡</button>
+                        <button class="btn cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="image-box">
+                    <span class="badge">VEG</span>
+                    <img class="food-image"
+                    src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=80"
+                    alt="Thali">
+                </div>
+
+                <div class="details">
+                    <span class="category">Indian Cuisine</span>
+                    <h2 class="food-name">Indian Thali</h2>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>4.9 (198)</span>
+                    </div>
+
+                    <p class="description">
+                        Traditional Indian meal served with rice, curries, vegetables, bread and dessert.
+                    </p>
+
+                    <div class="price-box">
+                        <span class="price">₹299</span>
+                        <span class="old-price">₹349</span>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity</span>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q8', -1)">−</button>
+                            <input id="q8" value="1" readonly>
+                            <button onclick="changeQuantity('q8', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn wishlist">♡</button>
+                        <button class="btn cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="food-card">
+                <div class="image-box">
+                    <span class="badge">SWEET</span>
+                    <img class="food-image"
+                    src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"
+                    alt="Chocolate Cake">
+                </div>
+
+                <div class="details">
+                    <span class="category">Desserts</span>
+                    <h2 class="food-name">Chocolate Cake</h2>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>4.9 (365)</span>
+                    </div>
+
+                    <p class="description">
+                        Soft and rich chocolate cake covered with creamy chocolate frosting.
+                    </p>
+
+                    <div class="price-box">
+                        <span class="price">₹180</span>
+                        <span class="old-price">₹220</span>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity</span>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q9', -1)">−</button>
+                            <input id="q9" value="1" readonly>
+                            <button onclick="changeQuantity('q9', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn wishlist">♡</button>
+                        <button class="btn cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+                <div class="food-card">
+    <div class="image-box">
+        <span class="badge">BEST SELLER</span>
+        <img class="food-image"
+        src="https://img.magnific.com/premium-photo/traditional-hyderabadi-vegetable-veg-dum-biryani-with-mixed-veggies-served-with-mixed-raita-selective-focus_726363-27.jpg?semt=ais_hybrid&w=740&q=80"
+        alt="Chicken Biryani">
+    </div>
+
+    <div class="details">
+        <span class="category">Indian Cuisine</span>
+        <h2 class="food-name">Chicken Biryani</h2>
+
+        <div class="rating">
+            ★★★★★
+            <span>4.9 (245)</span>
+        </div>
+
+        <p class="description">
+            Aromatic basmati rice cooked with tender chicken and rich Indian spices.
+        </p>
+
+        <div class="price-box">
+            <span class="price">₹250</span>
+            <span class="old-price">₹299</span>
+        </div>
+
+        <div class="quantity-section">
+            <span class="quantity-label">Quantity</span>
+            <div class="quantity-control">
+                <button onclick="changeQuantity('q11', -1)">−</button>
+                <input id="q11" value="1" readonly>
+                <button onclick="changeQuantity('q11', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn wishlist">♡</button>
+            <button class="btn cart">Add to Cart</button>
+            <button class="btn buy-now">Buy Now</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="food-card">
+    <div class="image-box">
+        <span class="badge">POPULAR</span>
+        <img class="food-image"
+        src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80"
+        alt="Samosa">
+    </div>
+
+    <div class="details">
+        <span class="category">Indian Snacks</span>
+        <h2 class="food-name">Crispy Samosa</h2>
+
+        <div class="rating">
+            ★★★★★
+            <span>4.8 (189)</span>
+        </div>
+
+        <p class="description">
+            Golden crispy samosa filled with spicy potatoes, peas and aromatic herbs.
+        </p>
+
+        <div class="price-box">
+            <span class="price">₹80</span>
+            <span class="old-price">₹100</span>
+        </div>
+
+        <div class="quantity-section">
+            <span class="quantity-label">Quantity</span>
+            <div class="quantity-control">
+                <button onclick="changeQuantity('q12', -1)">−</button>
+                <input id="q12" value="1" readonly>
+                <button onclick="changeQuantity('q12', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn wishlist">♡</button>
+            <button class="btn cart">Add to Cart</button>
+            <button class="btn buy-now">Buy Now</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="food-card">
+    <div class="image-box">
+        <span class="badge">NEW</span>
+        <img class="food-image"
+        src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80"
+        alt="Cheese Pizza">
+    </div>
+
+    <div class="details">
+        <span class="category">Italian Cuisine</span>
+        <h2 class="food-name">Cheese Pizza</h2>
+
+        <div class="rating">
+            ★★★★★
+            <span>4.7 (312)</span>
+        </div>
+
+        <p class="description">
+            Delicious cheesy pizza topped with fresh vegetables and Italian herbs.
+        </p>
+
+        <div class="price-box">
+            <span class="price">₹299</span>
+            <span class="old-price">₹349</span>
+        </div>
+
+        <div class="quantity-section">
+            <span class="quantity-label">Quantity</span>
+            <div class="quantity-control">
+                <button onclick="changeQuantity('q13', -1)">−</button>
+                <input id="q13" value="1" readonly>
+                <button onclick="changeQuantity('q13', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn wishlist">♡</button>
+            <button class="btn cart">Add to Cart</button>
+            <button class="btn buy-now">Buy Now</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="food-card">
+    <div class="image-box">
+        <span class="badge">HOT</span>
+        <img class="food-image"
+        src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80"
+        alt="Fried Rice">
+    </div>
+
+    <div class="details">
+        <span class="category">Asian Cuisine</span>
+        <h2 class="food-name">Veg Fried Rice</h2>
+
+        <div class="rating">
+            ★★★★★
+            <span>4.6 (156)</span>
+        </div>
+
+        <p class="description">
+            Flavorful fried rice tossed with fresh vegetables and delicious Asian sauces.
+        </p>
+
+        <div class="price-box">
+            <span class="price">₹180</span>
+            <span class="old-price">₹220</span>
+        </div>
+
+        <div class="quantity-section">
+            <span class="quantity-label">Quantity</span>
+            <div class="quantity-control">
+                <button onclick="changeQuantity('q14', -1)">−</button>
+                <input id="q14" value="1" readonly>
+                <button onclick="changeQuantity('q14', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn wishlist">♡</button>
+            <button class="btn cart">Add to Cart</button>
+            <button class="btn buy-now">Buy Now</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="food-card">
+    <div class="image-box">
+        <span class="badge">SPECIAL</span>
+        <img class="food-image"
+        src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80"
+        alt="Butter Chicken">
+    </div>
+
+    <div class="details">
+        <span class="category">North Indian</span>
+        <h2 class="food-name">Butter Chicken</h2>
+
+        <div class="rating">
+            ★★★★★
+            <span>4.9 (278)</span>
+        </div>
+
+        <p class="description">
+            Creamy butter chicken prepared with tomato, butter, cream and aromatic spices.
+        </p>
+
+        <div class="price-box">
+            <span class="price">₹320</span>
+            <span class="old-price">₹380</span>
+        </div>
+
+        <div class="quantity-section">
+            <span class="quantity-label">Quantity</span>
+            <div class="quantity-control">
+                <button onclick="changeQuantity('q15', -1)">−</button>
+                <input id="q15" value="1" readonly>
+                <button onclick="changeQuantity('q15', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn wishlist">♡</button>
+            <button class="btn cart">Add to Cart</button>
+            <button class="btn buy-now">Buy Now</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="food-card">
+    <div class="image-box">
+        <span class="badge">FRESH</span>
+        <img class="food-image"
+        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+        alt="Classic Burger">
+    </div>
+
+    <div class="details">
+        <span class="category">Fast Food</span>
+        <h2 class="food-name">Classic Burger</h2>
+
+        <div class="rating">
+            ★★★★★
+            <span>4.8 (342)</span>
+        </div>
+
+        <p class="description">
+            Juicy grilled burger with cheese, lettuce, tomato and our special sauce.
+        </p>
+
+        <div class="price-box">
+            <span class="price">₹220</span>
+            <span class="old-price">₹270</span>
+        </div>
+
+        <div class="quantity-section">
+            <span class="quantity-label">Quantity</span>
+            <div class="quantity-control">
+                <button onclick="changeQuantity('q16', -1)">−</button>
+                <input id="q16" value="1" readonly>
+                <button onclick="changeQuantity('q16', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn wishlist">♡</button>
+            <button class="btn cart">Add to Cart</button>
+            <button class="btn buy-now">Buy Now</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="food-card">
+    <div class="image-box">
+        <span class="badge">SPECIAL</span>
+        <img class="food-image"
+        src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=800&q=80"
+        alt="Creamy Pasta">
+    </div>
+
+    <div class="details">
+        <span class="category">Italian Cuisine</span>
+        <h2 class="food-name">Creamy Pasta</h2>
+
+        <div class="rating">
+            ★★★★★
+            <span>4.7 (201)</span>
+        </div>
+
+        <p class="description">
+            Creamy pasta tossed with parmesan cheese, herbs and delicious white sauce.
+        </p>
+
+        <div class="price-box">
+            <span class="price">₹280</span>
+            <span class="old-price">₹330</span>
+        </div>
+
+        <div class="quantity-section">
+            <span class="quantity-label">Quantity</span>
+            <div class="quantity-control">
+                <button onclick="changeQuantity('q17', -1)">−</button>
+                <input id="q17" value="1" readonly>
+                <button onclick="changeQuantity('q17', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn wishlist">♡</button>
+            <button class="btn cart">Add to Cart</button>
+            <button class="btn buy-now">Buy Now</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="food-card">
+    <div class="image-box">
+        <span class="badge">VEG</span>
+        <img class="food-image"
+        src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=80"
+        alt="Indian Thali">
+    </div>
+
+    <div class="details">
+        <span class="category">Indian Cuisine</span>
+        <h2 class="food-name">Indian Thali</h2>
+
+        <div class="rating">
+            ★★★★★
+            <span>4.9 (198)</span>
+        </div>
+
+        <p class="description">
+            Traditional Indian meal with rice, curries, vegetables, bread and delicious dessert.
+        </p>
+
+        <div class="price-box">
+            <span class="price">₹299</span>
+            <span class="old-price">₹349</span>
+        </div>
+
+        <div class="quantity-section">
+            <span class="quantity-label">Quantity</span>
+            <div class="quantity-control">
+                <button onclick="changeQuantity('q18', -1)">−</button>
+                <input id="q18" value="1" readonly>
+                <button onclick="changeQuantity('q18', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn wishlist">♡</button>
+            <button class="btn cart">Add to Cart</button>
+            <button class="btn buy-now">Buy Now</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="food-card">
+    <div class="image-box">
+        <span class="badge">SWEET</span>
+        <img class="food-image"
+        src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"
+        alt="Chocolate Cake">
+    </div>
+
+    <div class="details">
+        <span class="category">Desserts</span>
+        <h2 class="food-name">Chocolate Cake</h2>
+
+        <div class="rating">
+            ★★★★★
+            <span>4.9 (365)</span>
+        </div>
+
+        <p class="description">
+            Soft and rich chocolate cake covered with creamy chocolate frosting.
+        </p>
+
+        <div class="price-box">
+            <span class="price">₹180</span>
+            <span class="old-price">₹220</span>
+        </div>
+
+        <div class="quantity-section">
+            <span class="quantity-label">Quantity</span>
+            <div class="quantity-control">
+                <button onclick="changeQuantity('q19', -1)">−</button>
+                <input id="q19" value="1" readonly>
+                <button onclick="changeQuantity('q19', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn wishlist">♡</button>
+            <button class="btn cart">Add to Cart</button>
+            <button class="btn buy-now">Buy Now</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+            <div class="food-card">
+                <div class="image-box">
+                    <span class="badge">COOL</span>
+                    <img class="food-image"
+                    src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80"
+                    alt="Donuts">
+                </div>
+
+                <div class="details">
+                    <span class="category">Desserts</span>
+                    <h2 class="food-name">Glazed Donuts</h2>
+
+                    <div class="rating">
+                        ★★★★★
+                        <span>4.6 (174)</span>
+                    </div>
+
+                    <p class="description">
+                        Soft fluffy donuts covered with sweet glazed topping and delicious flavors.
+                    </p>
+
+                    <div class="price-box">
+                        <span class="price">₹150</span>
+                        <span class="old-price">₹190</span>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="quantity-label">Quantity</span>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q10', -1)">−</button>
+                            <input id="q10" value="1" readonly>
+                            <button onclick="changeQuantity('q10', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn wishlist">♡</button>
+                        <button class="btn cart">Add to Cart</button>
+                        <button class="btn buy-now">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+    function changeQuantity(id, value) {
+        const input = document.getElementById(id);
+        let quantity = parseInt(input.value);
+
+        quantity += value;
+
+        if (quantity < 1) {
+            quantity = 1;
+        }
+
+        input.style.transform = "scale(1.25)";
+
+        setTimeout(() => {
+            input.style.transform = "scale(1)";
+        }, 150);
+
+        input.value = quantity;
+    }
+
+    document.querySelectorAll(".wishlist").forEach(button => {
+        button.addEventListener("click", () => {
+            button.classList.toggle("active");
+
+            if (button.classList.contains("active")) {
+                button.innerHTML = "♥";
+            } else {
+                button.innerHTML = "♡";
+            }
+        });
+    });
+
+    document.querySelectorAll(".cart").forEach(button => {
+        button.addEventListener("click", () => {
+            const original = button.innerHTML;
+
+            button.innerHTML = "Added ✓";
+            button.style.background = "var(--dark-brown)";
+
+            setTimeout(() => {
+                button.innerHTML = original;
+                button.style.background = "";
+            }, 1500);
+        });
+    });
+
+    document.querySelectorAll(".buy-now").forEach(button => {
+        button.addEventListener("click", () => {
+            button.innerHTML = "Processing...";
+
+            setTimeout(() => {
+                button.innerHTML = "Order Ready ✓";
+            }, 1000);
+        });
+    });
+</script>
+
+</body>
+</html>

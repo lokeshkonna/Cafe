@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Our Cafe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --brown: #684035;
+    --dark-brown: #3d241e;
+    --light-brown: #c99378;
+    --cream: #f8f5f0;
+    --white: #ffffff;
+    --text: #30231f;
+    --gray: #777;
+    --border: #ded8d3;
+    --error: #c94b4b;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    color: var(--text);
+    background: var(--cream);
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.login-page {
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+}
+
+
+/* =========================
+   LEFT IMAGE
+========================= */
+
+.login-image {
+    position: relative;
+
+    min-height: 100vh;
+
+    background:
+        url("../img-1.png")
+        center center /
+        cover
+        no-repeat;
+
+    color: white;
+
+    overflow: hidden;
+}
+
+
+.overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(48, 29, 24, 0.88),
+            rgba(64, 37, 31, 0.55)
+        );
+}
+
+
+.image-content {
+    position: relative;
+
+    z-index: 2;
+
+    height: 100%;
+
+    padding: 55px 12%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+
+/* Brand */
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 600;
+}
+
+.brand i {
+    color: #d5a48d;
+
+    font-size: 22px;
+}
+
+
+/* Welcome */
+
+.welcome-text {
+    margin-bottom: 80px;
+}
+
+.welcome-text p {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 13px;
+
+    letter-spacing: 1.5px;
+
+    color: #d5a48d;
+
+    margin-bottom: 15px;
+}
+
+.welcome-text h1 {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: clamp(
+        42px,
+        4vw,
+        65px
+    );
+
+    line-height: 1.1;
+
+    font-weight: 600;
+
+    margin-bottom: 20px;
+}
+
+.welcome-text span {
+    display: block;
+
+    max-width: 450px;
+
+    color: #ddd;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.login-section {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px;
+}
+
+.login-container {
+    width: 100%;
+
+    max-width: 430px;
+}
+
+
+/* Back */
+
+.back-home {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #777;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    margin-bottom: 45px;
+
+    transition: 0.3s;
+}
+
+.back-home:hover {
+    color: var(--brown);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.login-header {
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+.login-icon {
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f0e3dc;
+
+    color: var(--brown);
+
+    font-size: 21px;
+}
+
+.login-header h2 {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 31px;
+
+    color: var(--dark-brown);
+
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    font-size: 14px;
+
+    color: var(--gray);
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+    color: var(--text);
+}
+
+
+/* Password label */
+
+.password-label {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+.password-label label {
+    margin-bottom: 0;
+}
+
+.password-label a {
+    font-size: 12px;
+
+    color: var(--brown);
+
+    text-decoration: none;
+}
+
+.password-label a:hover {
+    text-decoration: underline;
+}
+
+
+/* Input */
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper > i {
+    position: absolute;
+
+    left: 15px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #9a8f89;
+
+    font-size: 14px;
+}
+
+.input-wrapper input {
+    width: 100%;
+
+    height: 50px;
+
+    padding:
+        0 45px 0 44px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 6px;
+
+    background: white;
+
+    color: var(--text);
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.25s;
+}
+
+.input-wrapper input::placeholder {
+    color: #aaa;
+}
+
+.input-wrapper input:focus {
+    border-color: var(--brown);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(104, 64, 53, 0.08);
+}
+
+
+/* Password toggle */
+
+.password-toggle {
+    position: absolute;
+
+    right: 14px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #999;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   REMEMBER
+========================= */
+
+.remember-row {
+    margin-bottom: 20px;
+}
+
+.remember {
+    display: flex !important;
+
+    align-items: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+    color: #777 !important;
+
+    font-size: 12px !important;
+
+    font-weight: 400 !important;
+}
+
+.remember input {
+    accent-color: var(--brown);
+
+    width: 14px;
+    height: 14px;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+    min-height: 20px;
+
+    font-size: 12px;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+}
+
+.error-message {
+    color: var(--error);
+}
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.login-button {
+    width: 100%;
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background:
+        var(--dark-brown);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    transition: 0.3s;
+}
+
+.login-button:hover {
+    background: var(--brown);
+
+    transform: translateY(-1px);
+}
+
+.login-button:disabled {
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+.register-text {
+    text-align: center;
+
+    color: #777;
+
+    font-size: 13px;
+
+    margin-top: 25px;
+}
+
+.register-text a {
+    color: var(--brown);
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 28px 0;
+
+    color: #aaa;
+
+    font-size: 11px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+
+    height: 1px;
+
+    flex: 1;
+
+    background: #e5dfda;
+}
+
+
+/* =========================
+   GUEST
+========================= */
+
+.guest-button {
+    width: 100%;
+
+    height: 48px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 6px;
+
+    background: white;
+
+    color: var(--text);
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    transition: 0.3s;
+}
+
+.guest-button:hover {
+    border-color: var(--brown);
+
+    color: var(--brown);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .login-image {
+        display: none;
+    }
+
+    .login-section {
+        padding: 30px;
+    }
+
+    .login-container {
+        max-width: 450px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .login-section {
+        padding: 25px 20px;
+    }
+
+    .back-home {
+        margin-bottom: 35px;
+    }
+
+    .login-header h2 {
+        font-size: 27px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <!-- Left Side -->
+        <section class="login-image">
+
+            <div class="overlay"></div>
+
+            <div class="image-content">
+
+                <div class="brand">
+                    <i class="fa-solid fa-mug-hot"></i>
+                    <span>Our Cafe</span>
+                </div>
+
+                <div class="welcome-text">
+                    <p>WELCOME BACK</p>
+
+                    <h1>
+                        Your Perfect<br>
+                        Coffee Awaits.
+                    </h1>
+
+                    <span>
+                        Login to choose your table,
+                        explore our menu and order your
+                        favourite food.
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Right Side -->
+        <section class="login-section">
+
+            <div class="login-container">
+
+                <a href="../index.html" class="back-home">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Home
+                </a>
+
+
+                <div class="login-header">
+
+                    <div class="login-icon">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+
+                    <h2>Welcome Back!</h2>
+
+                    <p>
+                        Login to continue to Our Cafe
+                    </p>
+
+                </div>
+
+
+                <!-- Login Form -->
+
+                <form id="loginForm">
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="form-group">
+
+                        <div class="password-label">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <a href="#">
+                                Forgot Password?
+                            </a>
+
+                        </div>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                            >
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Remember -->
+
+                    <div class="remember-row">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                            >
+
+                            <span>Remember me</span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Error -->
+
+                    <div
+                        class="message error-message"
+                        id="errorMessage">
+                    </div>
+
+
+                    <!-- Login Button -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="loginButton"
+                    >
+
+                        <span id="buttonText">
+                            Login
+                        </span>
+
+                        <i
+                            class="fa-solid fa-arrow-right"
+                            id="buttonIcon">
+                        </i>
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- Register -->
+
+                <div class="register-text">
+
+                    Don't have an account?
+
+                    <a href="#">
+                        Create Account
+                    </a>
+
+                </div>
+
+
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+
+                <!-- Guest -->
+
+                <button
+                    class="guest-button"
+                    id="guestButton"
+                >
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Continue as Guest
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        const loginForm =
+    document.getElementById("loginForm");
+
+const passwordInput =
+    document.getElementById("password");
+
+const passwordToggle =
+    document.getElementById("passwordToggle");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const buttonText =
+    document.getElementById("buttonText");
+
+const buttonIcon =
+    document.getElementById("buttonIcon");
+
+const guestButton =
+    document.getElementById("guestButton");
+
+
+// =====================================
+// SHOW / HIDE PASSWORD
+// =====================================
+
+passwordToggle.addEventListener(
+    "click",
+    () => {
+
+        const isPassword =
+            passwordInput.type === "password";
+
+        passwordInput.type =
+            isPassword
+                ? "text"
+                : "password";
+
+        passwordToggle.innerHTML =
+            isPassword
+                ? '<i class="fa-regular fa-eye-slash"></i>'
+                : '<i class="fa-regular fa-eye"></i>';
+
+    }
+);
+
+
+// =====================================
+// LOGIN
+// =====================================
+
+loginForm.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+        errorMessage.textContent = "";
+
+
+        const email =
+            document.getElementById("email")
+                .value
+                .trim();
+
+        const password =
+            passwordInput.value;
+
+
+        // Basic validation
+
+        if (!email || !password) {
+
+            errorMessage.textContent =
+                "Please enter your email and password.";
+
+            return;
+        }
+
+
+        // Button loading state
+
+        loginButton.disabled = true;
+
+        buttonText.textContent =
+            "Logging in...";
+
+        buttonIcon.className =
+            "fa-solid fa-spinner fa-spin";
+
+
+        /*
+         * TEMPORARY LOGIN
+         *
+         * This is only for frontend testing.
+         *
+         * Later this section will call:
+         *
+         * POST /api/auth/login
+         *
+         */
+
+
+        setTimeout(() => {
+
+            // Demo user
+
+            const user = {
+
+                id: 1,
+
+                name:
+                    email.split("@")[0],
+
+                email:
+                    email
+
+            };
+
+
+            // Save logged-in user
+
+            sessionStorage.setItem(
+                "user",
+                JSON.stringify(user)
+            );
+
+
+            // Redirect to tables
+
+            window.location.href =
+                "../tables/tables.html";
+
+        }, 800);
+
+    }
+);
+
+
+// =====================================
+// GUEST LOGIN
+// =====================================
+
+guestButton.addEventListener(
+    "click",
+    () => {
+
+        const guestUser = {
+
+            id: null,
+
+            name: "Guest",
+
+            email: null,
+
+            guest: true
+
+        };
+
+
+        sessionStorage.setItem(
+            "user",
+            JSON.stringify(guestUser)
+        );
+
+
+        window.location.href =
+            "../tables/tables.html";
+
+    }
+);
+    </script>
+
+</body>
+
+</html>

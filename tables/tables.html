@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Cafe - Tables</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --brown: #684035;
+    --dark-brown: #3d241e;
+    --light-brown: #c99378;
+    --cream: #f8f5f0;
+    --white: #ffffff;
+    --text-dark: #2e211d;
+    --text-light: #777;
+    --border: #e8e1db;
+    --green: #3c9b63;
+    --red: #d85b5b;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+}
+
+
+.header {
+    height: 75px;
+    padding: 0 8%;
+    background: var(--white);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--border);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: var(--dark-brown);
+
+    text-decoration: none;
+
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.logo-icon {
+    color: var(--brown);
+    font-size: 20px;
+}
+
+
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+.user-info i {
+    font-size: 22px;
+    color: var(--brown);
+}
+
+
+
+.logout-btn {
+    border: none;
+
+    background: var(--dark-brown);
+    color: white;
+
+    padding: 10px 16px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-family: "DM Sans", sans-serif;
+
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: var(--brown);
+}
+
+
+
+.main-container {
+    width: 84%;
+    max-width: 1300px;
+
+    margin: auto;
+
+    padding: 55px 0 80px;
+}
+
+
+
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    color: var(--brown);
+
+    font-size: 13px;
+
+    font-family: "Playfair Display", serif;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 8px;
+}
+
+.page-heading h1 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 42px;
+
+    font-weight: 600;
+
+    color: var(--dark-brown);
+
+    margin-bottom: 10px;
+}
+
+.description {
+    color: var(--text-light);
+
+    font-size: 15px;
+}
+
+
+
+.table-status {
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 13px;
+
+    color: #555;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    display: inline-block;
+}
+
+.status-dot.available {
+    background: var(--green);
+}
+
+.status-dot.occupied {
+    background: var(--red);
+}
+
+
+
+.tables-container {
+    width: 100%;
+}
+
+.tables-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 22px;
+}
+
+
+
+.table-card {
+
+    background: var(--white);
+
+    min-height: 190px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+
+.table-card.available:hover {
+
+    transform: translateY(-5px);
+
+    border-color: var(--light-brown);
+
+    box-shadow:
+        0 10px 30px rgba(64, 37, 31, 0.12);
+}
+
+
+
+.table-icon {
+
+    width: 65px;
+    height: 65px;
+
+    border-radius: 50%;
+
+    background: #f4ebe5;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    color: var(--brown);
+
+    font-size: 26px;
+}
+
+
+
+.table-number {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    color: var(--dark-brown);
+
+    margin-bottom: 6px;
+}
+
+
+
+.table-status-text {
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+
+.table-card.available
+.table-status-text {
+
+    color: var(--green);
+}
+
+
+
+.table-card.occupied {
+
+    cursor: not-allowed;
+
+    opacity: 0.65;
+
+    background: #f5f3f1;
+}
+
+.table-card.occupied .table-icon {
+
+    background: #eee5e0;
+
+    color: #999;
+}
+
+.table-card.occupied
+.table-status-text {
+
+    color: var(--red);
+}
+
+
+
+.status-badge {
+
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+.status-badge.available {
+    background: #e5f5eb;
+    color: var(--green);
+}
+
+.status-badge.occupied {
+    background: #fae4e4;
+    color: var(--red);
+}
+
+
+
+@media (max-width: 1000px) {
+
+    .header {
+        padding: 0 5%;
+    }
+
+    .main-container {
+        width: 90%;
+    }
+
+    .tables-grid {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .header {
+        height: 65px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .user-info span {
+        display: none;
+    }
+
+    .header-right {
+        gap: 10px;
+    }
+
+    .main-container {
+        padding-top: 35px;
+    }
+
+    .page-heading h1 {
+        font-size: 32px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    .tables-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 15px;
+    }
+
+    .table-card {
+        min-height: 160px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .logout-btn {
+        padding: 8px 10px;
+    }
+
+    .logout-btn i {
+        margin-right: 0;
+    }
+
+    .logout-btn {
+        font-size: 0;
+    }
+
+    .logout-btn i {
+        font-size: 15px;
+    }
+
+    .tables-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .table-card {
+        min-height: 150px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="../index.html" class="logo">
+            <span class="logo-icon">
+                <i class="fa-solid fa-mug-hot"></i>
+            </span>
+            Our Cafe
+        </a>
+
+        <div class="header-right">
+
+            <div class="user-info">
+                <i class="fa-solid fa-circle-user"></i>
+                <span id="username">Welcome</span>
+            </div>
+
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="main-container">
+
+        <section class="page-heading">
+
+            <div>
+                <p class="subtitle">WELCOME TO OUR CAFE</p>
+
+                <h1>Select Your Table</h1>
+
+                <p class="description">
+                    Choose an available table to view our menu and place your order.
+                </p>
+            </div>
+
+        </section>
+
+
+        <section class="table-status">
+
+            <div class="status-item">
+                <span class="status-dot available"></span>
+                Available
+            </div>
+
+            <div class="status-item">
+                <span class="status-dot occupied"></span>
+                Occupied
+            </div>
+
+        </section>
+
+
+        <section class="tables-container">
+
+            <div class="tables-grid" id="tablesGrid">
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+        const tablesGrid = document.getElementById("tablesGrid");
+
+
+
+const tables = [
+    { id: 1, number: 1, status: "available" },
+    { id: 2, number: 2, status: "available" },
+    { id: 3, number: 3, status: "occupied" },
+    { id: 4, number: 4, status: "available" },
+
+    { id: 5, number: 5, status: "available" },
+    { id: 6, number: 6, status: "available" },
+    { id: 7, number: 7, status: "occupied" },
+    { id: 8, number: 8, status: "available" },
+
+    { id: 9, number: 9, status: "available" },
+    { id: 10, number: 10, status: "available" },
+    { id: 11, number: 11, status: "available" },
+    { id: 12, number: 12, status: "occupied" },
+
+    { id: 13, number: 13, status: "available" },
+    { id: 14, number: 14, status: "available" },
+    { id: 15, number: 15, status: "available" },
+    { id: 16, number: 16, status: "occupied" },
+
+    { id: 17, number: 17, status: "available" },
+    { id: 18, number: 18, status: "available" },
+    { id: 19, number: 19, status: "occupied" },
+    { id: 20, number: 20, status: "available" }
+];
+
+
+// ==============================
+// DISPLAY TABLES
+// ==============================
+
+function displayTables() {
+
+    tablesGrid.innerHTML = "";
+
+    tables.forEach(table => {
+
+        const card = document.createElement("div");
+
+        card.classList.add(
+            "table-card",
+            table.status
+        );
+
+
+        card.innerHTML = `
+
+            <span class="status-badge ${table.status}">
+                ${table.status === "available"
+                    ? "Available"
+                    : "Occupied"
+                }
+            </span>
+
+            <div class="table-icon">
+                <i class="fa-solid fa-chair"></i>
+            </div>
+
+            <div class="table-number">
+                Table ${table.number}
+            </div>
+
+            <div class="table-status-text">
+                ${table.status === "available"
+                    ? "Click to order"
+                    : "Currently occupied"
+                }
+            </div>
+
+        `;
+
+
+        // Only available tables are clickable
+
+        if (table.status === "available") {
+
+            card.addEventListener("click", () => {
+
+                selectTable(table);
+
+            });
+
+        }
+
+        tablesGrid.appendChild(card);
+
+    });
+}
+
+
+
+
+function selectTable(table) {
+
+    console.log("Selected table:", table);
+
+
+
+    sessionStorage.setItem(
+        "selectedTable",
+        JSON.stringify(table)
+    );
+
+
+
+    window.location.href =
+        `../menu/menu.html?table=${table.id}`;
+}
+
+
+
+document
+    .getElementById("logoutBtn")
+    .addEventListener("click", () => {
+
+        // Remove login information
+
+        sessionStorage.removeItem("user");
+
+        sessionStorage.removeItem("selectedTable");
+
+
+        // Redirect to login
+
+        window.location.href = "../login.html";
+
+    });
+
+
+
+function loadUser() {
+
+    const userData =
+        sessionStorage.getItem("user");
+
+    if (!userData) {
+
+
+        window.location.href =
+            "../login.html";
+
+        return;
+    }
+
+
+    const user =
+        JSON.parse(userData);
+
+
+    document.getElementById("username")
+        .textContent =
+        `Hi, ${user.name}`;
+}
+
+
+
+loadUser();
+
+displayTables();
+    </script>
+
+</body>
+</html>

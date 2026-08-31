@@ -665,6 +665,402 @@ body {
         font-size: 27px;
     }
 }
+
+
+/* =========================================
+   LEFT IMAGE SLIDER
+========================================= */
+
+.login-image {
+    position: relative;
+
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    color: white;
+
+    background: #2b1813;
+}
+
+
+/* =========================================
+   SLIDER
+========================================= */
+
+.slider {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+
+.slide {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    opacity: 0;
+
+    transform: scale(1.08);
+
+    transition:
+        opacity 1.2s ease,
+        transform 6s ease;
+
+    z-index: 0;
+}
+
+
+.slide.active {
+    opacity: 1;
+
+    transform: scale(1);
+
+    z-index: 1;
+}
+
+
+/* =========================================
+   DARK OVERLAY
+========================================= */
+
+.overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(35, 18, 14, 0.88) 0%,
+            rgba(45, 24, 19, 0.67) 48%,
+            rgba(35, 18, 14, 0.35) 100%
+        );
+}
+
+
+/* Extra bottom gradient */
+
+.login-image::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 45%;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(25, 12, 9, 0.65)
+        );
+}
+
+
+/* =========================================
+   FIXED CONTENT
+========================================= */
+
+.image-content {
+    position: relative;
+
+    z-index: 4;
+
+    height: 100%;
+
+    min-height: 100vh;
+
+    padding: 55px 12%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 600;
+}
+
+.brand i {
+    color: #d5a48d;
+
+    font-size: 22px;
+}
+
+
+/* =========================================
+   WELCOME TEXT
+========================================= */
+
+.welcome-text {
+    margin-bottom: 80px;
+
+    max-width: 620px;
+}
+
+.welcome-text p {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 13px;
+
+    letter-spacing: 1.8px;
+
+    color: #d5a48d;
+
+    margin-bottom: 15px;
+}
+
+.welcome-text h1 {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: clamp(
+        42px,
+        4vw,
+        65px
+    );
+
+    line-height: 1.1;
+
+    font-weight: 600;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 3px 15px
+        rgba(0, 0, 0, 0.35);
+}
+
+.welcome-text span {
+    display: block;
+
+    max-width: 500px;
+
+    color: #eee;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    text-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================================
+   SLIDER ARROWS
+========================================= */
+
+.slider-btn {
+    position: absolute;
+
+    z-index: 6;
+
+    top: 58%;
+
+    width: 52px;
+    height: 52px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(8px);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+}
+
+.slider-btn:hover {
+    background: #684035;
+
+    transform: scale(1.08);
+}
+
+.slider-btn.prev {
+    left: 45px;
+}
+
+.slider-btn.next {
+    right: 45px;
+}
+
+
+/* =========================================
+   SLIDER DOTS
+========================================= */
+
+.slider-dots {
+    position: absolute;
+
+    z-index: 6;
+
+    left: 45px;
+
+    top: 42%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+
+.dot {
+    width: 9px;
+    height: 9px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.8);
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition: 0.35s;
+}
+
+.dot:hover {
+    background: white;
+}
+
+.dot.active {
+    width: 10px;
+    height: 10px;
+
+    background: #d5a48d;
+
+    border-color: #d5a48d;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(213, 164, 141, 0.15);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .image-content {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .slider-dots {
+        left: 25px;
+    }
+
+    .slider-btn.prev {
+        left: 25px;
+    }
+
+    .slider-btn.next {
+        right: 25px;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .login-image {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .slider-btn {
+        width: 42px;
+        height: 42px;
+    }
+
+    .slider-btn.prev {
+        left: 15px;
+    }
+
+    .slider-btn.next {
+        right: 15px;
+    }
+
+    .slider-dots {
+        left: 15px;
+    }
+
+}
     </style>
 </head>
 
@@ -672,36 +1068,136 @@ body {
 
     <main class="login-page">
 
-        <!-- Left Side -->
-        <section class="login-image">
+            <!-- Left Side -->
+            <section class="login-image">
 
-            <div class="overlay"></div>
+        <!-- Background Slider -->
+        <div class="slider">
 
-            <div class="image-content">
+            <div class="slide active"
+                style="background-image: url('../images/cafe-1.jpg');">
+            </div>
 
-                <div class="brand">
-                    <i class="fa-solid fa-mug-hot"></i>
-                    <span>Our Cafe</span>
-                </div>
+            <div class="slide"
+                style="background-image: url('../images/cafe-2.jpg');">
+            </div>
 
-                <div class="welcome-text">
-                    <p>WELCOME BACK</p>
+            <div class="slide"
+                style="background-image: url('../images/cafe-3.jpg');">
+            </div>
 
-                    <h1>
-                        Your Perfect<br>
-                        Coffee Awaits.
-                    </h1>
+            <div class="slide"
+                style="background-image: url('../images/cafe-4.jpg');">
+            </div>
 
-                    <span>
-                        Login to choose your table,
-                        explore our menu and order your
-                        favourite food.
-                    </span>
-                </div>
+            <div class="slide"
+                style="background-image: url('../images/cafe-5.jpg');">
+            </div>
+
+        </div>
+
+
+        <!-- Dark Overlay -->
+        <div class="overlay"></div>
+
+
+        <!-- Fixed Content -->
+        <div class="image-content">
+
+            <!-- Logo -->
+
+            <div class="brand">
+
+                <i class="fa-solid fa-mug-hot"></i>
+
+                <span>Our Cafe</span>
 
             </div>
 
-        </section>
+
+            <!-- Welcome Text -->
+
+            <div class="welcome-text">
+
+                <p>WELCOME BACK</p>
+
+                <h1>
+                    Your Perfect<br>
+                    Coffee Awaits.
+                </h1>
+
+                <span>
+                    Login to choose your table,
+                    explore our menu and order your
+                    favourite food.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Slider Controls -->
+
+        <button
+            class="slider-btn prev"
+            id="prevSlide"
+            type="button"
+            aria-label="Previous image">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+
+        <button
+            class="slider-btn next"
+            id="nextSlide"
+            type="button"
+            aria-label="Next image">
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+
+        <!-- Dots -->
+
+        <div class="slider-dots" id="sliderDots">
+
+            <button
+                class="dot active"
+                type="button"
+                data-slide="0">
+            </button>
+
+            <button
+                class="dot"
+                type="button"
+                data-slide="1">
+            </button>
+
+            <button
+                class="dot"
+                type="button"
+                data-slide="2">
+            </button>
+
+            <button
+                class="dot"
+                type="button"
+                data-slide="3">
+            </button>
+
+            <button
+                class="dot"
+                type="button"
+                data-slide="4">
+            </button>
+
+        </div>
+
+    </section>
 
 
         <!-- Right Side -->
@@ -1064,6 +1560,186 @@ guestButton.addEventListener(
 
     }
 );
+
+// =========================================
+// CAFE IMAGE SLIDER
+// =========================================
+
+const slides =
+    document.querySelectorAll(".slide");
+
+const dots =
+    document.querySelectorAll(".dot");
+
+const prevButton =
+    document.getElementById("prevSlide");
+
+const nextButton =
+    document.getElementById("nextSlide");
+
+
+let currentSlide = 0;
+
+let sliderInterval;
+
+
+// =========================================
+// SHOW SLIDE
+// =========================================
+
+function showSlide(index) {
+
+    // Handle boundaries
+
+    if (index >= slides.length) {
+        currentSlide = 0;
+    }
+    else if (index < 0) {
+        currentSlide = slides.length - 1;
+    }
+    else {
+        currentSlide = index;
+    }
+
+
+    // Remove active from all slides
+
+    slides.forEach((slide) => {
+
+        slide.classList.remove("active");
+
+    });
+
+
+    // Remove active from all dots
+
+    dots.forEach((dot) => {
+
+        dot.classList.remove("active");
+
+    });
+
+
+    // Activate current slide
+
+    slides[currentSlide]
+        .classList.add("active");
+
+
+    // Activate current dot
+
+    if (dots[currentSlide]) {
+
+        dots[currentSlide]
+            .classList.add("active");
+
+    }
+
+}
+
+
+// =========================================
+// NEXT
+// =========================================
+
+function nextSlide() {
+
+    showSlide(currentSlide + 1);
+
+    restartSlider();
+
+}
+
+
+// =========================================
+// PREVIOUS
+// =========================================
+
+function previousSlide() {
+
+    showSlide(currentSlide - 1);
+
+    restartSlider();
+
+}
+
+
+// =========================================
+// AUTOMATIC SLIDER
+// =========================================
+
+function startSlider() {
+
+    sliderInterval =
+        setInterval(() => {
+
+            showSlide(currentSlide + 1);
+
+        }, 5000);
+
+}
+
+
+function restartSlider() {
+
+    clearInterval(sliderInterval);
+
+    startSlider();
+
+}
+
+
+// =========================================
+// BUTTON EVENTS
+// =========================================
+
+if (nextButton) {
+
+    nextButton.addEventListener(
+        "click",
+        nextSlide
+    );
+
+}
+
+
+if (prevButton) {
+
+    prevButton.addEventListener(
+        "click",
+        previousSlide
+    );
+
+}
+
+
+// =========================================
+// DOT EVENTS
+// =========================================
+
+dots.forEach((dot, index) => {
+
+    dot.addEventListener(
+        "click",
+        () => {
+
+            showSlide(index);
+
+            restartSlider();
+
+        }
+    );
+
+});
+
+
+// =========================================
+// START
+// =========================================
+
+showSlide(0);
+
+startSlider();
     </script>
 
 </body>

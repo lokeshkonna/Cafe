@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Artisanal Brews - Order Status</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&amp;family=EB+Garamond:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#eee0d6",
+                        "on-surface": "#211a14",
+                        "inverse-surface": "#372f28",
+                        "on-primary-container": "#bd9f83",
+                        "outline": "#80756c",
+                        "on-primary-fixed": "#291806",
+                        "tertiary-container": "#253f32",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#c9c6bf",
+                        "surface-container-highest": "#eee0d6",
+                        "primary-fixed-dim": "#e1c1a4",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#d2c4ba",
+                        "on-background": "#211a14",
+                        "tertiary-fixed": "#ccead6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#e5d8ce",
+                        "background": "#fff8f5",
+                        "on-primary-fixed-variant": "#59422c",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#725a42",
+                        "primary-fixed": "#fedcbe",
+                        "surface-container": "#faebe1",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#e6e2da",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#fff8f5",
+                        "surface-container-low": "#fff1e7",
+                        "surface-container-high": "#f4e6db",
+                        "surface-bright": "#fff8f5",
+                        "tertiary": "#0f291d",
+                        "secondary-fixed": "#e6e2da",
+                        "error": "#ba1a1a",
+                        "secondary": "#605e58",
+                        "inverse-primary": "#e1c1a4",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#062014",
+                        "primary-container": "#4b3621",
+                        "primary": "#33210d",
+                        "on-surface-variant": "#4e453d",
+                        "on-secondary-fixed-variant": "#484741",
+                        "on-tertiary-container": "#8eaa99",
+                        "on-secondary-container": "#66645e",
+                        "tertiary-fixed-dim": "#b0cdbb",
+                        "on-tertiary-fixed-variant": "#324c3e",
+                        "on-secondary-fixed": "#1c1c17",
+                        "inverse-on-surface": "#fceee4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "lg": "48px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "margin-desktop": "64px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "gutter": "20px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-md-mobile": ["EB Garamond"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "title-lg": ["Be Vietnam Pro"],
+                        "display-lg-mobile": ["EB Garamond"],
+                        "headline-md": ["EB Garamond"],
+                        "display-lg": ["EB Garamond"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .progress-pulse {
+            animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-border {
+            0%, 100% {
+                border-color: rgba(75, 54, 33, 0.2);
+            }
+            50% {
+                border-color: rgba(75, 54, 33, 1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim w-full top-0 sticky border-b border-outline-variant dark:border-outline shadow-sm z-40">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base w-full">
+<a href="../index.html" class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim flex items-center gap-2 no-underline">
+    <span class="material-symbols-outlined">coffee</span> Our Cafe
+</a>
+<div class="flex items-center gap-4">
+<a href="tables.html" class="text-primary font-medium hover:underline text-sm hidden sm:inline">Select Table</a>
+<a href="menu-item.html" class="text-primary font-medium hover:underline text-sm hidden sm:inline">Menu</a>
+<a href="previous-orders.html" class="text-primary font-medium hover:underline text-sm hidden sm:inline">Order History</a>
+<a href="customer_profile.html" title="My Profile" class="text-primary cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</a>
+<a href="menu-item.html" title="Cart / Menu" class="text-primary cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_bag</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop max-w-5xl mx-auto w-full gap-lg">
+<!-- Status Header -->
+<div class="text-center space-y-4">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary">
+                Brewing your moment
+            </h1>
+<p class="font-title-lg text-title-lg text-on-surface-variant">
+                Order #A892
+            </p>
+</div>
+<!-- Main Status Card (Glassmorphism / Bento style) -->
+<div class="w-full max-w-2xl bg-surface-container/60 backdrop-blur-md rounded-xl p-md shadow-[0_4px_24px_rgba(75,54,33,0.08)] border border-surface-container-high relative overflow-hidden">
+<!-- Subtle background texture/image for warmth -->
+<div class="absolute inset-0 opacity-10 pointer-events-none mix-blend-multiply" data-alt="A warm, highly detailed top-down view of roasted coffee beans scattered loosely over a textured beige linen cloth. Soft morning sunlight streams across the scene, creating long, gentle shadows. The palette is rich with deep browns, warm tans, and creamy off-whites, establishing an inviting, artisanal, and slow-living atmosphere. High resolution, organic texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5BFGYvmOr7E1Fqao3nNXTs6OeFImLvEukVPmUhSL4WLm5Bx8GaaelpjSP5RqQ9FCMnmyzk3CH3ssPlUDSpUwepquP20ZaDsBWOC2yGaTPb8J4QyUunqyomFcbsz6JZPFS-QFigz8Gp9KgNicXB-bByO_t-ufVM7trvOm9X2b5SsrOt9G-g59JpQ9jqzTKvE3UpLA35rnBM9aCNawmLGejCVhyjVt7PajYzZYSmzpQHHdDGipejH_3TQ')"></div>
+<div class="relative z-10 flex flex-col items-center gap-lg py-md">
+<!-- Countdown/Progress Ring -->
+<div class="relative w-48 h-48 flex items-center justify-center rounded-full progress-pulse border-4 border-primary-container bg-surface shadow-inner">
+<div class="text-center">
+<div class="font-display-lg-mobile text-display-lg-mobile text-primary leading-none" id="countdown">8</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-2">mins</div>
+</div>
+</div>
+<!-- Status Stages -->
+<div class="w-full px-md mt-md">
+<div class="relative flex justify-between">
+<!-- Connecting Line -->
+<div class="absolute top-1/2 left-4 right-4 h-[2px] bg-outline-variant -translate-y-1/2 z-0"></div>
+<!-- Active Progress Line -->
+<div class="absolute top-1/2 left-4 w-1/2 h-[2px] bg-primary -translate-y-1/2 z-0 transition-all duration-1000 ease-in-out"></div>
+<!-- Stage 1 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Received</span>
+</div>
+<!-- Stage 2 (Current) -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm ring-4 ring-primary/20">
+<span class="material-symbols-outlined text-sm animate-spin-slow" style="font-variation-settings: 'FILL' 1;">sync</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Preparing</span>
+</div>
+<!-- Stage 3 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface border-2 border-outline-variant flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">local_cafe</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ready</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Summary Card -->
+<div class="w-full max-w-2xl bg-surface rounded-lg p-md border border-outline-variant/50 shadow-sm flex flex-col gap-sm">
+<h3 class="font-title-lg text-title-lg text-primary border-b border-outline-variant/30 pb-sm mb-sm">Order Summary</h3>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-md overflow-hidden shadow-sm bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A perfectly poured artisan oat milk flat white in a beautifully crafted matte ceramic mug, resting on a raw wooden saucer. Soft natural window light illuminates the intricate latte art fern on the surface. The background is softly out of focus, suggesting a warm, quiet, independent cafe interior. High quality, comforting aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsmlJD_RLHjz35ynmFm6dd5KNUdtGSpWwWhH_QMBNsfYrQ2fI0DabN9b3ekkRbVPD_M0U1qFx7PPZeXdVi7kCbedzb3iLEcux_ZbPn76H0gyr5HD_FrgFth6gLurFi2Lf8Xu2dJlqvQbxVSsvIWRqPyKt0kGjANsfu_cqbA1seh61NibjZYgM4YjmmiPomzZ_ra6IjHBr601jkHw7esCF84a6cgRnGksxdhI4Indfnlpi-Ge6PZPmABg"/>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">Oat Milk Flat White</div>
+<div class="font-body-md text-body-md text-on-surface-variant">Large • Extra Hot</div>
+</div>
+</div>
+<div class="font-body-lg text-body-lg text-on-surface">1</div>
+</div>
+<div class="flex justify-between items-center pt-sm">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-md overflow-hidden shadow-sm bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary-container text-3xl">bakery_dining</span>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface">Almond Croissant</div>
+<div class="font-body-md text-body-md text-on-surface-variant">Warmed</div>
+</div>
+</div>
+<div class="font-body-lg text-body-lg text-on-surface">1</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) - Suppressed as per context rules since this is a transactional status screen -->
+<script>
+        // Simple timer decrement simulation for effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const countdownEl = document.getElementById('countdown');
+            let time = 8;
+            setInterval(() => {
+                if(time > 1) {
+                    // Just to show some interactivity, normally this would be real-time data
+                    // time--;
+                    // countdownEl.innerText = time;
+                }
+            }, 60000); // 1 minute
+        });
+    </script>
+</body></html>

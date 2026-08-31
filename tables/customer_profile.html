@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Our Cafe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --brown: #684035;
+            --dark-brown: #3d241e;
+            --light-brown: #c99378;
+            --cream: #f8f5f0;
+            --white: #ffffff;
+            --text-dark: #2e211d;
+            --border: #e8e1db;
+        }
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+        .header {
+            height: 75px;
+            padding: 0 8%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark-brown);
+            text-decoration: none;
+            font-family: "Playfair Display", serif;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .logo i { color: var(--brown); }
+        .nav-links-header {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .nav-links-header a {
+            color: var(--dark-brown);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .nav-links-header a:hover { color: var(--brown); }
+        .logout-btn {
+            border: none;
+            background: var(--dark-brown);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .logout-btn:hover { background: var(--brown); }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 15px rgba(61, 36, 30, 0.04);
+            margin-bottom: 25px;
+        }
+        .profile-avatar-card {
+            text-align: center;
+        }
+        .avatar-circle {
+            width: 90px;
+            height: 90px;
+            background: #f0e5de;
+            color: var(--dark-brown);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 15px;
+            border: 3px solid var(--light-brown);
+        }
+        .user-name-title {
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            color: var(--dark-brown);
+            margin-bottom: 4px;
+        }
+        .user-role-tag {
+            font-size: 13px;
+            color: #777;
+            background: #f4ece6;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+        .stat-item h3 {
+            font-size: 20px;
+            color: var(--dark-brown);
+        }
+        .stat-item p {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
+            color: var(--dark-brown);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .action-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+            text-decoration: none;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s;
+        }
+        .action-box:hover {
+            border-color: var(--brown);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+        }
+        .action-box i {
+            font-size: 24px;
+            color: var(--brown);
+        }
+        .action-box h4 { font-size: 15px; margin-bottom: 2px; }
+        .action-box p { font-size: 12px; color: #777; }
+
+        .info-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .info-field label {
+            display: block;
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 4px;
+        }
+        .info-field p {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--dark-brown);
+        }
+
+        @media (max-width: 800px) {
+            .profile-grid { grid-template-columns: 1fr; }
+            .action-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="../index.html" class="logo">
+            <i class="fa-solid fa-mug-hot"></i> Our Cafe
+        </a>
+        <div class="nav-links-header">
+            <a href="tables.html"><i class="fa-solid fa-chair"></i> Tables</a>
+            <a href="menu-item.html"><i class="fa-solid fa-utensils"></i> Menu</a>
+            <a href="customer_order_status.html"><i class="fa-solid fa-clock-rotate-left"></i> Live Order</a>
+            <a href="previous-orders.html"><i class="fa-solid fa-receipt"></i> History</a>
+        </div>
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+    </header>
+
+    <div class="container">
+        <div class="profile-grid">
+            <!-- Left Sidebar -->
+            <div>
+                <div class="card profile-avatar-card">
+                    <div class="avatar-circle">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <h2 class="user-name-title" id="profileName">Valued Customer</h2>
+                    <span class="user-role-tag">Customer Account</span>
+
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <h3 id="tableStat">Table #4</h3>
+                            <p>Current Table</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>140</h3>
+                            <p>Reward Points</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="section-title"><i class="fa-solid fa-star"></i> Loyalty Status</h3>
+                    <p style="font-size:13px; color:#666; margin-bottom:12px;">Gold Member - 10% discount on artisanal beverages</p>
+                    <div style="background:#f4ece6; border-radius:6px; height:8px; width:100%; overflow:hidden;">
+                        <div style="background:var(--brown); width:70%; height:100%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Main Area -->
+            <div>
+                <div class="card">
+                    <h3 class="section-title"><i class="fa-solid fa-compass"></i> Quick Navigation</h3>
+                    <div class="action-cards">
+                        <a href="tables.html" class="action-box">
+                            <i class="fa-solid fa-chair"></i>
+                            <div>
+                                <h4>Select / Change Table</h4>
+                                <p>Pick your preferred table</p>
+                            </div>
+                        </a>
+                        <a href="menu-item.html" class="action-box">
+                            <i class="fa-solid fa-utensils"></i>
+                            <div>
+                                <h4>Browse Food Menu</h4>
+                                <p>Order snacks & drinks</p>
+                            </div>
+                        </a>
+                        <a href="customer_order_status.html" class="action-box">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <div>
+                                <h4>Track Order Status</h4>
+                                <p>Live kitchen progress</p>
+                            </div>
+                        </a>
+                        <a href="previous-orders.html" class="action-box">
+                            <i class="fa-solid fa-receipt"></i>
+                            <div>
+                                <h4>Previous Orders</h4>
+                                <p>View receipt history</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="section-title"><i class="fa-solid fa-address-card"></i> Account Information</h3>
+                    <div class="info-group">
+                        <div class="info-field">
+                            <label>Full Name</label>
+                            <p id="infoName">Customer User</p>
+                        </div>
+                        <div class="info-field">
+                            <label>Email Address</label>
+                            <p id="infoEmail">customer@example.com</p>
+                        </div>
+                        <div class="info-field">
+                            <label>Member Since</label>
+                            <p>August 2026</p>
+                        </div>
+                        <div class="info-field">
+                            <label>Preferred Seating</label>
+                            <p>Window Table</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userData = sessionStorage.getItem("user");
+        if (userData) {
+            const user = JSON.parse(userData);
+            document.getElementById("profileName").textContent = user.name || "Valued Customer";
+            document.getElementById("infoName").textContent = user.name || "Valued Customer";
+            document.getElementById("infoEmail").textContent = user.email || "Guest User";
+        }
+
+        const selectedTable = sessionStorage.getItem("selectedTable");
+        if (selectedTable) {
+            const table = JSON.parse(selectedTable);
+            document.getElementById("tableStat").textContent = `Table #${table.number}`;
+        }
+
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            sessionStorage.removeItem("user");
+            sessionStorage.removeItem("selectedTable");
+            window.location.href = "../login/login.html";
+        });
+    </script>
+</body>
+</html>

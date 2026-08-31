@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 :root{
@@ -110,15 +112,9 @@ button{
 }
 
 .logo-icon{
-    width:42px;
-    height:42px;
-    display:grid;
-    place-items:center;
-    border-radius:13px;
-    background:var(--primary);
-    color:white;
-    font-size:21px;
-    box-shadow:0 8px 20px rgba(64,37,31,.09);
+    color: var(--brown);
+    font-size: 20px;
+    background-color: #40251f;
 }
 
 .nav-actions{
@@ -912,10 +908,7 @@ button{
         font-size:20px;
     }
 
-    .logo-icon{
-        width:36px;
-        height:36px;
-    }
+    
 
     .nav-btn{
         padding:0 11px;
@@ -986,6 +979,11 @@ button{
         height:230px;
     }
 }
+.logo-iconn{
+    color: var(--brown);
+    font-size: 20px;
+    
+}
 </style>
 </head>
 
@@ -993,14 +991,18 @@ button{
 
 <nav class="navbar">
     <div class="nav-container">
-        <a href="#" class="logo">
-            <span class="logo-icon">🍴</span>
-            Foodora
+        <a href="../index.html" class="logo">
+            <span class="logo-iconn"> 
+                <i class="fa-solid fa-mug-hot"></i>
+            </span>
+            Our Cafe
         </a>
 
         <div class="nav-actions">
-            <button class="nav-btn" onclick="scrollToMenu()">Menu</button>
-            <button class="nav-btn">♡ Wishlist</button>
+            <a href="tables.html" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-chair"></i> Tables</a>
+            <a href="customer_order_status.html" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-clock-rotate-left"></i> Live Order</a>
+            <a href="previous-orders.html" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-receipt"></i> History</a>
+            <a href="customer_profile.html" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-user"></i> Profile</a>
             <button class="nav-btn cart-nav" onclick="openCart()">
                 🛒 Cart
                 <span class="cart-count" id="cartCount">0</span>
@@ -1354,12 +1356,12 @@ button{
     <div class="footer-inner">
         <div>
             <div class="logo">
-                <span class="logo-icon">🍴</span>
-                <span style="color:white">Foodora</span>
+                <span class="logo-icon"><i class="fa-solid fa-mug-hot"></i></span>
+                <span style="color:white">Our Cafe</span>
             </div>
             <p>Fresh food. Great taste. Happy moments.</p>
         </div>
-        <p>© 2026 Foodora. All rights reserved.</p>
+        <p>© 2026 Our Cafe. All rights reserved.</p>
     </div>
 </footer>
 
@@ -1535,7 +1537,11 @@ function closeCart(event){
 }
 
 function buyNow(name){
-    showToast(`Proceeding with ${name}`);
+    showToast(`Redirecting to checkout for ${name}...`);
+    sessionStorage.setItem("activeCart", JSON.stringify(cart));
+    setTimeout(() => {
+        window.location.href = "transaction.html";
+    }, 600);
 }
 
 function checkout(){
@@ -1544,11 +1550,12 @@ function checkout(){
         return;
     }
 
-    showToast("Checkout started successfully");
+    showToast("Redirecting to payment checkout...");
+    sessionStorage.setItem("activeCart", JSON.stringify(cart));
 
     setTimeout(()=>{
-        closeCart();
-    },1200);
+        window.location.href = "transaction.html";
+    }, 600);
 }
 
 function showToast(message){
@@ -1634,6 +1641,10 @@ document.addEventListener("keydown",event=>{
         document.body.style.overflow = "";
     }
 });
+
+function buyNow(itemName) {
+    window.location.href = "transaction.html";
+}
 
 updateCart();
 </script>

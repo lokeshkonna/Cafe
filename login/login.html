@@ -1217,11 +1217,21 @@ body {
                         <i class="fa-solid fa-mug-hot"></i>
                     </div>
 
-                    <h2>Welcome Back!</h2>
+                    <h2 id="headerTitle">Welcome Back!</h2>
 
-                    <p>
-                        Login to continue to Our Cafe
+                    <p id="headerSubtitle">
+                        Choose your access mode to continue
                     </p>
+
+                    <!-- Role Switcher Tabs -->
+                    <div style="display: flex; background: #eee5e0; border-radius: 8px; padding: 4px; margin-top: 20px; gap: 4px;">
+                        <button type="button" id="tabCustomer" class="role-tab active-tab" style="flex: 1; padding: 10px; border: none; border-radius: 6px; background: #3d241e; color: white; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 13px;">
+                            <i class="fa-solid fa-user-large"></i> Customer
+                        </button>
+                        <button type="button" id="tabStaff" class="role-tab" style="flex: 1; padding: 10px; border: none; border-radius: 6px; background: transparent; color: #684035; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 13px;">
+                            <i class="fa-solid fa-id-badge"></i> Cafe Staff
+                        </button>
+                    </div>
 
                 </div>
 
@@ -1230,20 +1240,29 @@ body {
 
                 <form id="loginForm">
 
+                    <!-- Name field (shown on Sign Up) -->
+                    <div class="form-group" id="nameGroup" style="display: none;">
+                        <label for="name">Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name">
+                        </div>
+                    </div>
+
                     <!-- Email -->
 
                     <div class="form-group">
 
-                        <label for="email">
+                        <label for="email" id="emailLabel">
                             Email Address
                         </label>
 
                         <div class="input-wrapper">
 
-                            <i class="fa-regular fa-envelope"></i>
+                            <i class="fa-regular fa-envelope" id="emailIcon"></i>
 
                             <input
-                                type="email"
+                                type="text"
                                 id="email"
                                 name="email"
                                 placeholder="Enter your email"
@@ -1266,7 +1285,7 @@ body {
                                 Password
                             </label>
 
-                            <a href="#">
+                            <a href="#" id="forgotLink">
                                 Forgot Password?
                             </a>
 
@@ -1301,7 +1320,7 @@ body {
 
                     <!-- Remember -->
 
-                    <div class="remember-row">
+                    <div class="remember-row" id="rememberRow">
 
                         <label class="remember">
 
@@ -1334,7 +1353,7 @@ body {
                     >
 
                         <span id="buttonText">
-                            Login
+                            Login as Customer
                         </span>
 
                         <i
@@ -1350,18 +1369,18 @@ body {
 
                 <!-- Register -->
 
-                <div class="register-text">
+                <div class="register-text" id="registerText">
 
                     Don't have an account?
 
-                    <a href="#">
+                    <a href="#" id="toggleSignUp">
                         Create Account
                     </a>
 
                 </div>
 
 
-                <div class="divider">
+                <div class="divider" id="dividerBox">
                     <span>OR</span>
                 </div>
 
@@ -1386,29 +1405,82 @@ body {
     </main>
 
     <script>
-        const loginForm =
-    document.getElementById("loginForm");
+        const loginForm = document.getElementById("loginForm");
+        const passwordInput = document.getElementById("password");
+        const passwordToggle = document.getElementById("passwordToggle");
+        const errorMessage = document.getElementById("errorMessage");
+        const loginButton = document.getElementById("loginButton");
+        const buttonText = document.getElementById("buttonText");
+        const buttonIcon = document.getElementById("buttonIcon");
+        const guestButton = document.getElementById("guestButton");
+        const tabCustomer = document.getElementById("tabCustomer");
+        const tabStaff = document.getElementById("tabStaff");
+        const nameGroup = document.getElementById("nameGroup");
+        const headerTitle = document.getElementById("headerTitle");
+        const headerSubtitle = document.getElementById("headerSubtitle");
+        const registerText = document.getElementById("registerText");
+        const toggleSignUp = document.getElementById("toggleSignUp");
+        const dividerBox = document.getElementById("dividerBox");
 
-const passwordInput =
-    document.getElementById("password");
+        let currentRole = "customer"; // "customer" or "staff"
+        let isSignUp = false;
 
-const passwordToggle =
-    document.getElementById("passwordToggle");
+        // Role Switcher Handlers
+        tabCustomer.addEventListener("click", () => {
+            currentRole = "customer";
+            isSignUp = false;
+            tabCustomer.style.background = "#3d241e";
+            tabCustomer.style.color = "white";
+            tabStaff.style.background = "transparent";
+            tabStaff.style.color = "#684035";
 
-const errorMessage =
-    document.getElementById("errorMessage");
+            headerTitle.textContent = "Customer Portal";
+            headerSubtitle.textContent = "Login to order food and choose your table";
+            buttonText.textContent = "Login as Customer";
+            nameGroup.style.display = "none";
+            registerText.style.display = "block";
+            dividerBox.style.display = "flex";
+            guestButton.style.display = "flex";
+            document.getElementById("emailLabel").textContent = "Email Address";
+            document.getElementById("email").placeholder = "Enter your email";
+        });
 
-const loginButton =
-    document.getElementById("loginButton");
+        tabStaff.addEventListener("click", () => {
+            currentRole = "staff";
+            isSignUp = false;
+            tabStaff.style.background = "#3d241e";
+            tabStaff.style.color = "white";
+            tabCustomer.style.background = "transparent";
+            tabCustomer.style.color = "#684035";
 
-const buttonText =
-    document.getElementById("buttonText");
+            headerTitle.textContent = "Cafe Staff Portal";
+            headerSubtitle.textContent = "Login with Staff ID / Email for Management Dashboard";
+            buttonText.textContent = "Login to Staff Dashboard";
+            nameGroup.style.display = "none";
+            registerText.style.display = "none";
+            dividerBox.style.display = "none";
+            guestButton.style.display = "none";
+            document.getElementById("emailLabel").textContent = "Staff Email / ID";
+            document.getElementById("email").placeholder = "e.g. staff@cafe.com";
+        });
 
-const buttonIcon =
-    document.getElementById("buttonIcon");
-
-const guestButton =
-    document.getElementById("guestButton");
+        toggleSignUp.addEventListener("click", (e) => {
+            e.preventDefault();
+            isSignUp = !isSignUp;
+            if (isSignUp) {
+                headerTitle.textContent = "Create Customer Account";
+                headerSubtitle.textContent = "Join Our Cafe rewards and fast checkout";
+                buttonText.textContent = "Create Account";
+                nameGroup.style.display = "block";
+                toggleSignUp.textContent = "Sign In instead";
+            } else {
+                headerTitle.textContent = "Customer Portal";
+                headerSubtitle.textContent = "Login to order food and choose your table";
+                buttonText.textContent = "Login as Customer";
+                nameGroup.style.display = "none";
+                toggleSignUp.textContent = "Create Account";
+            }
+        });
 
 
 // =====================================
@@ -1437,7 +1509,7 @@ passwordToggle.addEventListener(
 
 
 // =====================================
-// LOGIN
+// LOGIN / SIGNUP SUBMISSION
 // =====================================
 
 loginForm.addEventListener(
@@ -1474,55 +1546,47 @@ loginForm.addEventListener(
         loginButton.disabled = true;
 
         buttonText.textContent =
-            "Logging in...";
+            currentRole === "staff" ? "Authenticating Staff..." : (isSignUp ? "Creating Account..." : "Logging in...");
 
         buttonIcon.className =
             "fa-solid fa-spinner fa-spin";
 
 
-        /*
-         * TEMPORARY LOGIN
-         *
-         * This is only for frontend testing.
-         *
-         * Later this section will call:
-         *
-         * POST /api/auth/login
-         *
-         */
-
-
         setTimeout(() => {
 
-            // Demo user
+            if (currentRole === "staff") {
 
-            const user = {
+                const staffUser = {
+                    id: "STAFF-01",
+                    name: "Staff Lead",
+                    email: email,
+                    role: "staff"
+                };
 
-                id: 1,
+                sessionStorage.setItem("user", JSON.stringify(staffUser));
+                sessionStorage.setItem("staffSession", "true");
 
-                name:
-                    email.split("@")[0],
+                window.location.href = "../tables/reception_order_management.html";
 
-                email:
-                    email
+            } else {
 
-            };
+                const nameInput = document.getElementById("name").value.trim();
+                const userName = isSignUp && nameInput ? nameInput : email.split("@")[0];
 
+                const user = {
+                    id: Date.now(),
+                    name: userName,
+                    email: email,
+                    role: "customer"
+                };
 
-            // Save logged-in user
+                sessionStorage.setItem("user", JSON.stringify(user));
 
-            sessionStorage.setItem(
-                "user",
-                JSON.stringify(user)
-            );
+                window.location.href = "../tables/tables.html";
 
+            }
 
-            // Redirect to tables
-
-            window.location.href =
-                "../tables/tables.html";
-
-        }, 800);
+        }, 600);
 
     }
 );

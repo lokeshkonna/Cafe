@@ -495,12 +495,18 @@ a{
             Our Cafe
         </a>
 
+        <div style="display:flex; gap:20px; align-items:center;">
+            <a href="menu-item.html" style="color:var(--dark-brown); font-weight:500; font-size:14px;"><i class="fa-solid fa-utensils"></i> Menu</a>
+            <a href="customer_order_status.html" style="color:var(--dark-brown); font-weight:500; font-size:14px;"><i class="fa-solid fa-clock-rotate-left"></i> Live Order</a>
+            <a href="previous-orders.html" style="color:var(--dark-brown); font-weight:500; font-size:14px;"><i class="fa-solid fa-receipt"></i> History</a>
+        </div>
+
         <div class="header-right">
 
-            <div class="user-info">
+            <a href="customer_profile.html" class="user-info" style="cursor:pointer; text-decoration:none;">
                 <i class="fa-solid fa-circle-user"></i>
                 <span id="username">Welcome</span>
-            </div>
+            </a>
 
             <button class="logout-btn" id="logoutBtn">
                 <i class="fa-solid fa-right-from-bracket"></i>
@@ -682,7 +688,7 @@ document
 
         // Redirect to login
 
-        window.location.href = "../login.html";
+        window.location.href = "../login/login.html";
 
     });
 
@@ -697,7 +703,7 @@ function loadUser() {
 
 
         window.location.href =
-            "../login.html";
+            "../login/login.html";
 
         return;
     }
@@ -713,6 +719,9 @@ function loadUser() {
 }
 
 
+function viewPreviousOrders() {
+    window.location.href = "previous-orders.html";
+}
 
 loadUser();
 

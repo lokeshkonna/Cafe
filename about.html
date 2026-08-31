@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Our Cafe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .about-section {
+            background: #f8f5f0;
+            color: #3d241e;
+            padding: 80px 13%;
+            min-height: 80vh;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-top: 40px;
+        }
+        .about-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(61, 36, 30, 0.15);
+            object-fit: cover;
+            max-height: 450px;
+        }
+        .about-title {
+            font-family: "Playfair Display", serif;
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #3d241e;
+        }
+        .about-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #684035;
+            margin-bottom: 25px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ded8d3;
+        }
+        .feature-card i {
+            color: #684035;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .feature-card h4 {
+            font-family: "Playfair Display", serif;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .feature-card p {
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-left">
+            <span><i class="fa-solid fa-clock"></i> Mon - Fri: 9:00 - 19:00 / Closed on Weekends</span>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <div class="top-right">
+            <a href="tables/menu-item.html" title="Cart / Menu"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="tables/customer_profile.html" title="Profile"><i class="fa-regular fa-user"></i></a>
+            <a href="login/login.html" class="login-top">LOGIN OR SIGN UP</a>
+        </div>
+    </div>
+
+    <nav class="navbar" style="background:#3d241e; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <a href="index.html" class="logo" style="color:white;">
+            <span class="logo-icon"><i class="fa-solid fa-mug-hot"></i></span> Our Cafe
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="tables/menu-item.html">Menu</a></li>
+            <li><a href="tables/tables.html">Book Table</a></li>
+            <li><a href="tables/customer_order_status.html">Order Status</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-contact" style="color:white;">
+            <i class="fa-solid fa-phone-volume"></i> <span>+91 705 210-1786</span>
+        </div>
+    </nav>
+
+    <section class="about-section">
+        <p class="subtitle" style="color:#684035; font-family:'Playfair Display', serif; font-weight:600;">OUR STORY</p>
+        <h1 class="about-title">Crafting Perfect Coffee Moments Since 2018</h1>
+        
+        <div class="about-grid">
+            <div>
+                <p class="about-text">
+                    At Our Cafe, we believe every cup of coffee tells a story. From ethically sourced beans from small-scale farmers to masterfully crafted espresso beverages, our mission is to deliver warmth, comfort, and extraordinary taste in every mug.
+                </p>
+                <p class="about-text">
+                    Whether you are grabbing a quick morning flat white, working remotely at our cozy tables, or dining with loved ones, our smart digital ordering system ensures a fast, seamless experience.
+                </p>
+                <div class="features">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-seedling"></i>
+                        <h4>100% Organic Beans</h4>
+                        <p>Sourced directly from sustainable farms worldwide.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-bell-concierge"></i>
+                        <h4>Smart Table Order</h4>
+                        <p>Order & pay directly from your phone at any table.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img src="img-1.png" alt="Cafe Interior" class="about-img">
+            </div>
+        </div>
+    </section>
+</body>
+</html>

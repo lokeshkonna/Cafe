@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Staff - Sales & Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#eee0d6",
+                      "on-surface": "#211a14",
+                      "inverse-surface": "#372f28",
+                      "on-primary-container": "#bd9f83",
+                      "outline": "#80756c",
+                      "tertiary-container": "#253f32",
+                      "on-primary": "#ffffff",
+                      "surface-container-highest": "#eee0d6",
+                      "primary-fixed-dim": "#e1c1a4",
+                      "outline-variant": "#d2c4ba",
+                      "on-background": "#211a14",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-dim": "#e5d8ce",
+                      "background": "#fff8f5",
+                      "surface-container": "#faebe1",
+                      "surface-container-low": "#fff1e7",
+                      "surface-container-high": "#f4e6db",
+                      "primary-container": "#4b3621",
+                      "primary": "#33210d",
+                      "on-surface-variant": "#4e453d"
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden">
+
+<!-- Desktop SideNavBar -->
+<aside class="bg-surface-container-low dark:bg-surface-container-highest h-screen w-64 fixed left-0 top-0 border-r border-outline-variant hidden lg:flex flex-col p-6 gap-4 z-40">
+<div class="mb-4 px-2">
+<h2 class="font-headline-md text-2xl font-bold text-primary">Staff Portal</h2>
+<p class="text-sm text-on-surface-variant">Business Analytics</p>
+</div>
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="reception_order_management.html">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-medium text-sm">Active Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="staff_tables.html">
+<span class="material-symbols-outlined">table_restaurant</span>
+<span class="font-medium text-sm">Table Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="staff_inventory.html">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-medium text-sm">Menu Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-semibold rounded-lg transition-colors" href="staff_analytics.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+<span class="font-medium text-sm">Sales & Analytics</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 flex items-center justify-between px-2">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm">SL</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-on-surface">Staff Lead</span>
+<span class="text-[11px] text-on-surface-variant">Shift Manager</span>
+</div>
+</div>
+<a href="../login/login.html" title="Logout" class="text-error hover:bg-error-container/20 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</a>
+</div>
+</aside>
+
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 h-full overflow-y-auto bg-background p-6 lg:p-8">
+<div class="max-w-6xl mx-auto">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h1 class="text-3xl font-bold text-primary font-serif">Revenue & Sales Analytics</h1>
+<p class="text-on-surface-variant text-sm mt-1">Real-time daily transaction summaries and shift metrics</p>
+</div>
+<span class="px-3 py-1.5 bg-surface-container-high border border-outline-variant rounded-full text-xs font-semibold text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-emerald-600">trending_up</span> Shift Live Report
+</span>
+</div>
+
+<!-- Key Performance Indicators Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<div class="bg-surface border border-outline-variant rounded-xl p-5 shadow-sm">
+<div class="flex justify-between items-center text-xs text-on-surface-variant font-medium">
+<span>Total Revenue</span>
+<span class="material-symbols-outlined text-emerald-600">payments</span>
+</div>
+<div class="text-2xl font-bold text-primary mt-2">₹18,450</div>
+<div class="text-[11px] text-emerald-700 font-semibold mt-1">↑ +14.2% vs yesterday</div>
+</div>
+
+<div class="bg-surface border border-outline-variant rounded-xl p-5 shadow-sm">
+<div class="flex justify-between items-center text-xs text-on-surface-variant font-medium">
+<span>Completed Orders</span>
+<span class="material-symbols-outlined text-primary">task_alt</span>
+</div>
+<div class="text-2xl font-bold text-primary mt-2">42 Orders</div>
+<div class="text-[11px] text-emerald-700 font-semibold mt-1">100% fulfill rate</div>
+</div>
+
+<div class="bg-surface border border-outline-variant rounded-xl p-5 shadow-sm">
+<div class="flex justify-between items-center text-xs text-on-surface-variant font-medium">
+<span>Average Order Value</span>
+<span class="material-symbols-outlined text-amber-700">analytics</span>
+</div>
+<div class="text-2xl font-bold text-primary mt-2">₹439</div>
+<div class="text-[11px] text-on-surface-variant mt-1">Avg 2.8 items / order</div>
+</div>
+
+<div class="bg-surface border border-outline-variant rounded-xl p-5 shadow-sm">
+<div class="flex justify-between items-center text-xs text-on-surface-variant font-medium">
+<span>Table Occupancy</span>
+<span class="material-symbols-outlined text-blue-700">table_restaurant</span>
+</div>
+<div class="text-2xl font-bold text-primary mt-2">75%</div>
+<div class="text-[11px] text-on-surface-variant mt-1">Peak time: 10:00 - 14:00</div>
+</div>
+</div>
+
+<!-- Top Sellers & Payment Methods Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<!-- Top Performing Items -->
+<div class="bg-surface border border-outline-variant rounded-xl p-5 shadow-sm">
+<h3 class="font-bold text-primary font-serif mb-4 flex items-center justify-between">
+<span>Top Selling Items</span>
+<span class="text-xs text-on-surface-variant font-normal">Today</span>
+</h3>
+<div class="space-y-3 text-xs">
+<div>
+<div class="flex justify-between font-semibold mb-1">
+<span>Chicken Biryani</span>
+<span>28 Sold (₹7,000)</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary rounded-full h-2" style="width: 85%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-semibold mb-1">
+<span>Oat Milk Flat White</span>
+<span>22 Sold (₹4,180)</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary rounded-full h-2" style="width: 68%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-semibold mb-1">
+<span>Crispy Samosa</span>
+<span>19 Sold (₹1,520)</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary rounded-full h-2" style="width: 52%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-semibold mb-1">
+<span>Artisanal Cappuccino</span>
+<span>15 Sold (₹2,550)</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2">
+<div class="bg-primary rounded-full h-2" style="width: 44%;"></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Payment Breakdown -->
+<div class="bg-surface border border-outline-variant rounded-xl p-5 shadow-sm">
+<h3 class="font-bold text-primary font-serif mb-4">Payment Method Breakdown</h3>
+<div class="grid grid-cols-3 gap-3 text-center">
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-2xl mb-1">qr_code_2</span>
+<div class="text-xs text-on-surface-variant font-medium">UPI / QR</div>
+<div class="text-base font-bold text-primary mt-1">₹11,200</div>
+<div class="text-[10px] text-on-surface-variant">60% of total</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-2xl mb-1">credit_card</span>
+<div class="text-xs text-on-surface-variant font-medium">Cards</div>
+<div class="text-base font-bold text-primary mt-1">₹5,400</div>
+<div class="text-[10px] text-on-surface-variant">29% of total</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-2xl mb-1">payments</span>
+<div class="text-xs text-on-surface-variant font-medium">Cash</div>
+<div class="text-base font-bold text-primary mt-1">₹1,850</div>
+<div class="text-[10px] text-on-surface-variant">11% of total</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Full Transactions Log -->
+<div class="bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="p-4 border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h3 class="font-bold text-primary font-serif">Recent Transactions Log</h3>
+<span class="text-xs text-on-surface-variant font-medium">Shift Total: 42 Transactions</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant text-primary font-semibold">
+<th class="p-3.5">Transaction ID</th>
+<th class="p-3.5">Time</th>
+<th class="p-3.5">Table</th>
+<th class="p-3.5">Customer</th>
+<th class="p-3.5">Payment Method</th>
+<th class="p-3.5">Amount</th>
+<th class="p-3.5">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/40">
+<tr class="hover:bg-surface-container-low">
+<td class="p-3.5 font-bold text-primary">#TXN-9021</td>
+<td class="p-3.5 text-on-surface-variant">14:22 PM</td>
+<td class="p-3.5">Table 04</td>
+<td class="p-3.5 font-medium">John Doe</td>
+<td class="p-3.5">UPI (GPay)</td>
+<td class="p-3.5 font-bold text-primary">₹440</td>
+<td class="p-3.5"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">SUCCESS</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="p-3.5 font-bold text-primary">#TXN-9020</td>
+<td class="p-3.5 text-on-surface-variant">14:05 PM</td>
+<td class="p-3.5">Table 01</td>
+<td class="p-3.5 font-medium">Sarah M.</td>
+<td class="p-3.5">Credit Card</td>
+<td class="p-3.5 font-bold text-primary">₹330</td>
+<td class="p-3.5"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">SUCCESS</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="p-3.5 font-bold text-primary">#TXN-9019</td>
+<td class="p-3.5 text-on-surface-variant">13:48 PM</td>
+<td class="p-3.5">Table 07</td>
+<td class="p-3.5 font-medium">Mike R.</td>
+<td class="p-3.5">UPI (Paytm)</td>
+<td class="p-3.5 font-bold text-primary">₹250</td>
+<td class="p-3.5"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">SUCCESS</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="p-3.5 font-bold text-primary">#TXN-9018</td>
+<td class="p-3.5 text-on-surface-variant">13:30 PM</td>
+<td class="p-3.5">Table 11</td>
+<td class="p-3.5 font-medium">Emma W.</td>
+<td class="p-3.5">Cash</td>
+<td class="p-3.5 font-bold text-primary">₹510</td>
+<td class="p-3.5"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">SUCCESS</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</body>
+</html>

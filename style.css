@@ -117,9 +117,8 @@ body {
 }
 
 .logo-icon {
-    margin-right: 6px;
-    font-size: 17px;
-    color: white;
+    color: var(--brown);
+    font-size: 20px;
 }
 
 .nav-links {

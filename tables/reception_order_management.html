@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Café Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=EB+Garamond:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#eee0d6",
+                      "on-surface": "#211a14",
+                      "inverse-surface": "#372f28",
+                      "on-primary-container": "#bd9f83",
+                      "outline": "#80756c",
+                      "on-primary-fixed": "#291806",
+                      "tertiary-container": "#253f32",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#c9c6bf",
+                      "surface-container-highest": "#eee0d6",
+                      "primary-fixed-dim": "#e1c1a4",
+                      "on-error": "#ffffff",
+                      "outline-variant": "#d2c4ba",
+                      "on-background": "#211a14",
+                      "tertiary-fixed": "#ccead6",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-dim": "#e5d8ce",
+                      "background": "#fff8f5",
+                      "on-primary-fixed-variant": "#59422c",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#725a42",
+                      "primary-fixed": "#fedcbe",
+                      "surface-container": "#faebe1",
+                      "on-error-container": "#93000a",
+                      "secondary-container": "#e6e2da",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#fff8f5",
+                      "surface-container-low": "#fff1e7",
+                      "surface-container-high": "#f4e6db",
+                      "surface-bright": "#fff8f5",
+                      "tertiary": "#0f291d",
+                      "secondary-fixed": "#e6e2da",
+                      "error": "#ba1a1a",
+                      "secondary": "#605e58",
+                      "inverse-primary": "#e1c1a4",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#062014",
+                      "primary-container": "#4b3621",
+                      "primary": "#33210d",
+                      "on-surface-variant": "#4e453d",
+                      "on-secondary-fixed-variant": "#484741",
+                      "on-tertiary-container": "#8eaa99",
+                      "on-secondary-container": "#66645e",
+                      "tertiary-fixed-dim": "#b0cdbb",
+                      "on-tertiary-fixed-variant": "#324c3e",
+                      "on-secondary-fixed": "#1c1c17",
+                      "inverse-on-surface": "#fceee4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "lg": "48px",
+                      "margin-mobile": "16px",
+                      "sm": "12px",
+                      "margin-desktop": "64px",
+                      "xl": "80px",
+                      "md": "24px",
+                      "gutter": "20px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-md-mobile": [
+                              "EB Garamond"
+                      ],
+                      "label-sm": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-md": [
+                              "Be Vietnam Pro"
+                      ],
+                      "title-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "display-lg-mobile": [
+                              "EB Garamond"
+                      ],
+                      "headline-md": [
+                              "EB Garamond"
+                      ],
+                      "display-lg": [
+                              "EB Garamond"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex h-screen overflow-hidden">
+<!-- Mobile TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim w-full top-0 sticky shadow-sm md:hidden z-30 flex justify-between items-center px-margin-mobile py-base">
+<button class="text-primary dark:text-primary-fixed-dim cursor-pointer active:opacity-80 transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary dark:text-primary-fixed-dim">Artisanal Brews</h1>
+<div class="flex gap-sm">
+<button class="text-primary dark:text-primary-fixed-dim cursor-pointer active:opacity-80 transition-all hover:bg-surface-container-high rounded-full p-1">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Desktop SideNavBar -->
+<aside class="bg-surface-container-low dark:bg-surface-container-highest h-screen w-64 fixed left-0 top-0 border-r border-outline-variant hidden lg:flex flex-col p-md gap-base z-40">
+<div class="mb-lg px-2">
+<h2 class="font-headline-md text-headline-md text-primary">Staff Portal</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Morning Shift</p>
+</div>
+<nav class="flex flex-col gap-xs flex-1">
+<a class="flex items-center gap-md px-4 py-3 bg-primary-container text-on-primary-container font-semibold rounded-lg transition-colors duration-150" href="reception_order_management.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-body-md text-body-md">Active Orders</span>
+</a>
+<a class="flex items-center gap-md px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors duration-150" href="staff_tables.html">
+<span class="material-symbols-outlined">table_restaurant</span>
+<span class="font-body-md text-body-md">Table Management</span>
+</a>
+<a class="flex items-center gap-md px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors duration-150" href="staff_inventory.html">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-md text-body-md">Menu Inventory</span>
+</a>
+<a class="flex items-center gap-md px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors duration-150" href="staff_analytics.html">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-body-md text-body-md">Sales & Analytics</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-md flex items-center justify-between px-2">
+<div class="flex items-center gap-sm">
+<div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm">SL</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">Staff Lead</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-[11px]">Shift Manager</span>
+</div>
+</div>
+<a href="../login/login.html" title="Logout" class="text-error hover:bg-error-container/20 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 h-full overflow-y-auto bg-background p-margin-mobile md:p-margin-desktop pb-32 lg:pb-margin-desktop">
+<div class="max-w-4xl mx-auto">
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-background mb-xs hidden md:block">Active Orders</h2>
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-on-background mb-xs md:hidden">Active Orders</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Manage and update current queue</p>
+</div>
+<div class="flex gap-sm items-center bg-surface-container-high rounded-full px-4 py-2 border border-outline-variant">
+<span class="material-symbols-outlined text-primary">sync</span>
+<span class="font-label-sm text-label-sm text-primary">Live</span>
+</div>
+</div>
+<!-- Orders Grid / List -->
+<div class="flex flex-col gap-md">
+<!-- New Order Card -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-md shadow-sm transition-shadow hover:shadow-md">
+<div class="flex justify-between items-center border-b border-surface-variant pb-sm">
+<div class="flex items-baseline gap-sm">
+<h3 class="font-headline-md text-headline-md text-primary">Table 04</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant px-2 py-1 bg-surface-container-high rounded-md">Order #1042</span>
+</div>
+<div class="flex items-center gap-xs text-error">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="font-label-sm text-label-sm">4m elapsed</span>
+</div>
+</div>
+<ul class="flex flex-col gap-sm">
+<li class="flex gap-md items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-label-sm shrink-0 mt-1">2x</div>
+<div>
+<span class="font-title-lg text-title-lg text-on-surface block font-headline-md">Artisanal Pour Over</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Ethiopian Yirgacheffe, Light Roast</p>
+</div>
+</li>
+<li class="flex gap-md items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-label-sm shrink-0 mt-1">1x</div>
+<div>
+<span class="font-title-lg text-title-lg text-on-surface block font-headline-md">Almond Croissant</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Warmed</p>
+</div>
+</li>
+</ul>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-sm mt-sm pt-sm border-t border-surface-variant">
+<div class="relative flex-1 max-w-[240px]">
+<select class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none outline-none cursor-pointer">
+<option>Prep Time: 5 mins</option>
+<option selected="">Prep Time: 10 mins</option>
+<option>Prep Time: 15 mins</option>
+<option>Prep Time: 20+ mins</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                            Accept Order
+                        </button>
+</div>
+</article>
+<!-- In Progress Order Card -->
+<article class="bg-surface-container border border-primary/20 rounded-xl p-md flex flex-col gap-md shadow-sm">
+<div class="flex justify-between items-center border-b border-primary/10 pb-sm">
+<div class="flex items-baseline gap-sm">
+<h3 class="font-headline-md text-headline-md text-primary">Table 12</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant px-2 py-1 bg-surface-container-high rounded-md">Order #1038</span>
+<span class="bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm px-2 py-1 rounded-full ml-2">In Progress</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="font-label-sm text-label-sm">12m elapsed</span>
+</div>
+</div>
+<ul class="flex flex-col gap-sm">
+<li class="flex gap-md items-start">
+<div class="w-8 h-8 rounded-full bg-surface flex items-center justify-center text-primary font-label-sm shrink-0 mt-1">1x</div>
+<div>
+<span class="font-title-lg text-title-lg text-on-surface block font-headline-md">Matcha Latte</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Oat Milk, Iced</p>
+</div>
+</li>
+</ul>
+<div class="flex items-center gap-sm mt-sm pt-sm border-t border-primary/10 justify-end">
+<button class="bg-tertiary text-on-tertiary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">room_service</span>
+                            Mark Ready
+                        </button>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- Mobile BottomNavBar -->
+<nav class="bg-surface/80 dark:bg-surface-container/80 backdrop-blur-md fixed bottom-0 w-full z-50 rounded-t-xl shadow-[0_-2px_10px_rgba(75,54,33,0.05)] md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center pt-xs pb-md px-margin-mobile">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-sm text-label-sm mt-1">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-tertiary-container text-on-tertiary-container rounded-full px-4 py-1 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
+<span class="font-label-sm text-label-sm mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">loyalty</span>
+<span class="font-label-sm text-label-sm mt-1">Rewards</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

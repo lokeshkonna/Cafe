@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register - Our Cafe</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+            --brown: #684035;
+            --dark-brown: #40251f;
+            --light-brown: #c18c70;
+            --cream: #f8f5f0;
+            --white: #ffffff;
+            --border: #ddd6d0;
+            --text: #333;
+        }
+
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: var(--cream);
+            color: var(--text);
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+        }
+
+
+        /* MAIN CONTAINER */
+
+        .register-container {
+            width: 100%;
+            max-width: 1050px;
+
+            min-height: 650px;
+
+            background: white;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns: 42% 58%;
+
+            box-shadow:
+                0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* LEFT SIDE */
+
+        .register-left {
+
+            position: relative;
+
+            background:
+                linear-gradient(
+                    rgba(50, 27, 21, 0.75),
+                    rgba(50, 27, 21, 0.75)
+                ),
+                url("../img-1.png")
+                center / cover no-repeat;
+
+            color: white;
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 27px;
+
+            font-weight: 600;
+        }
+
+
+        .logo i {
+            color: #dca487;
+        }
+
+
+        .left-content {
+            margin-top: auto;
+            margin-bottom: 40px;
+        }
+
+
+        .small-title {
+
+            color: #dca487;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .left-content h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 48px;
+
+            line-height: 1.1;
+
+            margin-bottom: 20px;
+        }
+
+
+        .left-content p {
+
+            color: #e1d8d4;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+            max-width: 390px;
+        }
+
+
+        /* RIGHT SIDE */
+
+        .register-right {
+
+            padding: 45px 60px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .back-home {
+
+            color: #684035;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .back-home:hover {
+            color: #40251f;
+        }
+
+
+        .register-title {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 36px;
+
+            color: var(--dark-brown);
+
+            margin-bottom: 7px;
+        }
+
+
+        .register-subtitle {
+
+            color: #777;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* ROLE SELECTION */
+
+        .role-title {
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 10px;
+        }
+
+
+        .role-container {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .role-option {
+
+            position: relative;
+        }
+
+
+        .role-option input {
+            display: none;
+        }
+
+
+        .role-label {
+
+            height: 55px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+
+        .role-label i {
+            color: #684035;
+        }
+
+
+        .role-option input:checked + .role-label {
+
+            background: #f5ebe6;
+
+            border: 2px solid #684035;
+
+            color: #40251f;
+        }
+
+
+        /* FORM */
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 16px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 7px;
+
+            color: #333;
+        }
+
+
+        .input-box {
+
+            position: relative;
+        }
+
+
+        .input-box i {
+
+            position: absolute;
+
+            left: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #9a8d87;
+
+            font-size: 14px;
+        }
+
+
+        .input-box input {
+
+            width: 100%;
+
+            height: 45px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 7px;
+
+            padding: 0 14px 0 42px;
+
+            outline: none;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 13px;
+
+            transition: 0.3s;
+        }
+
+
+        .input-box input:focus {
+
+            border-color: #684035;
+
+            box-shadow:
+                0 0 0 3px rgba(104, 64, 53, 0.08);
+        }
+
+
+        /* PASSWORD */
+
+        .password-box {
+            position: relative;
+        }
+
+
+        .password-box input {
+            padding-right: 45px;
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #999;
+
+            cursor: pointer;
+        }
+
+
+        /* TERMS */
+
+        .terms {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 8px;
+
+            margin: 5px 0 20px;
+
+            font-size: 12px;
+
+            color: #777;
+
+            line-height: 1.5;
+        }
+
+
+        .terms input {
+
+            margin-top: 3px;
+
+            accent-color: #684035;
+        }
+
+
+        .terms a {
+
+            color: #684035;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+
+        /* REGISTER BUTTON */
+
+        .register-btn {
+
+            width: 100%;
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #684035;
+
+            color: white;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .register-btn:hover {
+
+            background: #4b2c25;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 7px 15px rgba(104, 64, 53, 0.2);
+        }
+
+
+        .register-btn i {
+            margin-left: 7px;
+        }
+
+
+        /* LOGIN */
+
+        .login-text {
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            font-size: 13px;
+
+            color: #777;
+        }
+
+
+        .login-text a {
+
+            color: #684035;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            margin-left: 4px;
+        }
+
+
+        /* MESSAGE */
+
+        .message {
+
+            display: none;
+
+            padding: 10px;
+
+            border-radius: 6px;
+
+            margin-bottom: 15px;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+
+        .success {
+
+            background: #e8f5e9;
+
+            color: #2e7d32;
+        }
+
+
+        .error {
+
+            background: #ffebee;
+
+            color: #c62828;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .register-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .register-left {
+
+                min-height: 300px;
+
+                padding: 35px;
+            }
+
+            .left-content h2 {
+
+                font-size: 38px;
+            }
+
+            .register-right {
+
+                padding: 35px;
+            }
+        }
+
+
+        @media (max-width: 550px) {
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+
+                gap: 0;
+            }
+
+            .register-left {
+
+                min-height: 250px;
+
+                padding: 25px;
+            }
+
+            .register-right {
+
+                padding: 25px;
+            }
+
+            .register-title {
+
+                font-size: 30px;
+            }
+
+            .left-content h2 {
+
+                font-size: 32px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="register-container">
+
+
+        <!-- LEFT SIDE -->
+
+        <div class="register-left">
+
+            <div class="logo">
+
+                <i class="fa-solid fa-mug-hot"></i>
+
+                Our Cafe
+
+            </div>
+
+
+            <div class="left-content">
+
+                <div class="small-title">
+                    JOIN OUR CAFE
+                </div>
+
+                <h2>
+                    Your Perfect
+                    Coffee Journey
+                    Starts Here.
+                </h2>
+
+                <p>
+                    Create your account to choose your table,
+                    explore our delicious menu and enjoy a
+                    wonderful café experience.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="register-right">
+
+
+            <a href="../index.html"
+               class="back-home">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Home
+
+            </a>
+
+
+            <h1 class="register-title">
+                Create Account
+            </h1>
+
+
+            <p class="register-subtitle">
+                Register to continue to Our Cafe
+            </p>
+
+
+            <!-- MESSAGE -->
+
+            <div id="message"
+                 class="message">
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form id="registerForm">
+
+
+                <!-- ROLE -->
+
+                <div class="role-title">
+                    Register as
+                </div>
+
+
+                <div class="role-container">
+
+
+                    <div class="role-option">
+
+                        <input
+                            type="radio"
+                            id="customer"
+                            name="role"
+                            value="customer"
+                            checked>
+
+                        <label
+                            for="customer"
+                            class="role-label">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            Customer
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="role-option">
+
+                        <input
+                            type="radio"
+                            id="server"
+                            name="role"
+                            value="server">
+
+                        <label
+                            for="server"
+                            class="role-label">
+
+                            <i class="fa-solid fa-user-tie"></i>
+
+                            Server
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NAME + PHONE -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            User Name
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <input
+                                type="text"
+                                id="username"
+                                placeholder="Enter your name"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-phone"></i>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Enter phone number"
+                                maxlength="10"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <div class="input-box password-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a password"
+                            minlength="6"
+                            required  >
+
+                        <button style="margin-right: 40px;"
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword()">
+
+                            <i
+                                id="passwordIcon"
+                                class="fa-solid fa-eye">
+                            </i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Confirm Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <div class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required>
+
+                    <label for="terms">
+
+                        I agree to the
+                        <a href="#">
+                            Terms & Conditions
+                        </a>
+                        and
+                        <a href="#">
+                            Privacy Policy
+                        </a>
+
+                    </label>
+
+                </div>
+
+
+                <!-- REGISTER -->
+
+                <button
+                    type="submit"
+                    class="register-btn">
+
+                    Create Account
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+
+            </form>
+
+
+            <!-- LOGIN -->
+
+            <div class="login-text">
+
+                Already have an account?
+
+                <a href="../login/login.html">
+                    Login
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* =========================
+           PASSWORD TOGGLE
+        ========================= */
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const icon =
+                document.getElementById("passwordIcon");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove("fa-eye");
+
+                icon.classList.add("fa-eye-slash");
+
+            } else {
+
+                password.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+
+                icon.classList.add("fa-eye");
+
+            }
+
+        }
+
+
+        /* =========================
+           REGISTRATION
+        ========================= */
+
+        document
+            .getElementById("registerForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+
+                const username =
+                    document.getElementById("username")
+                    .value.trim();
+
+                const phone =
+                    document.getElementById("phone")
+                    .value.trim();
+
+                const email =
+                    document.getElementById("email")
+                    .value.trim();
+
+                const password =
+                    document.getElementById("password")
+                    .value;
+
+                const confirmPassword =
+                    document.getElementById("confirmPassword")
+                    .value;
+
+                const role =
+                    document.querySelector(
+                        'input[name="role"]:checked'
+                    ).value;
+
+
+                const message =
+                    document.getElementById("message");
+
+
+                /* PHONE VALIDATION */
+
+                if (!/^[0-9]{10}$/.test(phone)) {
+
+                    showMessage(
+                        "Please enter a valid 10-digit phone number.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* PASSWORD */
+
+                if (password.length < 6) {
+
+                    showMessage(
+                        "Password must contain at least 6 characters.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* CONFIRM PASSWORD */
+
+                if (password !== confirmPassword) {
+
+                    showMessage(
+                        "Passwords do not match.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                 * DEMO REGISTRATION
+                 *
+                 * Later replace this with:
+                 * fetch("/api/register", {...})
+                 */
+
+                const user = {
+
+                    username: username,
+
+                    phone: phone,
+
+                    email: email,
+
+                    role: role
+
+                };
+
+
+                /*
+                 * Store temporarily in browser.
+                 * This is ONLY for frontend testing.
+                 */
+
+                localStorage.setItem(
+                    "cafeUser",
+                    JSON.stringify(user)
+                );
+
+
+                showMessage(
+                    "Registration successful! Redirecting...",
+                    "success"
+                );
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "../login/login.html";
+
+                }, 1500);
+
+            });
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        function showMessage(text, type) {
+
+            const message =
+                document.getElementById("message");
+
+
+            message.textContent = text;
+
+            message.className =
+                "message " + type;
+
+            message.style.display = "block";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

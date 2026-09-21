@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register - Our Cafe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --brown: #684035;
+            --dark-brown: #3d241e;
+            --light-brown: #c99378;
+            --cream: #f8f5f0;
+            --white: #ffffff;
+            --text: #30231f;
+            --gray: #777;
+            --border: #ded8d3;
+            --error: #c94b4b;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            color: var(--text);
+            background: var(--cream);
+        }
+
+        /* PAGE */
+        .register-page {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* LEFT IMAGE SLIDER */
+        .register-image {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+            color: white;
+            background: #2b1813;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transform: scale(1.08);
+            transition: opacity 1.2s ease, transform 6s ease;
+            z-index: 0;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(
+                90deg,
+                rgba(35, 18, 14, 0.88) 0%,
+                rgba(45, 24, 19, 0.67) 48%,
+                rgba(35, 18, 14, 0.35) 100%
+            );
+        }
+
+        .register-image::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 45%;
+            z-index: 2;
+            pointer-events: none;
+            background: linear-gradient(
+                transparent,
+                rgba(25, 12, 9, 0.65)
+            );
+        }
+
+        .image-content {
+            position: relative;
+            z-index: 4;
+            height: 100%;
+            min-height: 100vh;
+            padding: 55px 12%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-family: "Playfair Display", serif;
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .brand i {
+            color: #d5a48d;
+            font-size: 22px;
+        }
+
+        .welcome-text {
+            margin-bottom: 80px;
+            max-width: 620px;
+        }
+
+        .welcome-text p {
+            font-family: "Playfair Display", serif;
+            font-size: 13px;
+            letter-spacing: 1.8px;
+            color: #d5a48d;
+            margin-bottom: 15px;
+        }
+
+        .welcome-text h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(42px, 4vw, 65px);
+            line-height: 1.1;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
+        }
+
+        .welcome-text span {
+            display: block;
+            max-width: 500px;
+            color: #eee;
+            font-size: 14px;
+            line-height: 1.7;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .slider-btn {
+            position: absolute;
+            z-index: 6;
+            top: 58%;
+            width: 52px;
+            height: 52px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: #684035;
+            transform: scale(1.08);
+        }
+
+        .slider-btn.prev {
+            left: 45px;
+        }
+
+        .slider-btn.next {
+            right: 45px;
+        }
+
+        .slider-dots {
+            position: absolute;
+            z-index: 6;
+            left: 45px;
+            top: 42%;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            padding: 0;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            background: transparent;
+            cursor: pointer;
+            transition: 0.35s;
+        }
+
+        .dot:hover {
+            background: white;
+        }
+
+        .dot.active {
+            width: 10px;
+            height: 10px;
+            background: #d5a48d;
+            border-color: #d5a48d;
+            box-shadow: 0 0 0 4px rgba(213, 164, 141, 0.15);
+        }
+
+        /* RIGHT SIDE */
+        .register-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #777;
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 35px;
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            color: var(--brown);
+        }
+
+        /* HEADER */
+        .register-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .register-icon {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f0e3dc;
+            color: var(--brown);
+            font-size: 21px;
+        }
+
+        .register-header h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 31px;
+            color: var(--dark-brown);
+            margin-bottom: 8px;
+        }
+
+        .register-header p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        /* FORM */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper > i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9a8f89;
+            font-size: 14px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 48px;
+            padding: 0 45px 0 44px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: white;
+            color: var(--text);
+            font-family: "DM Sans", sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: 0.25s;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #aaa;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--brown);
+            box-shadow: 0 0 0 3px rgba(104, 64, 53, 0.08);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #999;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .message {
+            min-height: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .error-message {
+            color: var(--error);
+        }
+
+        .register-button {
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 6px;
+            background: var(--dark-brown);
+            color: white;
+            cursor: pointer;
+            font-family: "DM Sans", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .register-button:hover {
+            background: var(--brown);
+            transform: translateY(-1px);
+        }
+
+        .register-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-text {
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+            margin-top: 25px;
+        }
+
+        .login-text a {
+            color: var(--brown);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .image-content {
+                padding-left: 10%;
+                padding-right: 10%;
+            }
+
+            .slider-dots, .slider-btn.prev {
+                left: 25px;
+            }
+
+            .slider-btn.next {
+                right: 25px;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .register-page {
+                grid-template-columns: 1fr;
+            }
+
+            .register-image {
+                display: none;
+            }
+
+            .register-section {
+                padding: 30px;
+            }
+
+            .register-container {
+                max-width: 450px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .slider-btn {
+                width: 42px;
+                height: 42px;
+            }
+
+            .slider-btn.prev, .slider-dots {
+                left: 15px;
+            }
+
+            .slider-btn.next {
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .register-section {
+                padding: 25px 20px;
+            }
+
+            .back-home {
+                margin-bottom: 25px;
+            }
+
+            .register-header h2 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="register-page">
+
+        <!-- Left Side -->
+        <section class="register-image">
+
+            <!-- Background Slider -->
+            <div class="slider">
+                <div class="slide active"
+                    style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/039/558/797/small_2x/ai-generated-gorgeous-solid-wood-coffee-table-as-the-focal-point-adorned-with-a-steaming-cup-of-black-coffee-against-the-backdrop-of-a-beautifully-decorated-cafe-photo.jpeg');">
+                </div>
+                <div class="slide"
+                    style="background-image: url('https://images.alphacoders.com/632/thumb-1920-632876.jpg');">
+                </div>
+                <div class="slide"
+                    style="background-image: url('https://static.vecteezy.com/system/resources/previews/030/626/112/non_2x/staticgraphy-foodgraphy-from-a-distance-free-photo.jpg');">
+                </div>
+                <div class="slide"
+                    style="background-image: url('https://img.magnific.com/premium-photo/cup-coffee-background-design_577115-14843.jpg');">
+                </div>  
+                <div class="slide"
+                    style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/030/903/265/small_2x/spaghetti-with-berries-and-tomato-sauce-on-a-plate-ai-generated-photo.jpg');">
+                </div>
+            </div>
+
+            <!-- Dark Overlay -->
+            <div class="overlay"></div>
+
+            <!-- Fixed Content -->
+            <div class="image-content">
+                <div class="brand">
+                    <i class="fa-solid fa-mug-hot"></i>
+                    <span>Our Cafe</span>
+                </div>
+
+                <div class="welcome-text">
+                    <p>JOIN OUR COMMUNITY</p>
+                    <h1>
+                        Start Your<br>
+                        Journey With Us.
+                    </h1>
+                    <span>
+                        Create an account to unlock exclusive rewards, faster table reservations, and seamless online ordering.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Slider Controls -->
+            <button class="slider-btn prev" id="prevSlide" type="button" aria-label="Previous image">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+            <button class="slider-btn next" id="nextSlide" type="button" aria-label="Next image">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <!-- Dots -->
+            <div class="slider-dots" id="sliderDots">
+                <button class="dot active" type="button" data-slide="0"></button>
+                <button class="dot" type="button" data-slide="1"></button>
+                <button class="dot" type="button" data-slide="2"></button>
+                <button class="dot" type="button" data-slide="3"></button>
+                <button class="dot" type="button" data-slide="4"></button>
+            </div>
+
+        </section>
+
+        <!-- Right Side -->
+        <section class="register-section">
+
+            <div class="register-container">
+
+                <a href="/" class="back-home">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Home
+                </a>
+
+                <div class="register-header">
+                    <div class="register-icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+
+                    <h2 id="headerTitle">Create Account</h2>
+
+                    <p id="headerSubtitle">
+                        Join Our Cafe for fast ordering and perks
+                    </p>
+
+                    <!-- Role Switcher Tabs -->
+                    <div style="display: flex; background: #eee5e0; border-radius: 8px; padding: 4px; margin-top: 20px; gap: 4px;">
+                        <button type="button" id="tabCustomer" class="role-tab active-tab" style="flex: 1; padding: 10px; border: none; border-radius: 6px; background: #3d241e; color: white; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 13px;">
+                            <i class="fa-solid fa-user-large"></i> Customer
+                        </button>
+                        <button type="button" id="tabStaff" class="role-tab" style="flex: 1; padding: 10px; border: none; border-radius: 6px; background: transparent; color: #684035; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 13px;">
+                            <i class="fa-solid fa-id-badge"></i> Cafe Staff
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Register Form -->
+                <form id="registerForm" action="/register" method="POST">
+
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input
+                                type="text"
+                                id="fullName"
+                                name="name"
+                                placeholder="Enter your full name"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email" id="emailLabel">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Create a password"
+                                autocomplete="new-password"
+                                required
+                            >
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                            >
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+            
+
+                    <!-- Error Message -->
+                    <div class="message error-message" id="errorMessage"></div>
+
+                    <!-- Register Button -->
+                    <button
+                        type="submit"
+                        class="register-button"
+                        id="registerButton"
+                    >
+                        <span id="buttonText">
+                            Create Customer Account
+                        </span>
+                        <i
+                            class="fa-solid fa-arrow-right"
+                            id="buttonIcon">
+                        </i>
+                    </button>
+
+                </form>
+
+                <div class="login-text">
+                    Already have an account?
+                    <a href="login.html">Sign In</a>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- <script>
+        const registerForm = document.getElementById("registerForm");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmPassword");
+        const passwordToggle = document.getElementById("passwordToggle");
+        const confirmPasswordToggle = document.getElementById("confirmPasswordToggle");
+        const errorMessage = document.getElementById("errorMessage");
+        const registerButton = document.getElementById("registerButton");
+        const buttonText = document.getElementById("buttonText");
+        const buttonIcon = document.getElementById("buttonIcon");
+        const tabCustomer = document.getElementById("tabCustomer");
+        const tabStaff = document.getElementById("tabStaff");
+        const headerTitle = document.getElementById("headerTitle");
+        const headerSubtitle = document.getElementById("headerSubtitle");
+
+        let currentRole = "customer"; // "customer" or "staff"
+
+        // Role Switcher Handlers
+        tabCustomer.addEventListener("click", () => {
+            currentRole = "customer";
+            tabCustomer.style.background = "#3d241e";
+            tabCustomer.style.color = "white";
+            tabStaff.style.background = "transparent";
+            tabStaff.style.color = "#684035";
+
+            headerTitle.textContent = "Create Account";
+            headerSubtitle.textContent = "Join Our Cafe for fast ordering and perks";
+            buttonText.textContent = "Create Customer Account";
+            document.getElementById("emailLabel").textContent = "Email Address";
+            document.getElementById("email").placeholder = "Enter your email";
+        });
+
+        tabStaff.addEventListener("click", () => {
+            currentRole = "staff";
+            tabStaff.style.background = "#3d241e";
+            tabStaff.style.color = "white";
+            tabCustomer.style.background = "transparent";
+            tabCustomer.style.color = "#684035";
+
+            headerTitle.textContent = "Staff Registration";
+            headerSubtitle.textContent = "Register a new staff profile for management access";
+            buttonText.textContent = "Register Staff Account";
+            document.getElementById("emailLabel").textContent = "Staff Work Email";
+            document.getElementById("email").placeholder = "e.g. staff@cafe.com";
+        });
+
+        // SHOW / HIDE PASSWORD
+        passwordToggle.addEventListener("click", () => {
+            const isPassword = passwordInput.type === "password";
+            passwordInput.type = isPassword ? "text" : "password";
+            passwordToggle.innerHTML = isPassword
+                ? '<i class="fa-regular fa-eye-slash"></i>'
+                : '<i class="fa-regular fa-eye"></i>';
+        });
+
+        confirmPasswordToggle.addEventListener("click", () => {
+            const isPassword = confirmPasswordInput.type === "password";
+            confirmPasswordInput.type = isPassword ? "text" : "password";
+            confirmPasswordToggle.innerHTML = isPassword
+                ? '<i class="fa-regular fa-eye-slash"></i>'
+                : '<i class="fa-regular fa-eye"></i>';
+        });
+
+        // FORM SUBMISSION
+        registerForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            errorMessage.textContent = "";
+
+            const fullName = document.getElementById("fullName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (!fullName || !email || !password || !confirmPassword) {
+                errorMessage.textContent = "Please fill in all required fields.";
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "Passwords do not match.";
+                return;
+            }
+
+            if (password.length < 6) {
+                errorMessage.textContent = "Password must be at least 6 characters long.";
+                return;
+            }
+
+            registerButton.disabled = true;
+            buttonText.textContent = "Creating Account...";
+            buttonIcon.className = "fa-solid fa-spinner fa-spin";
+
+            setTimeout(() => {
+                const newUser = {
+                    id: Date.now(),
+                    name: fullName,
+                    email: email,
+                    role: currentRole
+                };
+
+                sessionStorage.setItem("user", JSON.stringify(newUser));
+
+                if (currentRole === "staff") {
+                    sessionStorage.setItem("staffSession", "true");
+                    window.location.href = "../ reception_order_management.html";
+                } else {
+                    window.location.href = "../ tables.html";
+                }
+            }, 800);
+        });
+
+        // CAFE IMAGE SLIDER
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+        const prevButton = document.getElementById("prevSlide");
+        const nextButton = document.getElementById("nextSlide");
+
+        let currentSlide = 0;
+        let sliderInterval;
+
+        function showSlide(index) {
+            if (index >= slides.length) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = slides.length - 1;
+            } else {
+                currentSlide = index;
+            }
+
+            slides.forEach((slide) => slide.classList.remove("active"));
+            dots.forEach((dot) => dot.classList.remove("active"));
+
+            slides[currentSlide].classList.add("active");
+            if (dots[currentSlide]) {
+                dots[currentSlide].classList.add("active");
+            }
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+            restartSlider();
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+            restartSlider();
+        }
+
+        function startSlider() {
+            sliderInterval = setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 5000);
+        }
+
+        function restartSlider() {
+            clearInterval(sliderInterval);
+            startSlider();
+        }
+
+        if (nextButton) nextButton.addEventListener("click", nextSlide);
+        if (prevButton) prevButton.addEventListener("click", previousSlide);
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+                showSlide(index);
+                restartSlider();
+            });
+        });
+
+        showSlide(0);
+        startSlider();
+    </script> -->
+
+</body>
+
+</html>

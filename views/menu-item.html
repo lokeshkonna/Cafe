@@ -1438,89 +1438,89 @@ function toggleWishlist(button){
     }
 }
 
-function addToCart(name,price,image,quantityId){
-    const quantity = parseInt(document.getElementById(quantityId).value);
+// function addToCart(name,price,image,quantityId){
+//     const quantity = parseInt(document.getElementById(quantityId).value);
 
-    const existing = cart.find(item => item.name === name);
+//     const existing = cart.find(item => item.name === name);
 
-    if(existing){
-        existing.quantity += quantity;
-    }else{
-        cart.push({
-            name:name,
-            price:price,
-            image:image,
-            quantity:quantity
-        });
-    }
+//     if(existing){
+//         existing.quantity += quantity;
+//     }else{
+//         cart.push({
+//             name:name,
+//             price:price,
+//             image:image,
+//             quantity:quantity
+//         });
+//     }
 
-    updateCart();
-    showToast(`${name} added to cart`);
-}
+//     updateCart();
+//     showToast(`${name} added to cart`);
+// }
 
-function updateCart(){
-    const cartCount = cart.reduce((sum,item)=>sum + item.quantity,0);
+// function updateCart(){
+//     const cartCount = cart.reduce((sum,item)=>sum + item.quantity,0);
 
-    document.getElementById("cartCount").textContent = cartCount;
+//     document.getElementById("cartCount").textContent = cartCount;
 
-    const cartItems = document.getElementById("cartItems");
+//     const cartItems = document.getElementById("cartItems");
 
-    if(cart.length === 0){
-        cartItems.innerHTML = `
-            <div class="empty-cart">
-                <div class="empty-cart-icon">🛒</div>
-                <h3>Your cart is empty</h3>
-                <p>Add something delicious to get started.</p>
-            </div>
-        `;
-    }else{
-        cartItems.innerHTML = cart.map((item,index)=>`
-            <div class="cart-item">
-                <img class="cart-item-image" src="${item.image}" alt="${item.name}">
+//     if(cart.length === 0){
+//         cartItems.innerHTML = `
+//             <div class="empty-cart">
+//                 <div class="empty-cart-icon">🛒</div>
+//                 <h3>Your cart is empty</h3>
+//                 <p>Add something delicious to get started.</p>
+//             </div>
+//         `;
+//     }else{
+//         cartItems.innerHTML = cart.map((item,index)=>`
+//             <div class="cart-item">
+//                 <img class="cart-item-image" src="${item.image}" alt="${item.name}">
 
-                <div class="cart-item-info">
-                    <h4>${item.name}</h4>
-                    <div class="cart-item-price">₹${item.price * item.quantity}</div>
+//                 <div class="cart-item-info">
+//                     <h4>${item.name}</h4>
+//                     <div class="cart-item-price">₹${item.price * item.quantity}</div>
 
-                    <div class="cart-item-controls">
-                        <button onclick="updateCartQuantity(${index},-1)">−</button>
-                        <span>${item.quantity}</span>
-                        <button onclick="updateCartQuantity(${index},1)">+</button>
-                        <button class="remove-item" onclick="removeCartItem(${index})">×</button>
-                    </div>
-                </div>
-            </div>
-        `).join("");
-    }
+//                     <div class="cart-item-controls">
+//                         <button onclick="updateCartQuantity(${index},-1)">−</button>
+//                         <span>${item.quantity}</span>
+//                         <button onclick="updateCartQuantity(${index},1)">+</button>
+//                         <button class="remove-item" onclick="removeCartItem(${index})">×</button>
+//                     </div>
+//                 </div>
+//             </div>
+//         `).join("");
+//     }
 
-    const subtotal = cart.reduce((sum,item)=>sum + item.price * item.quantity,0);
-    const delivery = subtotal > 0 ? 40 : 0;
-    const total = subtotal + delivery;
+//     const subtotal = cart.reduce((sum,item)=>sum + item.price * item.quantity,0);
+//     const delivery = subtotal > 0 ? 40 : 0;
+//     const total = subtotal + delivery;
 
-    document.getElementById("subtotal").textContent = `₹${subtotal}`;
-    document.getElementById("delivery").textContent = `₹${delivery}`;
-    document.getElementById("total").textContent = `₹${total}`;
-}
+//     document.getElementById("subtotal").textContent = `₹${subtotal}`;
+//     document.getElementById("delivery").textContent = `₹${delivery}`;
+//     document.getElementById("total").textContent = `₹${total}`;
+// }
 
-function updateCartQuantity(index,value){
-    cart[index].quantity += value;
+// function updateCartQuantity(index,value){
+//     cart[index].quantity += value;
 
-    if(cart[index].quantity <= 0){
-        cart.splice(index,1);
-    }
+//     if(cart[index].quantity <= 0){
+//         cart.splice(index,1);
+//     }
 
-    updateCart();
-}
+//     updateCart();
+// }
 
-function removeCartItem(index){
-    const item = cart[index];
+// function removeCartItem(index){
+//     const item = cart[index];
 
-    cart.splice(index,1);
+//     cart.splice(index,1);
 
-    updateCart();
+//     updateCart();
 
-    showToast(`${item.name} removed`);
-}
+//     showToast(`${item.name} removed`);
+// }
 
 function openCart(){
     document.getElementById("cartOverlay").classList.add("active");
@@ -1540,38 +1540,38 @@ function buyNow(name){
     showToast(`Redirecting to checkout for ${name}...`);
     sessionStorage.setItem("activeCart", JSON.stringify(cart));
     setTimeout(() => {
-        window.location.href = "transaction.html";
+         
     }, 600);
 }
 
-function checkout(){
-    if(cart.length === 0){
-        showToast("Your cart is empty");
-        return;
-    }
+// function checkout(){
+//     if(cart.length === 0){
+//         showToast("Your cart is empty");
+//         return;
+//     }
 
-    showToast("Redirecting to payment checkout...");
-    sessionStorage.setItem("activeCart", JSON.stringify(cart));
+//     showToast("Redirecting to payment checkout...");
+//     sessionStorage.setItem("activeCart", JSON.stringify(cart));
 
-    setTimeout(()=>{
-        window.location.href = "transaction.html";
-    }, 600);
-}
+//     setTimeout(()=>{
+         
+//     }, 600);
+// }
 
-function showToast(message){
-    const toast = document.getElementById("toast");
-    const toastMessage = document.getElementById("toastMessage");
+// function showToast(message){
+//     const toast = document.getElementById("toast");
+//     const toastMessage = document.getElementById("toastMessage");
 
-    toastMessage.textContent = message;
+//     toastMessage.textContent = message;
 
-    toast.classList.add("show");
+//     toast.classList.add("show");
 
-    clearTimeout(window.toastTimer);
+//     clearTimeout(window.toastTimer);
 
-    window.toastTimer = setTimeout(()=>{
-        toast.classList.remove("show");
-    },2200);
-}
+//     window.toastTimer = setTimeout(()=>{
+//         toast.classList.remove("show");
+//     },2200);
+// }
 
 function filterFood(category,button){
     document.querySelectorAll(".category-btn").forEach(btn=>{
@@ -1643,7 +1643,7 @@ document.addEventListener("keydown",event=>{
 });
 
 function buyNow(itemName) {
-    window.location.href = "transaction.html";
+    
 }
 
 updateCart();

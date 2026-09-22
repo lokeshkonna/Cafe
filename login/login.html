@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Our Cafe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --brown: #684035;
+    --dark-brown: #3d241e;
+    --light-brown: #c99378;
+    --cream: #f8f5f0;
+    --white: #ffffff;
+    --text: #30231f;
+    --gray: #777;
+    --border: #ded8d3;
+    --error: #c94b4b;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    color: var(--text);
+    background: var(--cream);
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.login-page {
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+}
+
+
+/* =========================
+   LEFT IMAGE
+========================= */
+
+.login-image {
+    position: relative;
+
+    min-height: 100vh;
+
+    background:
+        url("../img-1.png")
+        center center /
+        cover
+        no-repeat;
+
+    color: white;
+
+    overflow: hidden;
+}
+
+
+.overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(48, 29, 24, 0.88),
+            rgba(64, 37, 31, 0.55)
+        );
+}
+
+
+.image-content {
+    position: relative;
+
+    z-index: 2;
+
+    height: 100%;
+
+    padding: 55px 12%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+
+/* Brand */
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 600;
+}
+
+.brand i {
+    color: #d5a48d;
+
+    font-size: 22px;
+}
+
+
+/* Welcome */
+
+.welcome-text {
+    margin-bottom: 80px;
+}
+
+.welcome-text p {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 13px;
+
+    letter-spacing: 1.5px;
+
+    color: #d5a48d;
+
+    margin-bottom: 15px;
+}
+
+.welcome-text h1 {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: clamp(
+        42px,
+        4vw,
+        65px
+    );
+
+    line-height: 1.1;
+
+    font-weight: 600;
+
+    margin-bottom: 20px;
+}
+
+.welcome-text span {
+    display: block;
+
+    max-width: 450px;
+
+    color: #ddd;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.login-section {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px;
+}
+
+.login-container {
+    width: 100%;
+
+    max-width: 430px;
+}
+
+
+/* Back */
+
+.back-home {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #777;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    margin-bottom: 45px;
+
+    transition: 0.3s;
+}
+
+.back-home:hover {
+    color: var(--brown);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.login-header {
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+.login-icon {
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f0e3dc;
+
+    color: var(--brown);
+
+    font-size: 21px;
+}
+
+.login-header h2 {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 31px;
+
+    color: var(--dark-brown);
+
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    font-size: 14px;
+
+    color: var(--gray);
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+    color: var(--text);
+}
+
+
+/* Password label */
+
+.password-label {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+.password-label label {
+    margin-bottom: 0;
+}
+
+.password-label a {
+    font-size: 12px;
+
+    color: var(--brown);
+
+    text-decoration: none;
+}
+
+.password-label a:hover {
+    text-decoration: underline;
+}
+
+
+/* Input */
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper > i {
+    position: absolute;
+
+    left: 15px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #9a8f89;
+
+    font-size: 14px;
+}
+
+.input-wrapper input {
+    width: 100%;
+
+    height: 50px;
+
+    padding:
+        0 45px 0 44px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 6px;
+
+    background: white;
+
+    color: var(--text);
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.25s;
+}
+
+.input-wrapper input::placeholder {
+    color: #aaa;
+}
+
+.input-wrapper input:focus {
+    border-color: var(--brown);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(104, 64, 53, 0.08);
+}
+
+
+/* Password toggle */
+
+.password-toggle {
+    position: absolute;
+
+    right: 14px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #999;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   REMEMBER
+========================= */
+
+.remember-row {
+    margin-bottom: 20px;
+}
+
+.remember {
+    display: flex !important;
+
+    align-items: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+    color: #777 !important;
+
+    font-size: 12px !important;
+
+    font-weight: 400 !important;
+}
+
+.remember input {
+    accent-color: var(--brown);
+
+    width: 14px;
+    height: 14px;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+    min-height: 20px;
+
+    font-size: 12px;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+}
+
+.error-message {
+    color: var(--error);
+}
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.login-button {
+    width: 100%;
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background:
+        var(--dark-brown);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    transition: 0.3s;
+}
+
+.login-button:hover {
+    background: var(--brown);
+
+    transform: translateY(-1px);
+}
+
+.login-button:disabled {
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+.register-text {
+    text-align: center;
+
+    color: #777;
+
+    font-size: 13px;
+
+    margin-top: 25px;
+}
+
+.register-text a {
+    color: var(--brown);
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 28px 0;
+
+    color: #aaa;
+
+    font-size: 11px;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+
+    height: 1px;
+
+    flex: 1;
+
+    background: #e5dfda;
+}
+
+
+/* =========================
+   GUEST
+========================= */
+
+.guest-button {
+    width: 100%;
+
+    height: 48px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 6px;
+
+    background: white;
+
+    color: var(--text);
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    transition: 0.3s;
+}
+
+.guest-button:hover {
+    border-color: var(--brown);
+
+    color: var(--brown);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .login-image {
+        display: none;
+    }
+
+    .login-section {
+        padding: 30px;
+    }
+
+    .login-container {
+        max-width: 450px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .login-section {
+        padding: 25px 20px;
+    }
+
+    .back-home {
+        margin-bottom: 35px;
+    }
+
+    .login-header h2 {
+        font-size: 27px;
+    }
+}
+
+
+/* =========================================
+   LEFT IMAGE SLIDER
+========================================= */
+
+.login-image {
+    position: relative;
+
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    color: white;
+
+    background: #2b1813;
+}
+
+
+/* =========================================
+   SLIDER
+========================================= */
+
+.slider {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+
+.slide {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    opacity: 0;
+
+    transform: scale(1.08);
+
+    transition:
+        opacity 1.2s ease,
+        transform 6s ease;
+
+    z-index: 0;
+}
+
+
+.slide.active {
+    opacity: 1;
+
+    transform: scale(1);
+
+    z-index: 1;
+}
+
+
+/* =========================================
+   DARK OVERLAY
+========================================= */
+
+.overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(35, 18, 14, 0.88) 0%,
+            rgba(45, 24, 19, 0.67) 48%,
+            rgba(35, 18, 14, 0.35) 100%
+        );
+}
+
+
+/* Extra bottom gradient */
+
+.login-image::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 45%;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(25, 12, 9, 0.65)
+        );
+}
+
+
+/* =========================================
+   FIXED CONTENT
+========================================= */
+
+.image-content {
+    position: relative;
+
+    z-index: 4;
+
+    height: 100%;
+
+    min-height: 100vh;
+
+    padding: 55px 12%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 600;
+}
+
+.brand i {
+    color: #d5a48d;
+
+    font-size: 22px;
+}
+
+
+/* =========================================
+   WELCOME TEXT
+========================================= */
+
+.welcome-text {
+    margin-bottom: 80px;
+
+    max-width: 620px;
+}
+
+.welcome-text p {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 13px;
+
+    letter-spacing: 1.8px;
+
+    color: #d5a48d;
+
+    margin-bottom: 15px;
+}
+
+.welcome-text h1 {
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: clamp(
+        42px,
+        4vw,
+        65px
+    );
+
+    line-height: 1.1;
+
+    font-weight: 600;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 3px 15px
+        rgba(0, 0, 0, 0.35);
+}
+
+.welcome-text span {
+    display: block;
+
+    max-width: 500px;
+
+    color: #eee;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    text-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================================
+   SLIDER ARROWS
+========================================= */
+
+.slider-btn {
+    position: absolute;
+
+    z-index: 6;
+
+    top: 58%;
+
+    width: 52px;
+    height: 52px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(8px);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+}
+
+.slider-btn:hover {
+    background: #684035;
+
+    transform: scale(1.08);
+}
+
+.slider-btn.prev {
+    left: 45px;
+}
+
+.slider-btn.next {
+    right: 45px;
+}
+
+
+/* =========================================
+   SLIDER DOTS
+========================================= */
+
+.slider-dots {
+    position: absolute;
+
+    z-index: 6;
+
+    left: 45px;
+
+    top: 42%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+
+.dot {
+    width: 9px;
+    height: 9px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.8);
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition: 0.35s;
+}
+
+.dot:hover {
+    background: white;
+}
+
+.dot.active {
+    width: 10px;
+    height: 10px;
+
+    background: #d5a48d;
+
+    border-color: #d5a48d;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(213, 164, 141, 0.15);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .image-content {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .slider-dots {
+        left: 25px;
+    }
+
+    .slider-btn.prev {
+        left: 25px;
+    }
+
+    .slider-btn.next {
+        right: 25px;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .login-image {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .slider-btn {
+        width: 42px;
+        height: 42px;
+    }
+
+    .slider-btn.prev {
+        left: 15px;
+    }
+
+    .slider-btn.next {
+        right: 15px;
+    }
+
+    .slider-dots {
+        left: 15px;
+    }
+
+}
+    </style>
+</head>
+
+<body>
+
+    <main class="login-page">
+
+            <!-- Left Side -->
+            <section class="login-image">
+
+        <!-- Background Slider -->
+        <div class="slider">
+
+            <div class="slide active"
+                style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/039/558/797/small_2x/ai-generated-gorgeous-solid-wood-coffee-table-as-the-focal-point-adorned-with-a-steaming-cup-of-black-coffee-against-the-backdrop-of-a-beautifully-decorated-cafe-photo.jpeg');">
+            </div>
+
+            <div class="slide"
+                style="background-image: url('https://images.alphacoders.com/632/thumb-1920-632876.jpg');">
+            </div>
+
+            <div class="slide"
+                style="background-image: url('https://static.vecteezy.com/system/resources/previews/030/626/112/non_2x/staticgraphy-foodgraphy-from-a-distance-free-photo.jpg');">
+            </div>
+
+            <div class="slide"
+                style="background-image: url('https://img.magnific.com/premium-photo/cup-coffee-background-design_577115-14843.jpg');">
+            </div>  
+
+            <div class="slide"
+                style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/030/903/265/small_2x/spaghetti-with-berries-and-tomato-sauce-on-a-plate-ai-generated-photo.jpg');">
+            </div>
+
+        </div>
+
+
+        <!-- Dark Overlay -->
+        <div class="overlay"></div>
+
+
+        <!-- Fixed Content -->
+        <div class="image-content">
+
+            <!-- Logo -->
+<a href="../index.html" class="brand" style="pointer-events: auto; text-decoration: none; color: white;">
+            <div class="brand">
+
+                <i class="fa-solid fa-mug-hot"></i>
+
+                <span>Our Cafe</span>
+
+            </div>
+            </a>
+
+
+            <!-- Welcome Text -->
+
+            <div class="welcome-text">
+
+                <p>WELCOME BACK</p>
+
+                <h1>
+                    Your Perfect<br>
+                    Coffee Awaits.
+                </h1>
+
+                <span>
+                    Login to choose your table,
+                    explore our menu and order your
+                    favourite food.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Slider Controls -->
+
+        <button
+            class="slider-btn prev"
+            id="prevSlide"
+            type="button"
+            aria-label="Previous image">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+
+        <button
+            class="slider-btn next"
+            id="nextSlide"
+            type="button"
+            aria-label="Next image">
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+
+        <!-- Dots -->
+
+        <div class="slider-dots" id="sliderDots">
+
+            <button
+                class="dot active"
+                type="button"
+                data-slide="0">
+            </button>
+
+            <button
+                class="dot"
+                type="button"
+                data-slide="1">
+            </button>
+
+            <button
+                class="dot"
+                type="button"
+                data-slide="2">
+            </button>
+
+            <button
+                class="dot"
+                type="button"
+                data-slide="3">
+            </button>
+
+            <button
+                class="dot"
+                type="button"
+                data-slide="4">
+            </button>
+
+        </div>
+
+    </section>
+
+
+        <!-- Right Side -->
+        <section class="login-section">
+
+            <div class="login-container">
+
+                <a href="../index.html" class="back-home">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Home
+                </a>
+
+
+                <div class="login-header">
+
+                    <div class="login-icon">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+
+                    <h2 id="headerTitle">Welcome Back!</h2>
+
+                    <p id="headerSubtitle">
+                        Choose your access mode to continue
+                    </p>
+
+                    <!-- Role Switcher Tabs -->
+                    <div style="display: flex; background: #eee5e0; border-radius: 8px; padding: 4px; margin-top: 20px; gap: 4px;">
+                        <button type="button" id="tabCustomer" class="role-tab active-tab" style="flex: 1; padding: 10px; border: none; border-radius: 6px; background: #3d241e; color: white; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 13px;">
+                            <i class="fa-solid fa-user-large"></i> Customer
+                        </button>
+                        <button type="button" id="tabStaff" class="role-tab" style="flex: 1; padding: 10px; border: none; border-radius: 6px; background: transparent; color: #684035; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 13px;">
+                            <i class="fa-solid fa-id-badge"></i> Cafe Staff
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <!-- Login Form -->
+
+                <form id="loginForm">
+
+                    <!-- Name field (shown on Sign Up) -->
+                    <div class="form-group" id="nameGroup" style="display: none;">
+                        <label for="name">Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="email" id="emailLabel">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope" id="emailIcon"></i>
+
+                            <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="form-group">
+
+                        <div class="password-label">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <a href="#" id="forgotLink">
+                                Forgot Password?
+                            </a>
+
+                        </div>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                            >
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Remember -->
+
+                    <div class="remember-row" id="rememberRow">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                            >
+
+                            <span>Remember me</span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Error -->
+
+                    <div
+                        class="message error-message"
+                        id="errorMessage">
+                    </div>
+
+
+                    <!-- Login Button -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="loginButton"
+                    >
+
+                        <span id="buttonText">
+                            Login as Customer
+                        </span>
+
+                        <i
+                            class="fa-solid fa-arrow-right"
+                            id="buttonIcon">
+                        </i>
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- Register -->
+
+                <div class="register-text" id="registerText">
+
+                    Don't have an account?
+
+                    <a href="./register.html" id="toggleSignUp">
+                        Create Account
+                    </a>
+
+                </div>
+
+
+                <div class="divider" id="dividerBox">
+                    <span>OR</span>
+                </div>
+
+
+                <!-- Guest -->
+
+                <button
+                    class="guest-button"
+                    id="guestButton"
+                >
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Continue as Guest
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const passwordInput = document.getElementById("password");
+        const passwordToggle = document.getElementById("passwordToggle");
+        const errorMessage = document.getElementById("errorMessage");
+        const loginButton = document.getElementById("loginButton");
+        const buttonText = document.getElementById("buttonText");
+        const buttonIcon = document.getElementById("buttonIcon");
+        const guestButton = document.getElementById("guestButton");
+        const tabCustomer = document.getElementById("tabCustomer");
+        const tabStaff = document.getElementById("tabStaff");
+        const nameGroup = document.getElementById("nameGroup");
+        const headerTitle = document.getElementById("headerTitle");
+        const headerSubtitle = document.getElementById("headerSubtitle");
+        const registerText = document.getElementById("registerText");
+        const toggleSignUp = document.getElementById("toggleSignUp");
+        const dividerBox = document.getElementById("dividerBox");
+
+        let currentRole = "customer"; // "customer" or "staff"
+        let isSignUp = false;
+
+        // Role Switcher Handlers
+        tabCustomer.addEventListener("click", () => {
+            currentRole = "customer";
+            isSignUp = false;
+            tabCustomer.style.background = "#3d241e";
+            tabCustomer.style.color = "white";
+            tabStaff.style.background = "transparent";
+            tabStaff.style.color = "#684035";
+
+            headerTitle.textContent = "Customer Portal";
+            headerSubtitle.textContent = "Login to order food and choose your table";
+            buttonText.textContent = "Login as Customer";
+            nameGroup.style.display = "none";
+            registerText.style.display = "block";
+            dividerBox.style.display = "flex";
+            guestButton.style.display = "flex";
+            document.getElementById("emailLabel").textContent = "Email Address";
+            document.getElementById("email").placeholder = "Enter your email";
+        });
+
+        tabStaff.addEventListener("click", () => {
+            currentRole = "staff";
+            isSignUp = false;
+            tabStaff.style.background = "#3d241e";
+            tabStaff.style.color = "white";
+            tabCustomer.style.background = "transparent";
+            tabCustomer.style.color = "#684035";
+
+            headerTitle.textContent = "Cafe Staff Portal";
+            headerSubtitle.textContent = "Login with Staff ID / Email for Management Dashboard";
+            buttonText.textContent = "Login to Staff Dashboard";
+            nameGroup.style.display = "none";
+            registerText.style.display = "none";
+            dividerBox.style.display = "none";
+            guestButton.style.display = "none";
+            document.getElementById("emailLabel").textContent = "Staff Email / ID";
+            document.getElementById("email").placeholder = "e.g. staff@cafe.com";
+        });
+
+        toggleSignUp.addEventListener("click", (e) => {
+            e.preventDefault();
+            isSignUp = !isSignUp;
+            if (isSignUp) {
+                headerTitle.textContent = "Create Customer Account";
+                headerSubtitle.textContent = "Join Our Cafe rewards and fast checkout";
+                buttonText.textContent = "Create Account";
+                nameGroup.style.display = "block";
+                toggleSignUp.textContent = "Sign In instead";
+            } else {
+                headerTitle.textContent = "Customer Portal";
+                headerSubtitle.textContent = "Login to order food and choose your table";
+                buttonText.textContent = "Login as Customer";
+                nameGroup.style.display = "none";
+                toggleSignUp.textContent = "Create Account";
+            }
+        });
+
+
+// =====================================
+// SHOW / HIDE PASSWORD
+// =====================================
+
+passwordToggle.addEventListener(
+    "click",
+    () => {
+
+        const isPassword =
+            passwordInput.type === "password";
+
+        passwordInput.type =
+            isPassword
+                ? "text"
+                : "password";
+
+        passwordToggle.innerHTML =
+            isPassword
+                ? '<i class="fa-regular fa-eye-slash"></i>'
+                : '<i class="fa-regular fa-eye"></i>';
+
+    }
+);
+
+
+// =====================================
+// LOGIN / SIGNUP SUBMISSION
+// =====================================
+
+loginForm.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+        errorMessage.textContent = "";
+
+
+        const email =
+            document.getElementById("email")
+                .value
+                .trim();
+
+        const password =
+            passwordInput.value;
+
+
+        // Basic validation
+
+        if (!email || !password) {
+
+            errorMessage.textContent =
+                "Please enter your email and password.";
+
+            return;
+        }
+
+
+        // Button loading state
+
+        loginButton.disabled = true;
+
+        buttonText.textContent =
+            currentRole === "staff" ? "Authenticating Staff..." : (isSignUp ? "Creating Account..." : "Logging in...");
+
+        buttonIcon.className =
+            "fa-solid fa-spinner fa-spin";
+
+
+        setTimeout(() => {
+
+            if (currentRole === "staff") {
+
+                const staffUser = {
+                    id: "STAFF-01",
+                    name: "Staff Lead",
+                    email: email,
+                    role: "staff"
+                };
+
+                sessionStorage.setItem("user", JSON.stringify(staffUser));
+                sessionStorage.setItem("staffSession", "true");
+
+                window.location.href = "../tables/reception_order_management.html";
+
+            } else {
+
+                const nameInput = document.getElementById("name").value.trim();
+                const userName = isSignUp && nameInput ? nameInput : email.split("@")[0];
+
+                const user = {
+                    id: Date.now(),
+                    name: userName,
+                    email: email,
+                    role: "customer"
+                };
+
+                sessionStorage.setItem("user", JSON.stringify(user));
+
+                window.location.href = "../tables/tables.html";
+
+            }
+
+        }, 600);
+
+    }
+);
+
+
+// =====================================
+// GUEST LOGIN
+// =====================================
+
+guestButton.addEventListener(
+    "click",
+    () => {
+
+        const guestUser = {
+
+            id: null,
+
+            name: "Guest",
+
+            email: null,
+
+            guest: true
+
+        };
+
+
+        sessionStorage.setItem(
+            "user",
+            JSON.stringify(guestUser)
+        );
+
+
+        window.location.href =
+            "../tables/tables.html";
+
+    }
+);
+
+// =========================================
+// CAFE IMAGE SLIDER
+// =========================================
+
+const slides =
+    document.querySelectorAll(".slide");
+
+const dots =
+    document.querySelectorAll(".dot");
+
+const prevButton =
+    document.getElementById("prevSlide");
+
+const nextButton =
+    document.getElementById("nextSlide");
+
+
+let currentSlide = 0;
+
+let sliderInterval;
+
+
+// =========================================
+// SHOW SLIDE
+// =========================================
+
+function showSlide(index) {
+
+    // Handle boundaries
+
+    if (index >= slides.length) {
+        currentSlide = 0;
+    }
+    else if (index < 0) {
+        currentSlide = slides.length - 1;
+    }
+    else {
+        currentSlide = index;
+    }
+
+
+    // Remove active from all slides
+
+    slides.forEach((slide) => {
+
+        slide.classList.remove("active");
+
+    });
+
+
+    // Remove active from all dots
+
+    dots.forEach((dot) => {
+
+        dot.classList.remove("active");
+
+    });
+
+
+    // Activate current slide
+
+    slides[currentSlide]
+        .classList.add("active");
+
+
+    // Activate current dot
+
+    if (dots[currentSlide]) {
+
+        dots[currentSlide]
+            .classList.add("active");
+
+    }
+
+}
+
+
+// =========================================
+// NEXT
+// =========================================
+
+function nextSlide() {
+
+    showSlide(currentSlide + 1);
+
+    restartSlider();
+
+}
+
+
+// =========================================
+// PREVIOUS
+// =========================================
+
+function previousSlide() {
+
+    showSlide(currentSlide - 1);
+
+    restartSlider();
+
+}
+
+
+// =========================================
+// AUTOMATIC SLIDER
+// =========================================
+
+function startSlider() {
+
+    sliderInterval =
+        setInterval(() => {
+
+            showSlide(currentSlide + 1);
+
+        }, 5000);
+
+}
+
+
+function restartSlider() {
+
+    clearInterval(sliderInterval);
+
+    startSlider();
+
+}
+
+
+// =========================================
+// BUTTON EVENTS
+// =========================================
+
+if (nextButton) {
+
+    nextButton.addEventListener(
+        "click",
+        nextSlide
+    );
+
+}
+
+
+if (prevButton) {
+
+    prevButton.addEventListener(
+        "click",
+        previousSlide
+    );
+
+}
+
+
+// =========================================
+// DOT EVENTS
+// =========================================
+
+dots.forEach((dot, index) => {
+
+    dot.addEventListener(
+        "click",
+        () => {
+
+            showSlide(index);
+
+            restartSlider();
+
+        }
+    );
+
+});
+
+
+// =========================================
+// START
+// =========================================
+
+showSlide(0);
+
+startSlider();
+    </script>
+
+</body>
+
+</html>

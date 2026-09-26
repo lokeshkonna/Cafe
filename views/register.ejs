@@ -670,51 +670,51 @@
 
     </main>
 
-    <!-- <script>
-        const registerForm = document.getElementById("registerForm");
-        const passwordInput = document.getElementById("password");
-        const confirmPasswordInput = document.getElementById("confirmPassword");
-        const passwordToggle = document.getElementById("passwordToggle");
-        const confirmPasswordToggle = document.getElementById("confirmPasswordToggle");
-        const errorMessage = document.getElementById("errorMessage");
-        const registerButton = document.getElementById("registerButton");
-        const buttonText = document.getElementById("buttonText");
-        const buttonIcon = document.getElementById("buttonIcon");
-        const tabCustomer = document.getElementById("tabCustomer");
-        const tabStaff = document.getElementById("tabStaff");
-        const headerTitle = document.getElementById("headerTitle");
-        const headerSubtitle = document.getElementById("headerSubtitle");
+    <script>
+        // const registerForm = document.getElementById("registerForm");
+        // const passwordInput = document.getElementById("password");
+        // const confirmPasswordInput = document.getElementById("confirmPassword");
+        // const passwordToggle = document.getElementById("passwordToggle");
+        // const confirmPasswordToggle = document.getElementById("confirmPasswordToggle");
+        // const errorMessage = document.getElementById("errorMessage");
+        // const registerButton = document.getElementById("registerButton");
+        // const buttonText = document.getElementById("buttonText");
+        // const buttonIcon = document.getElementById("buttonIcon");
+        // const tabCustomer = document.getElementById("tabCustomer");
+        // const tabStaff = document.getElementById("tabStaff");
+        // const headerTitle = document.getElementById("headerTitle");
+        // const headerSubtitle = document.getElementById("headerSubtitle");
 
-        let currentRole = "customer"; // "customer" or "staff"
+        // let currentRole = "customer"; // "customer" or "staff"
 
-        // Role Switcher Handlers
-        tabCustomer.addEventListener("click", () => {
-            currentRole = "customer";
-            tabCustomer.style.background = "#3d241e";
-            tabCustomer.style.color = "white";
-            tabStaff.style.background = "transparent";
-            tabStaff.style.color = "#684035";
+        // // Role Switcher Handlers
+        // tabCustomer.addEventListener("click", () => {
+        //     currentRole = "customer";
+        //     tabCustomer.style.background = "#3d241e";
+        //     tabCustomer.style.color = "white";
+        //     tabStaff.style.background = "transparent";
+        //     tabStaff.style.color = "#684035";
 
-            headerTitle.textContent = "Create Account";
-            headerSubtitle.textContent = "Join Our Cafe for fast ordering and perks";
-            buttonText.textContent = "Create Customer Account";
-            document.getElementById("emailLabel").textContent = "Email Address";
-            document.getElementById("email").placeholder = "Enter your email";
-        });
+        //     headerTitle.textContent = "Create Account";
+        //     headerSubtitle.textContent = "Join Our Cafe for fast ordering and perks";
+        //     buttonText.textContent = "Create Customer Account";
+        //     document.getElementById("emailLabel").textContent = "Email Address";
+        //     document.getElementById("email").placeholder = "Enter your email";
+        // });
 
-        tabStaff.addEventListener("click", () => {
-            currentRole = "staff";
-            tabStaff.style.background = "#3d241e";
-            tabStaff.style.color = "white";
-            tabCustomer.style.background = "transparent";
-            tabCustomer.style.color = "#684035";
+        // tabStaff.addEventListener("click", () => {
+        //     currentRole = "staff";
+        //     tabStaff.style.background = "#3d241e";
+        //     tabStaff.style.color = "white";
+        //     tabCustomer.style.background = "transparent";
+        //     tabCustomer.style.color = "#684035";
 
-            headerTitle.textContent = "Staff Registration";
-            headerSubtitle.textContent = "Register a new staff profile for management access";
-            buttonText.textContent = "Register Staff Account";
-            document.getElementById("emailLabel").textContent = "Staff Work Email";
-            document.getElementById("email").placeholder = "e.g. staff@cafe.com";
-        });
+        //     headerTitle.textContent = "Staff Registration";
+        //     headerSubtitle.textContent = "Register a new staff profile for management access";
+        //     buttonText.textContent = "Register Staff Account";
+        //     document.getElementById("emailLabel").textContent = "Staff Work Email";
+        //     document.getElementById("email").placeholder = "e.g. staff@cafe.com";
+        // });
 
         // SHOW / HIDE PASSWORD
         passwordToggle.addEventListener("click", () => {
@@ -734,52 +734,52 @@
         });
 
         // FORM SUBMISSION
-        registerForm.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            errorMessage.textContent = "";
+        // registerForm.addEventListener("submit", async (event) => {
+        //     event.preventDefault();
+        //     errorMessage.textContent = "";
 
-            const fullName = document.getElementById("fullName").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const password = passwordInput.value;
-            const confirmPassword = confirmPasswordInput.value;
+        //     const fullName = document.getElementById("fullName").value.trim();
+        //     const email = document.getElementById("email").value.trim();
+        //     const password = passwordInput.value;
+        //     const confirmPassword = confirmPasswordInput.value;
 
-            if (!fullName || !email || !password || !confirmPassword) {
-                errorMessage.textContent = "Please fill in all required fields.";
-                return;
-            }
+        //     if (!fullName || !email || !password || !confirmPassword) {
+        //         errorMessage.textContent = "Please fill in all required fields.";
+        //         return;
+        //     }
 
-            if (password !== confirmPassword) {
-                errorMessage.textContent = "Passwords do not match.";
-                return;
-            }
+        //     if (password !== confirmPassword) {
+        //         errorMessage.textContent = "Passwords do not match.";
+        //         return;
+        //     }
 
-            if (password.length < 6) {
-                errorMessage.textContent = "Password must be at least 6 characters long.";
-                return;
-            }
+        //     if (password.length < 6) {
+        //         errorMessage.textContent = "Password must be at least 6 characters long.";
+        //         return;
+        //     }
 
-            registerButton.disabled = true;
-            buttonText.textContent = "Creating Account...";
-            buttonIcon.className = "fa-solid fa-spinner fa-spin";
+        //     registerButton.disabled = true;
+        //     buttonText.textContent = "Creating Account...";
+        //     buttonIcon.className = "fa-solid fa-spinner fa-spin";
 
-            setTimeout(() => {
-                const newUser = {
-                    id: Date.now(),
-                    name: fullName,
-                    email: email,
-                    role: currentRole
-                };
+        //     setTimeout(() => {
+        //         const newUser = {
+        //             id: Date.now(),
+        //             name: fullName,
+        //             email: email,
+        //             role: currentRole
+        //         };
 
-                sessionStorage.setItem("user", JSON.stringify(newUser));
+        //         sessionStorage.setItem("user", JSON.stringify(newUser));
 
-                if (currentRole === "staff") {
-                    sessionStorage.setItem("staffSession", "true");
-                       = "../ reception_order_management.html";
-                } else {
-                       = "../ tables.html";
-                }
-            }, 800);
-        });
+        //         if (currentRole === "staff") {
+        //             sessionStorage.setItem("staffSession", "true");
+        //                = "../ reception_order_management.html";
+        //         } else {
+        //                = "../ tables.html";
+        //         }
+        //     }, 800);
+        // });
 
         // CAFE IMAGE SLIDER
         const slides = document.querySelectorAll(".slide");
@@ -798,7 +798,7 @@
             } else {
                 currentSlide = index;
             }
-
+            
             slides.forEach((slide) => slide.classList.remove("active"));
             dots.forEach((dot) => dot.classList.remove("active"));
 
@@ -841,7 +841,7 @@
 
         showSlide(0);
         startSlider();
-    </script> -->
+    </script> 
 
 </body>
 

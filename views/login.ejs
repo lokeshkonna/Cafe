@@ -646,8 +646,11 @@
 
                 <!-- Login Form -->
                 <form id="loginForm" action="/login" method="POST">
+                    
+                    <!-- Hidden role field -->
+                    <input type="hidden" id="roleInput" name="role" value="customer">
 
-                    <!-- Email -->
+                    <!-- Email / Identifier -->
                     <div class="form-group">
                         <label for="email" id="emailLabel">
                             Email Address
@@ -708,16 +711,17 @@
                         </label>
                     </div>
 
-                    <!-- Error -->
+                    <!-- Error Output -->
                     <div class="message error-message" id="errorMessage"></div>
 
                     <!-- Login Button -->
-                    <input
+                    <button
                         type="submit"
-                        value="Login"
                         class="login-button"
                         id="loginButton"
                     >
+                        Login
+                    </button>
 
                 </form>
 
@@ -725,7 +729,7 @@
                     <span>OR</span>
                 </div>
 
-                <!-- Guest -->
+                <!-- Guest Button -->
                 <button
                     class="guest-button"
                     id="guestButton"
@@ -742,10 +746,24 @@
     </main>
 
     <script>
-        // Password Visibility Toggle
+        // --- DOM Elements ---
+        const loginForm = document.getElementById("loginForm");
         const passwordInput = document.getElementById("password");
         const passwordToggle = document.getElementById("passwordToggle");
+        const tabCustomer = document.getElementById("tabCustomer");
+        const tabStaff = document.getElementById("tabStaff");
+        const headerTitle = document.getElementById("headerTitle");
+        const headerSubtitle = document.getElementById("headerSubtitle");
+        const emailLabel = document.getElementById("emailLabel");
+        const emailInput = document.getElementById("email");
+        const emailIcon = document.getElementById("emailIcon");
+        const roleInput = document.getElementById("roleInput");
+        const errorMessage = document.getElementById("errorMessage");
+        const guestButton = document.getElementById("guestButton");
 
+        let currentRole = "customer";
+
+        // --- Password Visibility Toggle ---
         passwordToggle.addEventListener("click", () => {
             const isPassword = passwordInput.type === "password";
             passwordInput.type = isPassword ? "text" : "password";
@@ -754,7 +772,45 @@
                 : '<i class="fa-regular fa-eye"></i>';
         });
 
-        // Image Slider Functionality
+        // --- Role Switcher Tabs ---
+        function setRole(role) {
+            currentRole = role;
+            roleInput.value = role;
+            errorMessage.textContent = "";
+
+            if (role === "customer") {
+                tabCustomer.style.background = "#3d241e";
+                tabCustomer.style.color = "white";
+                tabStaff.style.background = "transparent";
+                tabStaff.style.color = "#684035";
+
+                headerTitle.textContent = "Customer Portal";
+                headerSubtitle.textContent = "Login to order food and choose your table";
+                emailLabel.textContent = "Email Address";
+                emailInput.placeholder = "Enter your email";
+                emailIcon.className = "fa-regular fa-envelope";
+
+                loginForm.action = "/login";
+            } else if (role === "staff") {
+                tabStaff.style.background = "#3d241e";
+                tabStaff.style.color = "white";
+                tabCustomer.style.background = "transparent";
+                tabCustomer.style.color = "#684035";
+
+                headerTitle.textContent = "Staff Portal";
+                headerSubtitle.textContent = "Access internal management systems";
+                emailLabel.textContent = "Staff ID / Email";
+                emailInput.placeholder = "Enter your Staff ID or email";
+                emailIcon.className = "fa-solid fa-id-card";
+
+                loginForm.action = "/loginStaff";
+            }
+        }
+
+        tabCustomer.addEventListener("click", () => setRole("customer"));
+        tabStaff.addEventListener("click", () => setRole("staff"));
+
+        // --- Image Slider Functionality ---
         const slides = document.querySelectorAll(".slide");
         const dots = document.querySelectorAll(".dot");
         const prevBtn = document.getElementById("prevSlide");
@@ -810,45 +866,61 @@
 
         startAutoSlide();
 
-        // Role Switcher Tabs
-        const tabCustomer = document.getElementById("tabCustomer");
-        const tabStaff = document.getElementById("tabStaff");
-        const headerTitle = document.getElementById("headerTitle");
-        const headerSubtitle = document.getElementById("headerSubtitle");
-        const emailLabel = document.getElementById("emailLabel");
-        const emailInput = document.getElementById("email");
-        const emailIcon = document.getElementById("emailIcon");
+        // --- Form Submission for Node.js Backend ---
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            errorMessage.textContent = "";
 
-        tabCustomer.addEventListener("click", () => {
-            tabCustomer.style.background = "#3d241e";
-            tabCustomer.style.color = "white";
-            tabStaff.style.background = "transparent";
-            tabStaff.style.color = "#684035";
+            const payload = {
+                role: currentRole,
+                email: emailInput.value.trim(),
+                password: passwordInput.value,
+                remember: document.getElementById("remember").checked
+            };
 
-            headerTitle.textContent = "Customer Portal";
-            headerSubtitle.textContent = "Login to order food and choose your table";
-            emailLabel.textContent = "Email Address";
-            emailInput.placeholder = "Enter your email";
-            emailInput.type = "text";
-            emailIcon.className = "fa-regular fa-envelope";
+            try {
+                const response = await fetch(loginForm.action, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                // Follow browser redirects if backend sends HTTP redirect response
+                if (response.redirected) {
+                    window.location.href = response.url;
+                    return;
+                }
+
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    const data = await response.json();
+                    if (response.ok) {
+                        window.location.href = data.redirectUrl || (currentRole === "staff" ? "/dashboard" : "/tables");
+                    } else {
+                        errorMessage.textContent = data.message || "Invalid credentials. Please try again.";
+                        if (data.redirectUrl) {
+                            setTimeout(() => {
+                                window.location.href = data.redirectUrl;
+                            }, 1500);
+                        }
+                    }
+                } else {
+                    if (response.ok) {
+                        window.location.href = currentRole === "staff" ? "/dashboard" : "/tables";
+                    } else {
+                        errorMessage.textContent = "Invalid credentials. Please try again.";
+                    }
+                }
+            } catch (err) {
+                errorMessage.textContent = "Server connection error. Please try again.";
+            }
         });
 
-        tabStaff.addEventListener("click", () => {
-            tabStaff.style.background = "#3d241e";
-            tabStaff.style.color = "white";
-            tabCustomer.style.background = "transparent";
-            tabCustomer.style.color = "#684035";
-
-            headerTitle.textContent = "Staff Portal";
-            headerSubtitle.textContent = "Access internal management systems";
-            emailLabel.textContent = "Staff ID / Email";
-            emailInput.placeholder = "Enter your Staff ID or email";
-            emailIcon.className = "fa-solid fa-id-card";
-        });
-
-        // Guest Access Redirect
-        document.getElementById("guestButton").addEventListener("click", () => {
-               = "/tables";
+        // --- Guest Access Redirect ---
+        guestButton.addEventListener("click", () => {
+            window.location.href = "/tables";
         });
     </script>
 

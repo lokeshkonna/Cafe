@@ -1052,302 +1052,38 @@ button{
     </div>
 
     <div class="food-grid" id="foodGrid">
-
-        <div class="food-card" data-category="indian" data-name="Chicken Biryani">
-            <div class="image-box">
-                <span class="badge">BEST SELLER</span>
-                <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                <img class="food-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaKIHdGwp0ei1-M01N24MERbBbrFgK8YrxX29OfV_Zjd64BM5RaB60G9SF&s=1024" alt="Chicken Biryani">
-            </div>
-            <div class="details">
-                <span class="category">Indian Cuisine</span>
-                <h2 class="food-name">Chicken Biryani</h2>
-                <div class="rating">★★★★★ <span>4.9 (245)</span></div>
-                <p class="description">Aromatic basmati rice cooked with tender chicken and rich Indian spices.</p>
-                <div class="price-row">
-                    <div class="price-box">
-                        <span class="price">₹250</span>
-                        <span class="old-price">₹299</span>
-                    </div>
-                    <div class="quantity-control">
-                        <button onclick="changeQuantity('q1',-1)">−</button>
-                        <input id="q1" value="1" readonly>
-                        <button onclick="changeQuantity('q1',1)">+</button>
-                    </div>
+        <% data.forEach(function(item, index) { %>
+            <div class="food-card" data-category="<%= item.category %>" data-name="<%= item.name %>">
+                <div class="image-box">
+                  
+                    <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
+                    <img class="food-image" src="<%= item.image %>" alt="<%= item.name %>">
                 </div>
-                <div class="actions">
-                    <button class="btn cart-btn" onclick="addToCart('Chicken Biryani',250,'https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=800&q=80','q1')">Add to Cart</button>
-                    <button class="btn buy-btn" onclick="buyNow('Chicken Biryani')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="food-card" data-category="indian" data-name="Crispy Samosa">
-            <div class="image-box">
-                <span class="badge">POPULAR</span>
-                <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                <img class="food-image" src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80" alt="Samosa">
-            </div>
-            <div class="details">
-                <span class="category">Indian Snacks</span>
-                <h2 class="food-name">Crispy Samosa</h2>
-                <div class="rating">★★★★★ <span>4.8 (189)</span></div>
-                <p class="description">Golden crispy samosa filled with spicy potatoes, peas and aromatic herbs.</p>
-                <div class="price-row">
-                    <div class="price-box">
-                        <span class="price">₹80</span>
-                        <span class="old-price">₹100</span>
+                <div class="details">
+                    <span class="category"><%= item.category.charAt(0).toUpperCase() + item.category.slice(1) %> Cuisine</span>
+                    <h2 class="food-name"><%= item.itemName %></h2>
+                    <div class="price-row">
+                        <div class="price-box">
+                            <span class="price">₹<%= item.price %></span>
+                                <span class="old-price">₹1000</span>
+                        </div>
+                        <div class="quantity-control">
+                            <button onclick="changeQuantity('q<%= index %>',-1)">−</button>
+                            <input id="q<%= index %>" value="1" readonly>
+                            <button onclick="changeQuantity('q<%= index %>',1)">+</button>
+                        </div>
                     </div>
-                    <div class="quantity-control">
-                        <button onclick="changeQuantity('q2',-1)">−</button>
-                        <input id="q2" value="1" readonly>
-                        <button onclick="changeQuantity('q2',1)">+</button>
+                    <div class="actions">
+                        <button class="btn cart-btn" onclick="addToCart('<%= item.name %>','<%= item.price %>','<%= item.image %>','q<%= index %>')">Add to Cart</button>
+                        <button class="btn buy-btn" onclick="buyNow('<%= item.name %>')">Buy Now</button>
                     </div>
                 </div>
-                <div class="actions">
-                    <button class="btn cart-btn" onclick="addToCart('Crispy Samosa',80,'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80','q2')">Add to Cart</button>
-                    <button class="btn buy-btn" onclick="buyNow('Crispy Samosa')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="food-card" data-category="italian" data-name="Cheese Pizza">
-            <div class="image-box">
-                <span class="badge">HOT</span>
-                <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                <img class="food-image" src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80" alt="Cheese Pizza">
-            </div>
-            <div class="details">
-                <span class="category">Italian Cuisine</span>
-                <h2 class="food-name">Cheese Pizza</h2>
-                <div class="rating">★★★★★ <span>4.7 (312)</span></div>
-                <p class="description">Delicious cheesy pizza topped with fresh vegetables and Italian herbs.</p>
-                <div class="price-row">
-                    <div class="price-box">
-                        <span class="price">₹299</span>
-                        <span class="old-price">₹349</span>
-                    </div>
-                    <div class="quantity-control">
-                        <button onclick="changeQuantity('q3',-1)">−</button>
-                        <input id="q3" value="1" readonly>
-                        <button onclick="changeQuantity('q3',1)">+</button>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button class="btn cart-btn" onclick="addToCart('Cheese Pizza',299,'https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80','q3')">Add to Cart</button>
-                    <button class="btn buy-btn" onclick="buyNow('Cheese Pizza')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="food-card" data-category="asian" data-name="Veg Fried Rice">
-            <div class="image-box">
-                <span class="badge">FRESH</span>
-                <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                <img class="food-image" src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80" alt="Fried Rice">
-            </div>
-            <div class="details">
-                <span class="category">Asian Cuisine</span>
-                <h2 class="food-name">Veg Fried Rice</h2>
-                <div class="rating">★★★★★ <span>4.6 (156)</span></div>
-                <p class="description">Flavorful fried rice tossed with fresh vegetables and delicious Asian sauces.</p>
-                <div class="price-row">
-                    <div class="price-box">
-                        <span class="price">₹180</span>
-                        <span class="old-price">₹220</span>
-                    </div>
-                    <div class="quantity-control">
-                        <button onclick="changeQuantity('q4',-1)">−</button>
-                        <input id="q4" value="1" readonly>
-                        <button onclick="changeQuantity('q4',1)">+</button>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button class="btn cart-btn" onclick="addToCart('Veg Fried Rice',180,'https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80','q4')">Add to Cart</button>
-                    <button class="btn buy-btn" onclick="buyNow('Veg Fried Rice')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="food-card" data-category="indian" data-name="Butter Chicken">
-            <div class="image-box">
-                <span class="badge">SPECIAL</span>
-                <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                <img class="food-image" src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80" alt="Butter Chicken">
-            </div>
-            <div class="details">
-                <span class="category">North Indian</span>
-                <h2 class="food-name">Butter Chicken</h2>
-                <div class="rating">★★★★★ <span>4.9 (278)</span></div>
-                <p class="description">Creamy butter chicken prepared with tomato, butter, cream and aromatic spices.</p>
-                <div class="price-row">
-                    <div class="price-box">
-                        <span class="price">₹320</span>
-                        <span class="old-price">₹380</span>
-                    </div>
-                    <div class="quantity-control">
-                        <button onclick="changeQuantity('q5',-1)">−</button>
-                        <input id="q5" value="1" readonly>
-                        <button onclick="changeQuantity('q5',1)">+</button>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button class="btn cart-btn" onclick="addToCart('Butter Chicken',320,'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80','q5')">Add to Cart</button>
-                    <button class="btn buy-btn" onclick="buyNow('Butter Chicken')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="food-card" data-category="fast" data-name="Classic Burger">
-            <div class="image-box">
-                <span class="badge">POPULAR</span>
-                <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                <img class="food-image" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="Burger">
-            </div>
-            <div class="details">
-                <span class="category">Fast Food</span>
-                <h2 class="food-name">Classic Burger</h2>
-                <div class="rating">★★★★★ <span>4.8 (342)</span></div>
-                <p class="description">Juicy grilled burger with cheese, lettuce, tomato and our special sauce.</p>
-                <div class="price-row">
-                    <div class="price-box">
-                        <span class="price">₹220</span>
-                        <span class="old-price">₹270</span>
-                    </div>
-                    <div class="quantity-control">
-                        <button onclick="changeQuantity('q6',-1)">−</button>
-                        <input id="q6" value="1" readonly>
-                        <button onclick="changeQuantity('q6',1)">+</button>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button class="btn cart-btn" onclick="addToCart('Classic Burger',220,'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80','q6')">Add to Cart</button>
-                    <button class="btn buy-btn" onclick="buyNow('Classic Burger')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="food-card" data-category="italian" data-name="Creamy Pasta">
-            <div class="image-box">
-                <span class="badge">SPECIAL</span>
-                <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                <img class="food-image" src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=800&q=80" alt="Pasta">
-            </div>
-            <div class="details">
-                <span class="category">Italian Cuisine</span>
-                <h2 class="food-name">Creamy Pasta</h2>
-                <div class="rating">★★★★★ <span>4.7 (201)</span></div>
-                <p class="description">Creamy pasta tossed with parmesan cheese, herbs and delicious white sauce.</p>
-                <div class="price-row">
-                    <div class="price-box">
-                        <span class="price">₹280</span>
-                        <span class="old-price">₹330</span>
-                    </div>
-                    <div class="quantity-control">
-                        <button onclick="changeQuantity('q7',-1)">−</button>
-                        <input id="q7" value="1" readonly>
-                        <button onclick="changeQuantity('q7',1)">+</button>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button class="btn cart-btn" onclick="addToCart('Creamy Pasta',280,'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=800&q=80','q7')">Add to Cart</button>
-                    <button class="btn buy-btn" onclick="buyNow('Creamy Pasta')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="food-card" data-category="indian" data-name="Indian Thali">
-            <div class="image-box">
-                <span class="badge">VEG</span>
-                <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                <img class="food-image" src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=80" alt="Indian Thali">
-            </div>
-            <div class="details">
-                <span class="category">Indian Cuisine</span>
-                <h2 class="food-name">Indian Thali</h2>
-                <div class="rating">★★★★★ <span>4.9 (198)</span></div>
-                <p class="description">Traditional Indian meal with rice, curries, vegetables, bread and dessert.</p>
-                <div class="price-row">
-                    <div class="price-box">
-                        <span class="price">₹299</span>
-                        <span class="old-price">₹349</span>
-                    </div>
-                    <div class="quantity-control">
-                        <button onclick="changeQuantity('q8',-1)">−</button>
-                        <input id="q8" value="1" readonly>
-                        <button onclick="changeQuantity('q8',1)">+</button>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button class="btn cart-btn" onclick="addToCart('Indian Thali',299,'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=80','q8')">Add to Cart</button>
-                    <button class="btn buy-btn" onclick="buyNow('Indian Thali')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="food-card" data-category="dessert" data-name="Chocolate Cake">
-            <div class="image-box">
-                <span class="badge">SWEET</span>
-                <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                <img class="food-image" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" alt="Chocolate Cake">
-            </div>
-            <div class="details">
-                <span class="category">Desserts</span>
-                <h2 class="food-name">Chocolate Cake</h2>
-                <div class="rating">★★★★★ <span>4.9 (365)</span></div>
-                <p class="description">Soft and rich chocolate cake covered with creamy chocolate frosting.</p>
-                <div class="price-row">
-                    <div class="price-box">
-                        <span class="price">₹180</span>
-                        <span class="old-price">₹220</span>
-                    </div>
-                    <div class="quantity-control">
-                        <button onclick="changeQuantity('q9',-1)">−</button>
-                        <input id="q9" value="1" readonly>
-                        <button onclick="changeQuantity('q9',1)">+</button>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button class="btn cart-btn" onclick="addToCart('Chocolate Cake',180,'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80','q9')">Add to Cart</button>
-                    <button class="btn buy-btn" onclick="buyNow('Chocolate Cake')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="food-card" data-category="dessert" data-name="Glazed Donuts">
-            <div class="image-box">
-                <span class="badge">SWEET</span>
-                <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                <img class="food-image" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80" alt="Donuts">
-            </div>
-            <div class="details">
-                <span class="category">Desserts</span>
-                <h2 class="food-name">Glazed Donuts</h2>
-                <div class="rating">★★★★★ <span>4.6 (174)</span></div>
-                <p class="description">Soft and fluffy donuts covered with a delicious sweet glazed topping.</p>
-                <div class="price-row">
-                    <div class="price-box">
-                        <span class="price">₹150</span>
-                        <span class="old-price">₹190</span>
-                    </div>
-                    <div class="quantity-control">
-                        <button onclick="changeQuantity('q10',-1)">−</button>
-                        <input id="q10" value="1" readonly>
-                        <button onclick="changeQuantity('q10',1)">+</button>
-                    </div>
-                </div>
-                <div class="actions">
-                    <button class="btn cart-btn" onclick="addToCart('Glazed Donuts',150,'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80','q10')">Add to Cart</button>
-                    <button class="btn buy-btn" onclick="buyNow('Glazed Donuts')">Buy Now</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="no-results" id="noResults">
-            <div>🍽️</div>
-            <h3>No food found</h3>
-            <p>Try searching for another delicious meal.</p>
-        </div>
+            </div>  
+        <% }); %>
+        <div class="no-results" id="noResults"> 
+            <div>😔</div>
+            <h3>No results found</h3>
+            <p>Try searching for something else.</p>    
 
     </div>
 </main>

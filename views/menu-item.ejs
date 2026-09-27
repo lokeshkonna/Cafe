@@ -1074,8 +1074,8 @@ button{
                         </div>
                     </div>
                     <div class="actions">
-                        <button class="btn cart-btn" onclick="addToCart('<%= item.name %>','<%= item.price %>','<%= item.image %>','q<%= index %>')">Add to Cart</button>
-                        <button class="btn buy-btn" onclick="buyNow('<%= item.name %>')">Buy Now</button>
+                        <button class="btn cart-btn" onclick="addToCart('<%= item.itemName %>','<%= item.price %>','<%= item.image %>','q<%= index %>')">Add to Cart</button>
+                        <a href="/transaction" class="btn buy-btn" onclick="buyNow('<%= item._id %>')">Buy Now</a>
                     </div>
                 </div>
             </div>  
@@ -1272,12 +1272,8 @@ function closeCart(event){
     document.body.style.overflow = "";
 }
 
-function buyNow(name){
-    showToast(`Redirecting to checkout for ${name}...`);
-    sessionStorage.setItem("activeCart", JSON.stringify(cart));
-    setTimeout(() => {
-         
-    }, 600);
+function buyNow(id){
+    window.location.href = `/transaction/${id}`;
 }
 
 // function checkout(){

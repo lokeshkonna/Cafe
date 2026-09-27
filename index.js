@@ -267,7 +267,7 @@ app.post("/tables/:id", async (req, res) => {
     try {
         const tableId = Number(req.params.id);
 
-        console.log("Selected Table ID:", tableId);
+       
 
         const updatedTable = await tables.findOneAndUpdate(
             {
@@ -298,7 +298,7 @@ app.post("/tables/:id", async (req, res) => {
 app.get("/menu", async (req, res) => {
     try {
         const menuData = await menu.find();
-        console.log("Menu Data:", menuData);
+
         res.render("menu-item", { data: menuData });
     } catch (err) {
         console.error("Menu Error:", err);
@@ -423,6 +423,14 @@ app.post("/add", async (req, res) => {
     const newItem = new menu({ itemName, category, price, status });
     await newItem.save();
     res.redirect("/staffMenu");
+
+});
+
+app.get("/transaction/:id", async (req, res) => {
+    const itemId = req.params.id;
+    const item = await menu.findById(itemId);
+    res.render("transaction", { item: item });
+
 
 });
 

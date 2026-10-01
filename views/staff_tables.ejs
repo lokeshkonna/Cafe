@@ -145,20 +145,20 @@
 </main>
 
 <script>
-let tableData = [
-    { id: 1, number: 1, seats: 2, status: 'available', customer: '' },
-    { id: 2, number: 2, seats: 2, status: 'available', customer: '' },
-    { id: 3, number: 3, seats: 4, status: 'occupied', customer: 'John (Order #A892)' },
-    { id: 4, number: 4, seats: 4, status: 'occupied', customer: 'Sarah (Order #B104)' },
-    { id: 5, number: 5, seats: 6, status: 'available', customer: '' },
-    { id: 6, number: 6, seats: 4, status: 'available', customer: '' },
-    { id: 7, number: 7, seats: 2, status: 'occupied', customer: 'Mike (Order #C220)' },
-    { id: 8, number: 8, seats: 2, status: 'cleaning', customer: 'Pending Clean' },
-    { id: 9, number: 9, seats: 4, status: 'available', customer: '' },
-    { id: 10, number: 10, seats: 6, status: 'available', customer: '' },
-    { id: 11, number: 11, seats: 4, status: 'occupied', customer: 'Emma (Order #D301)' },
-    { id: 12, number: 12, seats: 2, status: 'available', customer: '' },
-];
+// let tableData = [
+//     { id: 1, number: 1, seats: 2, status: 'available', customer: '' },
+//     { id: 2, number: 2, seats: 2, status: 'available', customer: '' },
+//     { id: 3, number: 3, seats: 4, status: 'occupied', customer: 'John (Order #A892)' },
+//     { id: 4, number: 4, seats: 4, status: 'occupied', customer: 'Sarah (Order #B104)' },
+//     { id: 5, number: 5, seats: 6, status: 'available', customer: '' },
+//     { id: 6, number: 6, seats: 4, status: 'available', customer: '' },
+//     { id: 7, number: 7, seats: 2, status: 'occupied', customer: 'Mike (Order #C220)' },
+//     { id: 8, number: 8, seats: 2, status: 'cleaning', customer: 'Pending Clean' },
+//     { id: 9, number: 9, seats: 4, status: 'available', customer: '' },
+//     { id: 10, number: 10, seats: 6, status: 'available', customer: '' },
+//     { id: 11, number: 11, seats: 4, status: 'occupied', customer: 'Emma (Order #D301)' },
+//     { id: 12, number: 12, seats: 2, status: 'available', customer: '' },
+// ];
 
 function renderTables(filter = 'all') {
     const container = document.getElementById("tablesContainer");
@@ -184,35 +184,35 @@ function renderTables(filter = 'all') {
 
         const card = document.createElement("div");
         card.className = "bg-surface border border-outline-variant rounded-xl p-5 shadow-sm flex flex-col justify-between h-48 hover:shadow-md transition-shadow";
-        card.innerHTML = `
-            <div>
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-xl font-bold font-serif text-primary">Table ${t.number}</span>
-                    <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full border ${statusColor} flex items-center gap-1">
-                        <span class="material-symbols-outlined text-xs">${statusIcon}</span>
-                        ${t.status.toUpperCase()}
-                    </span>
-                </div>
-                <div class="text-xs text-on-surface-variant flex items-center gap-1">
-                    <span class="material-symbols-outlined text-sm">chair</span> ${t.seats} Seater
-                </div>
-                <div class="text-xs font-medium text-primary mt-2">
-                    ${t.customer ? t.customer : 'Ready for guests'}
-                </div>
-            </div>
+        // card.innerHTML = `
+        //     <div>
+        //         <div class="flex justify-between items-center mb-2">
+        //             <span class="text-xl font-bold font-serif text-primary">Table ${t.number}</span>
+        //             <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full border ${statusColor} flex items-center gap-1">
+        //                 <span class="material-symbols-outlined text-xs">${statusIcon}</span>
+        //                 ${t.status.toUpperCase()}
+        //             </span>
+        //         </div>
+        //         <div class="text-xs text-on-surface-variant flex items-center gap-1">
+        //             <span class="material-symbols-outlined text-sm">chair</span> ${t.seats} Seater
+        //         </div>
+        //         <div class="text-xs font-medium text-primary mt-2">
+        //             ${t.customer ? t.customer : 'Ready for guests'}
+        //         </div>
+        //     </div>
 
-            <div class="flex gap-2 mt-4 pt-3 border-t border-outline-variant/40">
-                ${t.status === 'available' ? `
-                    <button onclick="updateStatus(${t.id}, 'occupied')" class="flex-1 py-1.5 bg-primary text-white text-xs font-medium rounded-md hover:bg-opacity-90">Seat Guest</button>
-                ` : ''}
-                ${t.status === 'occupied' ? `
-                    <button onclick="updateStatus(${t.id}, 'cleaning')" class="flex-1 py-1.5 bg-amber-700 text-white text-xs font-medium rounded-md hover:bg-opacity-90">Clear Table</button>
-                ` : ''}
-                ${t.status === 'cleaning' ? `
-                    <button onclick="updateStatus(${t.id}, 'available')" class="flex-1 py-1.5 bg-emerald-700 text-white text-xs font-medium rounded-md hover:bg-opacity-90">Mark Clean</button>
-                ` : ''}
-            </div>
-        `;
+        //     <div class="flex gap-2 mt-4 pt-3 border-t border-outline-variant/40">
+        //         ${t.status === 'available' ? `
+        //             <button onclick="updateStatus(${t.id}, 'occupied')" class="flex-1 py-1.5 bg-primary text-white text-xs font-medium rounded-md hover:bg-opacity-90">Seat Guest</button>
+        //         ` : ''}
+        //         ${t.status === 'occupied' ? `
+        //             <button onclick="updateStatus(${t.id}, 'cleaning')" class="flex-1 py-1.5 bg-amber-700 text-white text-xs font-medium rounded-md hover:bg-opacity-90">Clear Table</button>
+        //         ` : ''}
+        //         ${t.status === 'cleaning' ? `
+        //             <button onclick="updateStatus(${t.id}, 'available')" class="flex-1 py-1.5 bg-emerald-700 text-white text-xs font-medium rounded-md hover:bg-opacity-90">Mark Clean</button>
+        //         ` : ''}
+        //     </div>
+        // `;
         container.appendChild(card);
     });
 

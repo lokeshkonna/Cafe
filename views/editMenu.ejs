@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Menu Item - Our Cafe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "DM Sans", sans-serif;
+        }
+
+        :root {
+            --brown: #684035;
+            --dark-brown: #3d241e;
+            --cream: #f8f5f0;
+            --white: #ffffff;
+            --text: #30231f;
+            --gray: #777;
+            --border: #ded8d3;
+            --success: #2e7d32;
+            --error: #c94b4b;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .edit-container {
+            width: 100%;
+            max-width: 520px;
+            background: var(--white);
+            padding: 35px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .header-icon {
+            width: 50px;
+            height: 50px;
+            background: #f0e3dc;
+            color: var(--brown);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 20px;
+        }
+
+        .header h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 26px;
+            color: var(--dark-brown);
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9a8f89;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            height: 48px;
+            padding: 0 14px 0 42px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--white);
+            color: var(--text);
+            font-size: 14px;
+            outline: none;
+            transition: 0.25s;
+        }
+
+        .form-group select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .select-wrapper::after {
+            content: "\f107";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9a8f89;
+            pointer-events: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--brown);
+            box-shadow: 0 0 0 3px rgba(104, 64, 53, 0.08);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn-submit {
+            flex: 2;
+            height: 48px;
+            background: var(--dark-brown);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-submit:hover {
+            background: var(--brown);
+        }
+
+        .btn-cancel {
+            flex: 1;
+            height: 48px;
+            background: transparent;
+            color: var(--gray);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.25s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-cancel:hover {
+            background: var(--cream);
+            color: var(--text);
+        }
+
+        .status-alert {
+            display: none;
+            font-size: 13px;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .status-alert.success {
+            background: #e8f5e9;
+            color: var(--success);
+            border: 1px solid #c8e6c9;
+        }
+
+        .status-alert.error {
+            background: #ffebee;
+            color: var(--error);
+            border: 1px solid #ffcdd2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="edit-container">
+        <div class="header">
+            <div class="header-icon">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+            <h2>Edit Menu Item</h2>
+            <p>Select an item to update its price, status, or details</p>
+        </div>
+
+        <!-- Dynamic Feedback Message -->
+        <div class="status-alert" id="statusAlert"></div>
+
+        <form id="editMenuForm" action="/edit/<%= item._id %>" method="POST">
+            
+       
+
+            <!-- Item Name -->
+            <div class="form-group">
+                <label for="itemName">Item Name</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-utensils"></i>
+                    <input type="text" id="itemName" name="itemName" value="<%= item.itemName %>" required placeholder="Item Name">
+                </div>
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+                <label for="itemCategory">Category</label>
+                <div class="input-wrapper select-wrapper">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <input type="text" id="itemCategory" name="category" value="<%= item.category %>" required placeholder="Category">
+                 
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="form-group">
+                <label for="itemPrice">Price (₹)</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                    <input type="number" id="itemPrice" name="price" value="<%= item.price %>" min="0" step="1" required placeholder="0">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="itemImage">Image URL</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-image"></i>
+                    <input type="text" id="itemImage" name="image" value="<%= item.image %>" required placeholder="https://example.com/image.jpg">
+                </div>
+
+            <!-- Stock Status -->
+            <div class="form-group">
+                <label for="itemStatus">Stock Status</label>
+                <div class="input-wrapper select-wrapper">
+                    <i class="fa-solid fa-box-archive"></i>
+                    <select id="itemStatus" name="status" required>
+                        <option value="in stock" <%= item.status === 'in stock' ? 'selected' : '' %>>In Stock</option>
+                        <option value="out of stock" <%= item.status === 'out of stock' ? 'selected' : '' %>>Out of Stock</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="form-actions">
+                <a href="/staffMenu" class="btn-cancel">Back</a>
+                <input type="submit" class="btn-submit" id="saveBtn" value="Save Changes">
+                
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        const itemSelect = document.getElementById("itemSelect");
+        const itemName = document.getElementById("itemName");
+        const itemCategory = document.getElementById("itemCategory");
+        const itemPrice = document.getElementById("itemPrice");
+        const itemStatus = document.getElementById("itemStatus");
+        const form = document.getElementById("editMenuForm");
+        const statusAlert = document.getElementById("statusAlert");
+        const saveBtn = document.getElementById("saveBtn");
+
+        let itemsCache = {};
+
+        // Helper to show alert messages
+        function showAlert(message, type) {
+            statusAlert.textContent = message;
+            statusAlert.className = `status-alert ${type}`;
+            statusAlert.style.display = "block";
+        }
+
+        function hideAlert() {
+            statusAlert.style.display = "none";
+        }
+
+        // 1. Fetch items from Node.js Express route (/api/items)
+        async function fetchMenuItems() {
+            try {
+                const response = await fetch("/api/items");
+                if (!response.ok) throw new Error("Failed to load menu items");
+
+                const items = await response.json();
+                itemSelect.innerHTML = "";
+                itemsCache = {};
+
+                if (items.length === 0) {
+                    itemSelect.innerHTML = '<option value="" disabled selected>No items found</option>';
+                    return;
+                }
+
+                items.forEach((item) => {
+                    itemsCache[item._id] = item;
+                    const option = document.createElement("option");
+                    option.value = item._id;
+                    option.textContent = item.name;
+                    itemSelect.appendChild(option);
+                });
+
+                // Pre-fill form with the first item in the list
+                fillFormFields(items[0]._id);
+
+            } catch (err) {
+                console.error("Fetch Error:", err);
+                showAlert("Could not connect to server to load items.", "error");
+            }
+        }
+
+        // 2. Populate input fields when an item is selected
+        function fillFormFields(id) {
+            const selectedItem = itemsCache[id];
+            if (selectedItem) {
+                itemName.value = selectedItem.name;
+                itemCategory.value = selectedItem.category;
+                itemPrice.value = selectedItem.price;
+                itemStatus.value = selectedItem.status;
+            }
+        }
+
+        // Dropdown selection change listener
+        itemSelect.addEventListener("change", (e) => {
+            fillFormFields(e.target.value);
+            hideAlert();
+        });
+
+        // 3. Send update request (PUT /api/items/:id) on form submission
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            hideAlert();
+
+            const selectedId = itemSelect.value;
+            if (!selectedId) return;
+
+            saveBtn.disabled = true;
+            saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+            const payload = {
+                name: itemName.value.trim(),
+                category: itemCategory.value,
+                price: parseFloat(itemPrice.value),
+                status: itemStatus.value
+            };
+
+            try {
+                const response = await fetch(`/api/items/${selectedId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert(data.message || "Item updated successfully!", "success");
+                    
+                    // Update cache and dropdown text if item name was changed
+                    itemsCache[selectedId] = data.item || payload;
+                    const selectedOption = itemSelect.options[itemSelect.selectedIndex];
+                    selectedOption.textContent = payload.name;
+                } else {
+                    showAlert(data.message || "Failed to update item.", "error");
+                }
+            } catch (err) {
+                console.error("Submit Error:", err);
+                showAlert("Server connection error. Please try again.", "error");
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Changes';
+            }
+        });
+
+        // Initialize on page load
+        fetchMenuItems();
+    </script>
+</body>
+</html>

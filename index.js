@@ -77,7 +77,19 @@ const menuSchema = new mongoose.Schema({
         type: String
     }
 });
+const feedbackSchema = new mongoose.Schema({
+    name: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    message: {
+        type: String
+    }
+});
 
+const feedback = mongoose.model("feedback", feedbackSchema, "feedback");
 const tables = mongoose.model("tables", tablesSchema, "tables");
 const menu = mongoose.model("menu", menuSchema, "menu");
 const user = mongoose.model("user", userschema, "user");
@@ -94,7 +106,24 @@ mongoose.connect(process.env.mongodb)
 app.get("/", (req, res) => {
     res.render("index");
 });
-
+app.get("/index", (req, res) => {
+    res.render("index");
+});
+app.get("/about", (req, res) => {
+    res.render("about");
+}); 
+app.get("/contact", (req, res) => {
+    res.render("contact");
+});
+app.get("/customer_profile", (req, res) => {
+    res.render("customer_profile");
+});
+app.get("/menu-item", (req, res) => {
+    res.render("menu-item");
+});
+app.get("/customer_order_status", (req, res) => {
+    res.render("customer_order_status");
+});
 app.get("/login", (req, res) => {
     const token = req.cookies.token;
 
@@ -433,7 +462,30 @@ app.get("/transaction/:id", async (req, res) => {
 
 
 });
-
+app.post("/contact", async (req, res) => {
+    
+    const { name, email, message } = req.body;
+    const newFeedback = new feedback({ name, email, message });
+    await newFeedback.save();
+    res.redirect("/contact");
+});
+app.get("/logout", (req, res) => {
+    res.clearCookie("token");
+    res.redirect("/login");
+});
+app.get("/logoutStaff", (req, res) => {
+    res.clearCookie("token");
+    res.redirect("/login");
+});
+app.get("/addMenu", (req, res) => {
+    res.render("addMenu");
+});
+app.get("/order-status", (req, res) => {
+    res.render("customer_order_status");
+});
+app.get("/history", (req, res) => {
+    res.render("previous-orders");
+});
 
 
 

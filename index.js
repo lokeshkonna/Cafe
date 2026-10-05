@@ -78,10 +78,20 @@ const menuSchema = new mongoose.Schema({
     }
 });
 
+const orderSchema = new mongoose.Schema({
+    email: {
+        type: String
+    },
+    ordername: {
+        type: String
+    },
+});
+
 const tables = mongoose.model("tables", tablesSchema, "tables");
 const menu = mongoose.model("menu", menuSchema, "menu");
 const user = mongoose.model("user", userschema, "user");
 const emp = mongoose.model("emp", empSchema, "emp");
+const order = mongoose.model("order", orderSchema, "order");
 
 mongoose.connect(process.env.mongodb)
     .then(() => {
@@ -377,8 +387,8 @@ app.get("/staffMenu", async (req, res) => {
     const  token = req.cookies.token;
     const data= await menu.find();
    
-
-    res.render("staff_inventory", { data: data });
+        res.json({ data: data });
+    // res.render("staff_inventory", { data: data });
 });
 
 app.post("/edit/:id", async (req, res) => {
@@ -433,6 +443,7 @@ app.get("/transaction/:id", async (req, res) => {
 
 
 });
+
 
 
 

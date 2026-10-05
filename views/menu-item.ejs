@@ -564,14 +564,20 @@ button{
 
 .btn{
     height:43px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-sizing:border-box;
     border:0;
     border-radius:12px;
+    font-family:inherit;
     font-size:11px;
     font-weight:800;
     cursor:pointer;
     transition:.3s;
+    text-decoration:none;
 }
-
 .cart-btn{
     background:var(--primary);
     color:white;
@@ -1073,10 +1079,13 @@ button{
                             <button onclick="changeQuantity('q<%= index %>',1)">+</button>
                         </div>
                     </div>
-                    <div class="actions">
-                        <button class="btn cart-btn" onclick="addToCart('<%= item.itemName %>','<%= item.price %>','<%= item.image %>','q<%= index %>')">Add to Cart</button>
-                        <a href="/transaction" class="btn buy-btn" onclick="buyNow('<%= item._id %>')">Buy Now</a>
-                    </div>
+                <div class="actions">
+                <button class="btn cart-btn" onclick="addToCart('<%= item.itemName %>','<%= item.price %>','<%= item.image %>','q<%= index %>')">Add to Cart</button>
+
+            
+                <a href="/transaction"class="btn buy-btn"onclick="buyNow('<%= item._id %>')"> Buy Now</a>
+                    
+</div>
                 </div>
             </div>  
         <% }); %>
@@ -1141,6 +1150,7 @@ button{
     <span>✓</span>
     <span id="toastMessage">Added to cart</span>
 </div>
+
 
 <script>
 let cart = [];

@@ -89,7 +89,7 @@ const feedbackSchema = new mongoose.Schema({
     }
 });
 
-<<<<<<< HEAD
+
 const orderSchema = new mongoose.Schema({
     email: {
         type: String
@@ -99,9 +99,9 @@ const orderSchema = new mongoose.Schema({
     },
 });
 
-=======
+
 const feedback = mongoose.model("feedback", feedbackSchema, "feedback");
->>>>>>> 9faa4f0feaf4e409377f3565d83d3011a475bed4
+
 const tables = mongoose.model("tables", tablesSchema, "tables");
 const menu = mongoose.model("menu", menuSchema, "menu");
 const user = mongoose.model("user", userschema, "user");

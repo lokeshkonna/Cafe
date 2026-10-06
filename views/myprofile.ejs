@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | Our Cafe</title>
+
+    <!-- =========================
+         GOOGLE FONTS
+    ========================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =========================
+         FONT AWESOME
+    ========================== -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <style>
+
+        /* =========================================
+           GLOBAL
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #faf8f4;
+            color: #432820;
+            font-family: "DM Sans", sans-serif;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================================
+           NAVBAR
+        ========================================= */
+
+        .navbar {
+            height: 68px;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e8e2dc;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 6.2%;
+
+            justify-content: space-between;
+        }
+
+
+        /* ---------- LOGO ---------- */
+
+        .logo {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            color: #432820;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 27px;
+
+            font-weight: 600;
+        }
+
+        .logo i {
+            color: #5a3026;
+
+            font-size: 22px;
+        }
+
+
+        /* ---------- NAV LINKS ---------- */
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+
+            gap: 28px;
+
+            margin-left: auto;
+            margin-right: 35px;
+        }
+
+        .nav-center a {
+            display: flex;
+            align-items: center;
+
+            gap: 6px;
+
+            color: #432820;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            transition: 0.25s;
+        }
+
+        .nav-center a:hover {
+            color: #8a5140;
+        }
+
+        .nav-center i {
+            font-size: 15px;
+        }
+
+
+        /* ---------- USER AREA ---------- */
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+
+            gap: 25px;
+        }
+
+        .username {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            color: #432820;
+
+            font-size: 16px;
+
+            font-weight: 500;
+        }
+
+        .username i {
+            font-size: 27px;
+
+            color: #704536;
+        }
+
+
+        /* ---------- LOGOUT ---------- */
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+
+            gap: 7px;
+
+            background: #432820;
+
+            color: #ffffff;
+
+            padding: 12px 18px;
+
+            border-radius: 5px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            transition: 0.25s;
+        }
+
+        .logout-btn:hover {
+            background: #5a3026;
+        }
+
+
+        /* =========================================
+           MAIN PAGE
+        ========================================= */
+
+        .profile-page {
+
+            max-width: 1250px;
+
+            margin: 0 auto;
+
+            padding: 68px 25px 90px;
+        }
+
+
+        /* =========================================
+           PAGE HEADER
+        ========================================= */
+
+        .page-header {
+            margin-bottom: 42px;
+        }
+
+        .page-header .small-title {
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            letter-spacing: 1px;
+
+            color: #704536;
+
+            margin-bottom: 17px;
+        }
+
+        .page-header h1 {
+
+            font-family: "Playfair Display", serif;
+
+            color: #432820;
+
+            font-size: 54px;
+
+            line-height: 1.1;
+
+            font-weight: 600;
+
+            margin-bottom: 13px;
+        }
+
+        .page-header p {
+
+            color: #667085;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           PROFILE LAYOUT
+        ========================================= */
+
+        .profile-layout {
+
+            display: grid;
+
+            grid-template-columns: 285px 1fr;
+
+            gap: 28px;
+
+            align-items: start;
+        }
+
+
+        /* =========================================
+           LEFT PROFILE CARD
+        ========================================= */
+
+        .profile-sidebar {
+
+            background: #ffffff;
+
+            border: 1px solid #e8e2dc;
+
+            border-radius: 14px;
+
+            padding: 30px 22px;
+        }
+
+
+        /* ---------- PROFILE IMAGE ---------- */
+
+        .profile-avatar {
+
+            width: 105px;
+            height: 105px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #f4ebe5;
+
+            color: #704536;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 42px;
+
+            border: 1px solid #eadcd4;
+        }
+
+
+        .profile-sidebar h2 {
+
+            text-align: center;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 25px;
+
+            font-weight: 600;
+
+            color: #432820;
+
+            margin-bottom: 5px;
+        }
+
+        .profile-email {
+
+            text-align: center;
+
+            color: #7b8490;
+
+            font-size: 14px;
+
+            margin-bottom: 28px;
+        }
+
+
+        /* =========================================
+           SIDEBAR MENU
+        ========================================= */
+
+        .side-menu {
+
+            border-top: 1px solid #eee8e2;
+
+            padding-top: 15px;
+        }
+
+        .side-menu a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 13px;
+
+            margin-bottom: 5px;
+
+            border-radius: 7px;
+
+            color: #5d646d;
+
+            font-size: 15px;
+
+            font-weight: 500;
+
+            transition: 0.2s;
+        }
+
+        .side-menu a i {
+
+            width: 20px;
+
+            text-align: center;
+        }
+
+        .side-menu a:hover {
+
+            background: #f7f1ed;
+
+            color: #5a3026;
+        }
+
+        .side-menu a.active {
+
+            background: #f2e8e2;
+
+            color: #5a3026;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================
+           PROFILE DETAILS CARD
+        ========================================= */
+
+        .profile-content {
+
+            background: #ffffff;
+
+            border: 1px solid #e8e2dc;
+
+            border-radius: 14px;
+
+            padding: 32px;
+        }
+
+
+        /* =========================================
+           SECTION HEADER
+        ========================================= */
+
+        .section-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid #eee8e2;
+
+            margin-bottom: 27px;
+        }
+
+        .section-header h2 {
+
+            font-family: "Playfair Display", serif;
+
+            color: #432820;
+
+            font-size: 28px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================
+           EDIT BUTTON
+        ========================================= */
+
+        .edit-btn {
+
+            border: 1px solid #d9c8bf;
+
+            background: #ffffff;
+
+            color: #5a3026;
+
+            padding: 9px 16px;
+
+            border-radius: 5px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            transition: 0.2s;
+        }
+
+        .edit-btn:hover {
+
+            background: #f7f1ed;
+
+            border-color: #c9afa2;
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 22px;
+        }
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .form-group.full {
+
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+
+            color: #4f5660;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+
+            width: 100%;
+
+            height: 45px;
+
+            border: 1px solid #ddd5ce;
+
+            border-radius: 6px;
+
+            background: #fcfbf9;
+
+            color: #432820;
+
+            padding: 0 13px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color: #a67a67;
+
+            background: #ffffff;
+
+            box-shadow: 0 0 0 3px rgba(112,69,54,0.07);
+        }
+
+        .form-group input:disabled,
+        .form-group select:disabled {
+
+            color: #5f6368;
+
+            cursor: default;
+        }
+
+
+        /* =========================================
+           STATS
+        ========================================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 32px;
+        }
+
+        .stat {
+
+            background: #faf8f4;
+
+            border: 1px solid #e8e2dc;
+
+            border-radius: 9px;
+
+            padding: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+        }
+
+        .stat-icon {
+
+            width: 43px;
+
+            height: 43px;
+
+            border-radius: 50%;
+
+            background: #f2e8e2;
+
+            color: #704536;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+        .stat h3 {
+
+            font-family: "Playfair Display", serif;
+
+            color: #432820;
+
+            font-size: 23px;
+
+            margin-bottom: 2px;
+        }
+
+        .stat p {
+
+            color: #7b8490;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================
+           SAVE AREA
+        ========================================= */
+
+        .save-area {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            margin-top: 30px;
+
+            padding-top: 22px;
+
+            border-top: 1px solid #eee8e2;
+        }
+
+
+        .save-btn {
+
+            border: none;
+
+            background: #432820;
+
+            color: #ffffff;
+
+            padding: 12px 23px;
+
+            border-radius: 5px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            transition: 0.2s;
+        }
+
+        .save-btn:hover {
+
+            background: #5a3026;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1000px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .nav-center {
+                gap: 15px;
+
+                margin-right: 15px;
+            }
+
+            .nav-center a {
+                font-size: 14px;
+            }
+
+            .profile-page {
+                padding-left: 4%;
+                padding-right: 4%;
+            }
+
+            .profile-layout {
+                grid-template-columns: 240px 1fr;
+            }
+        }
+
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                height: auto;
+
+                min-height: 68px;
+
+                flex-wrap: wrap;
+
+                padding: 15px 5%;
+
+                gap: 15px;
+            }
+
+            .nav-center {
+                order: 3;
+
+                width: 100%;
+
+                justify-content: center;
+
+                margin: 0;
+
+                padding-top: 8px;
+
+                border-top: 1px solid #eee8e2;
+            }
+
+            .nav-right {
+                margin-left: auto;
+            }
+
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-sidebar {
+                display: grid;
+
+                grid-template-columns: 120px 1fr;
+
+                column-gap: 25px;
+
+                align-items: center;
+            }
+
+            .profile-avatar {
+                grid-row: span 2;
+
+                margin: 0 auto;
+            }
+
+            .profile-sidebar h2,
+            .profile-email {
+                text-align: left;
+            }
+
+            .side-menu {
+                grid-column: 1 / -1;
+
+                display: flex;
+
+                flex-wrap: wrap;
+
+                gap: 5px;
+            }
+
+            .side-menu a {
+                margin: 0;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .logo {
+                font-size: 23px;
+            }
+
+            .nav-center {
+                gap: 10px;
+
+                overflow-x: auto;
+
+                justify-content: flex-start;
+            }
+
+            .nav-center a {
+                white-space: nowrap;
+
+                font-size: 13px;
+            }
+
+            .username span {
+                display: none;
+            }
+
+            .logout-btn span {
+                display: none;
+            }
+
+            .logout-btn {
+                padding: 10px 12px;
+            }
+
+            .profile-page {
+                padding-top: 40px;
+            }
+
+            .page-header h1 {
+                font-size: 42px;
+            }
+
+            .page-header p {
+                font-size: 15px;
+            }
+
+            .profile-content {
+                padding: 22px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-sidebar {
+                display: block;
+
+                text-align: center;
+            }
+
+            .profile-sidebar h2,
+            .profile-email {
+                text-align: center;
+            }
+
+            .side-menu {
+                justify-content: center;
+            }
+
+            .section-header h2 {
+                font-size: 24px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+
+    <header class="navbar">
+
+
+        <!-- LOGO -->
+
+        <a href="index.html" class="logo">
+
+            <i class="fa-solid fa-mug-hot"></i>
+
+            <span>Our Cafe</span>
+
+        </a>
+
+
+        <!-- CENTER NAVIGATION -->
+
+        <nav class="nav-center">
+
+            <a href="menu.html">
+
+                <i class="fa-solid fa-utensils"></i>
+
+                Menu
+
+            </a>
+
+
+            <a href="order-status.html">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                Live Order
+
+            </a>
+
+
+            <a href="history.html">
+
+                <i class="fa-solid fa-receipt"></i>
+
+                History
+
+            </a>
+
+        </nav>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="nav-right">
+
+
+            <div class="username">
+
+                <i class="fa-solid fa-circle-user"></i>
+
+                <span>lokesh</span>
+
+            </div>
+
+
+            <a href="logout.php" class="logout-btn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =========================================
+         MAIN PROFILE PAGE
+    ========================================== -->
+
+    <main class="profile-page">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div class="small-title">
+                WELCOME TO OUR CAFE
+            </div>
+
+            <h1>My Profile</h1>
+
+            <p>
+                Manage your personal information and view your cafe activity.
+            </p>
+
+        </section>
+
+
+
+        <!-- =====================================
+             PROFILE LAYOUT
+        ====================================== -->
+
+        <div class="profile-layout">
+
+
+            <!-- =================================
+                 LEFT SIDEBAR
+            ================================== -->
+
+            <aside class="profile-sidebar">
+
+
+                <!-- PROFILE AVATAR -->
+
+                <div class="profile-avatar">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+
+                <h2>Lokesh</h2>
+
+                <p class="profile-email">
+                    lokesh@example.com
+                </p>
+
+
+                <!-- SIDE MENU -->
+
+                <div class="side-menu">
+
+
+                    <a href="#" class="active">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        My Profile
+
+                    </a>
+
+
+                    <a href="history.html">
+
+                        <i class="fa-solid fa-receipt"></i>
+
+                        Order History
+
+                    </a>
+
+
+                    <a href="order-status.html">
+
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+
+                        Live Orders
+
+                    </a>
+
+
+                    <a href="menu.html">
+
+                        <i class="fa-solid fa-utensils"></i>
+
+                        Browse Menu
+
+                    </a>
+
+
+                    <a href="logout.php">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        Logout
+
+                    </a>
+
+
+                </div>
+
+
+            </aside>
+
+
+
+            <!-- =================================
+                 RIGHT CONTENT
+            ================================== -->
+
+            <section class="profile-content">
+
+
+                <!-- SECTION HEADER -->
+
+                <div class="section-header">
+
+                    <h2>Personal Information</h2>
+
+                    <button
+                        class="edit-btn"
+                        id="editButton"
+                        onclick="enableEditing()"
+                    >
+
+                        <i class="fa-solid fa-pen"></i>
+
+                        Edit Profile
+
+                    </button>
+
+                </div>
+
+
+                <form action="/myprofile" method="POST">
+                    <div class="form-grid">
+
+
+                        <!-- FULL NAME -->
+
+                        <div class="form-group">
+
+                            <label for="fullname">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="fullname"
+                                value="Lokesh Konna"
+                                disabled
+                            >
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                value="lokesh@example.com"
+                                disabled
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="password"
+                                value="********"
+                                disabled
+                            >
+
+                        </div>
+
+                    </div>
+                </form>
+
+
+                <!-- =================================
+                     ACCOUNT STATISTICS
+                ================================== -->
+
+                <div class="stats">
+
+
+                    <!-- ORDERS -->
+
+                    <div class="stat">
+
+                        <div class="stat-icon">
+
+                            <i class="fa-solid fa-bag-shopping"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>12</h3>
+
+                            <p>Total Orders</p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOOKINGS -->
+
+                    <div class="stat">
+
+                        <div class="stat-icon">
+
+                            <i class="fa-solid fa-calendar-check"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>5</h3>
+
+                            <p>Table Bookings</p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FAVORITES -->
+
+                    <div class="stat">
+
+                        <div class="stat-icon">
+
+                            <i class="fa-solid fa-heart"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>8</h3>
+
+                            <p>Favorite Items</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                
+
+                <div
+                    class="save-area"
+                    id="saveArea"
+                    style="display: none;"
+                >
+
+                    <button
+                        class="save-btn"
+                        onclick="saveProfile()"
+                    >
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Save Changes
+
+                    </button>
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    
+
+    <!-- <script>
+
+
+        function enableEditing() {
+
+            const fields = [
+
+                "fullname",
+                "email",
+                "password"
+
+            ];
+
+
+            fields.forEach(function(field) {
+
+                document.getElementById(field).disabled = false;
+
+            });
+
+
+            document.getElementById("saveArea").style.display = "flex";
+
+
+            document.getElementById("editButton").style.display = "none";
+
+        }
+
+
+
+        function saveProfile() {
+
+            const fields = [
+
+                "fullname",
+                "email",
+                "password",
+
+            ];
+
+
+            fields.forEach(function(field) {
+
+                document.getElementById(field).disabled = true;
+
+            });
+
+
+            document.getElementById("saveArea").style.display = "none";
+
+
+            document.getElementById("editButton").style.display = "flex";
+
+
+            alert("Profile updated successfully!");
+
+        }
+
+
+    </script> -->
+
+
+</body>
+</html>

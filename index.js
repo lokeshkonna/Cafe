@@ -90,15 +90,42 @@ const feedbackSchema = new mongoose.Schema({
 });
 
 
+
+
 const orderSchema = new mongoose.Schema({
-    email: {
-        type: String
-    },
-    ordername: {
-        type: String
-    },
+  name: {
+    type: String,
+    required: true
+  },
+
+  status: {
+    type: String,
+    required: true
+  },
+
+  date: {
+    type: String,
+    required: true
+  },
+
+  table: {
+    type: Number,
+    required: true
+  },
+
+  price: {
+    type: Number,
+    required: true
+  },
+
+  mail: {
+    type: String,
+    required: true
+  }
 });
 
+
+const history = mongoose.model("history", orderSchema, "history");
 
 const feedback = mongoose.model("feedback", feedbackSchema, "feedback");
 
@@ -419,8 +446,8 @@ app.get("/staffMenu", async (req, res) => {
     const  token = req.cookies.token;
     const data= await menu.find();
    
-        res.json({ data: data });
-    // res.render("staff_inventory", { data: data });
+    res.json({ data: data });
+    res.render("staff_inventory", { data: data });
 });
 
 app.post("/edit/:id", async (req, res) => {
@@ -493,11 +520,33 @@ app.get("/logoutStaff", (req, res) => {
 app.get("/addMenu", (req, res) => {
     res.render("addMenu");
 });
-app.get("/order-status", (req, res) => {
-    res.render("customer_order_status");
-});
-app.get("/history", (req, res) => {
-    res.render("previous-orders");
+
+
+
+
+
+app.get("/history", async (req, res) => {
+    const token = req.cookies.token;
+
+    console.log("Token:", token);
+
+    try {
+        const data = jwt.verify(token, process.env.jwtSecret);
+
+        const userData = await user.findById(data.id);
+
+        const orders = await history.find({
+            mail: userData.email
+        });
+
+        console.log("Orders:", orders);
+
+        res.render("previous-orders", { data: orders });
+
+    } catch (err) {
+        console.error("Error fetching order status:", err);
+        res.status(500).send("An error occurred while fetching order status.");
+    }
 });
 
 

@@ -921,84 +921,69 @@
 
             </div>
 
-
-            <!-- ORDER SUMMARY -->
-
-            <div class="card">
-
-                <h2>Order Summary</h2>
+<!-- ORDER SUMMARY -->
 
 
-                <div class="order-info">
+<!-- ORDER SUMMARY -->
 
-                    <div class="info-row">
+<div class="card">
 
-                        <span>
-                            Table
-                        </span>
+    <h2>Order Summary</h2>
 
-                        <strong>
-                            #5
-                        </strong>
+    <!-- Table Information -->
+    <div class="order-info">
 
-                    </div>
+        <div class="info-row">
+            <span>Table Number</span>
 
+            <strong>
+                <%= tableNumber %>
+            </strong>
+        </div>
 
-                    <div class="info-row">
+        <div class="info-row">
+            <span>Order Type</span>
 
-                        <span>
-                            Order Type
-                        </span>
+            <strong>
+                Dine In
+            </strong>
+        </div>
 
-                        <strong>
-                            Dine In
-                        </strong>
+    </div>
 
-                    </div>
+    <!-- Item Information -->
+    <div class="item-list">
 
-                </div>
+        <div class="item">
 
+            <span class="item-name">
+                <%= item.itemName %>
+            </span>
 
-                <div class="item-list">
-
-
-                    <div class="item">
-
-                        <span class="item-name">
-
-                            <%= item.itemName %>
-
-                        </span>
-
-                        <span class="item-price">
-
-                            <%= item.price %>
-                        </span>
-
-                    </div>
-
-
-                 
-
-
-                </div>
-
-
-                <div class="total">
-
-                    <span>
-                        Total Amount
-                    </span>
-
-                    <span class="total-price">
-                       <%= item.price %>
-                    </span>
-
-                </div>
-
-            </div>
+            <span class="item-price">
+                ₹<%= item.price %>
+            </span>
 
         </div>
+
+    </div>
+
+    <!-- Total -->
+    <div class="total">
+
+        <span>
+            Total Amount
+        </span>
+
+        <span class="total-price">
+            ₹<%= item.price %>
+        </span>
+
+    </div>
+
+</div>
+
+
 
     </main>
 

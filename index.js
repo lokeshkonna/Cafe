@@ -455,13 +455,33 @@ app.post("/add", async (req, res) => {
 
 });
 
+// app.get("/transaction/:id", async (req, res) => {
+//     const itemId = req.params.id;
+//     const item = await menu.findById(itemId);
+//     res.render("transaction", { item: item });
+
+
+// });
 app.get("/transaction/:id", async (req, res) => {
-    const itemId = req.params.id;
-    const item = await menu.findById(itemId);
-    res.render("transaction", { item: item });
+    try {
+        const itemId = req.params.id;
 
+        const item = await menu.findById(itemId);
 
+        const tableNumber = req.query.tableNumber;
+
+        res.render("transaction", {
+            item: item,
+            tableNumber: tableNumber
+        });
+
+    } catch (err) {
+        console.error("Transaction Error:", err);
+        res.redirect("/menu");
+    }
 });
+
+
 app.post("/contact", async (req, res) => {
     
     const { name, email, message } = req.body;

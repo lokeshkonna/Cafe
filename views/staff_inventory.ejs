@@ -50,19 +50,19 @@
 <p class="text-sm text-on-surface-variant">Inventory Control</p>
 </div>
 <nav class="flex flex-col gap-2 flex-1">
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="reception_order_management.html">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="/reception_order_management">
 <span class="material-symbols-outlined">receipt_long</span>
 <span class="font-medium text-sm">Active Orders</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="staff_tables.html">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="/staff_tables">
 <span class="material-symbols-outlined">table_restaurant</span>
 <span class="font-medium text-sm">Table Management</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-semibold rounded-lg transition-colors" href="staff_inventory.html">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-semibold rounded-lg transition-colors" href="/staffMenu">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
 <span class="font-medium text-sm">Menu Inventory</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="staff_analytics.html">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="/staff_analytics">
 <span class="material-symbols-outlined">bar_chart</span>
 <span class="font-medium text-sm">Sales & Analytics</span>
 </a>
@@ -75,7 +75,7 @@
 <span class="text-[11px] text-on-surface-variant">Shift Manager</span>
 </div>
 </div>
-<a href="../login/login.html" title="Logout" class="text-error hover:bg-error-container/20 p-2 rounded-full transition-colors">
+<a href="/login" title="Logout" class="text-error hover:bg-error-container/20 p-2 rounded-full transition-colors">
 <span class="material-symbols-outlined">logout</span>
 </a>
 </div>
@@ -95,29 +95,31 @@
 </div>
 
 <!-- Category & Stock Summary Cards -->
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-<div class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm flex items-center justify-between">
-<div>
-<div class="text-xs text-on-surface-variant">Total Menu Items</div>
-<div class="text-2xl font-bold text-primary mt-1" id="totalItemsCount">8 Items</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+
+    <div class="bg-white p-6 rounded-2xl border shadow-sm">
+        <p class="text-sm text-gray-500">Total Menu Items</p>
+        <h2 class="text-3xl font-bold mt-2">
+            <%= TotalItems %>
+        </h2>
+    </div>
+
+    <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-200">
+        <p class="text-sm text-emerald-700">In Stock</p>
+        <h2 class="text-3xl font-bold text-emerald-700 mt-2">
+            <%= availableCount %>
+        </h2>
+    </div>
+
+    <div class="bg-rose-50 p-6 rounded-2xl border border-rose-200">
+        <p class="text-sm text-rose-700">Out of Stock</p>
+        <h2 class="text-3xl font-bold text-rose-700 mt-2">
+            <%= unavailableCount %>
+        </h2>
+    </div>
+
 </div>
-<span class="material-symbols-outlined text-3xl text-primary/40">restaurant_menu</span>
-</div>
-<div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 shadow-sm flex items-center justify-between">
-<div>
-<div class="text-xs text-emerald-800">In Stock & Serving</div>
-<div class="text-2xl font-bold text-emerald-700 mt-1" id="inStockCount">7 Items</div>
-</div>
-<span class="material-symbols-outlined text-3xl text-emerald-600/40">check_circle</span>
-</div>
-<div class="bg-rose-50 border border-rose-200 rounded-xl p-4 shadow-sm flex items-center justify-between">
-<div>
-<div class="text-xs text-rose-800">Sold Out / Disabled</div>
-<div class="text-2xl font-bold text-rose-700 mt-1" id="outStockCount">1 Item</div>
-</div>
-<span class="material-symbols-outlined text-3xl text-rose-600/40">block</span>
-</div>
-</div>
+<div class="my-8 border-t border-outline-variant"></div>
 
 <!-- Table of Inventory Items -->
 <div class="bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">

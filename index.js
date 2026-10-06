@@ -18,7 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(methodOverride("_method"));
 
-
 const empSchema = new mongoose.Schema({
     name: {
         type: String
@@ -405,9 +404,12 @@ app.get("/staffMenu", async (req, res) => {
 
     const  token = req.cookies.token;
     const data= await menu.find();
+    const TotalItems = data.length;
+    const availableCount = data.filter(item => item.status === "in stock").length;
+    const unavailableCount = data.filter(item => item.status === "out of stock").length;
    
 
-    res.render("staff_inventory", { data: data });
+    res.render("staff_inventory", { data: data, TotalItems: TotalItems, availableCount: availableCount, unavailableCount: unavailableCount });
 });
 
 app.post("/edit/:id", async (req, res) => {
@@ -463,11 +465,12 @@ app.get("/transaction/:id", async (req, res) => {
 
 });
 app.post("/contact", async (req, res) => {
-    
+
     const { name, email, message } = req.body;
     const newFeedback = new feedback({ name, email, message });
     await newFeedback.save();
     res.redirect("/contact");
+
 });
 app.get("/logout", (req, res) => {
     res.clearCookie("token");
@@ -486,7 +489,127 @@ app.get("/order-status", (req, res) => {
 app.get("/history", (req, res) => {
     res.render("previous-orders");
 });
+app.get("/reception_order_management", (req, res) => {
+    res.render("reception_order_management");
+});
 
+
+const VALID_TABLE_STATUSES = ["available", "occupied", "cleaning"];
+
+// GET: Staff table management page
+app.get("/staff_tables", async (req, res) => {
+    try {
+        const tablesData = await tables.find().sort({ number: 1 });
+
+        const availableCount = tablesData.filter(
+            table => table.status === "available"
+        ).length;
+
+        const occupiedCount = tablesData.filter(
+            table => table.status === "occupied"
+        ).length;
+
+        const cleaningCount = tablesData.filter(
+            table => table.status === "cleaning"
+        ).length;
+
+        const totalSeats = tablesData.reduce(
+            (total, table) => total + (Number(table.seats) || 0),
+            0
+        );
+
+        res.render("staff_tables", {
+            tablesData,
+            availableCount,
+            occupiedCount,
+            cleaningCount,
+            totalSeats
+        });
+    } catch (error) {
+        console.error("Error fetching table data:", error);
+        res.status(500).send("Unable to load table management.");
+    }
+});
+
+// PATCH: Update a table's status
+app.patch("/staff_tables/:id/status", async (req, res) => {
+    try {
+        const { status } = req.body;
+
+        if (!VALID_TABLE_STATUSES.includes(status)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid table status."
+            });
+        }
+
+        const table = await tables.findById(req.params.id);
+
+        if (!table) {
+            return res.status(404).json({
+                success: false,
+                message: "Table not found."
+            });
+        }
+
+        table.status = status;
+
+        if (status === "available" || status === "cleaning") {
+            table.customer = "";
+        } else if (!table.customer) {
+            table.customer = "Walk-in Guests";
+        }
+
+        await table.save();
+
+        res.json({
+            success: true,
+            message: "Table status updated successfully."
+        });
+    } catch (error) {
+        console.error("Error updating table status:", error);
+        res.status(500).json({
+            success: false,
+            message: "Unable to update table status."
+        });
+    }
+});
+
+// app.get("/staffMenu", async (req, res) => {
+//     try {
+//         const menuData = await menu.find();
+
+//         const availableCount = menuData.filter(
+//             item => item.status === "in stock"
+//         ).length;
+
+//         const unavailableCount = menuData.filter(
+//             item => item.status === "out of stock"
+//         ).length;
+//         const totalItems = menuData.length;
+
+      
+
+//         res.render("staff_inventory", {
+//             data: menuData,
+//             availableCount,
+//             unavailableCount,
+//             totalItems
+//         });
+
+//     } catch (err) {
+//         console.error("Error fetching menu data:", err);
+//         res.status(500).send("Unable to load menu inventory.");
+//     }
+// });
+
+
+app.get("/staff_analytics", (req, res) => {
+    res.render("staff_analytics");
+});
+app.get("/profile", (req, res) => {
+    res.render("customer_profile");
+});
 
 
 app.listen(5005, () => {

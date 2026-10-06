@@ -253,7 +253,7 @@ body {
 
 /* EMPTY */
 
-.empty-orders {
+.orders {
 
     text-align: center;
 
@@ -291,7 +291,7 @@ body {
 }
 
 
-.empty-orders h2 {
+.orders h2 {
 
     font-family: "Playfair Display", serif;
 
@@ -299,7 +299,7 @@ body {
 }
 
 
-.empty-orders p {
+.orders p {
 
     color: #777;
 
@@ -365,6 +365,197 @@ body {
     }
 
 }
+
+
+/* =========================================
+   ORDERS CONTAINER
+========================================= */
+
+.orders-container {
+    padding: 28px;
+}
+
+
+/* =========================================
+   ORDER CARD
+========================================= */
+
+.order-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e2dc;
+
+    border-radius: 12px;
+
+    padding: 20px 22px;
+
+    box-shadow: 0 4px 15px rgba(67, 40, 32, 0.05);
+
+    transition: 0.2s;
+}
+
+
+.order-card:hover {
+    box-shadow: 0 7px 20px rgba(67, 40, 32, 0.09);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   ORDER IMAGE
+========================================= */
+
+
+
+
+
+
+
+/* =========================================
+   ORDER DETAILS
+========================================= */
+
+.order-details {
+    flex: 1;
+}
+
+
+.order-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    margin-bottom: 14px;
+}
+
+
+.order-top h2 {
+    margin: 0;
+
+    font-family: "Playfair Display", serif;
+
+    color: #432820;
+
+    font-size: 24px;
+}
+
+
+.order-id {
+    margin-top: 4px;
+
+    color: #8a817c;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status {
+    background: #e8f6ee;
+
+    color: #36a269;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   ORDER INFO
+========================================= */
+
+.order-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-bottom: 10px;
+}
+
+
+.order-info div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+
+.order-info i {
+    color: #704536;
+}
+
+
+/* =========================================
+   ITEMS
+========================================= */
+
+.order-items {
+    margin: 0;
+
+    color: #5f6368;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .order-card {
+        align-items: flex-start;
+
+        padding: 16px;
+
+        gap: 15px;
+    }
+
+
+
+
+    .order-top h2 {
+        font-size: 20px;
+    }
+
+
+    .order-info {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 7px;
+    }
+
+}
     </style>
 
 </head>
@@ -416,10 +607,81 @@ body {
 
         <!-- Empty State -->
 
-        <div id="emptyOrders"
-             class="empty-orders">
+        <div class="orders">
 
-            <div class="empty-icon">
+                    <div class="orders-container">
+
+            <div class="order-card">
+
+                
+                
+
+                <!-- Order Details -->
+               <% data.forEach(order => { %>
+
+    <div class="order-details">
+
+        <div class="order-top">
+
+          
+
+            <span class="status">
+                <%= order.status || "Completed" %>
+            </span>
+
+        </div>
+
+        <div class="order-info">
+
+            <div>
+                <i class="fa-solid fa-chair"></i>
+                Table <%= order.table %>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-clock"></i>
+                <%= order.date %>
+            </div>
+
+        </div>
+
+        <div class="order-items">
+
+            <div class="order-item">
+
+                <span class="item-name">
+                    <%= order.name %>
+                </span>
+
+                <span class="item-price">
+                    ₹<%= order.price %>
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="order-bottom">
+
+            <span class="total-label">
+                Total Amount
+            </span>
+
+            <span class="total-price">
+                ₹<%= order.price %>
+            </span>
+
+        </div>
+
+    </div>
+
+<% }); %>
+
+            </div>
+
+            </div>
+            
+            <!-- <div class="empty-icon">
 
                 <i class="fa-solid fa-receipt"></i>
 
@@ -438,13 +700,13 @@ body {
 
                 <i class="fa-solid fa-arrow-right"></i>
 
-            </a>
+            </a> -->
 
         </div>
 
     </div>
 
-    <script>
+    <!-- <script>
         const ordersList =
     document.getElementById("ordersList");
 
@@ -579,7 +841,7 @@ function loadPreviousOrders() {
 
 
 loadPreviousOrders();
-    </script>
+    </script> -->
 
 </body>
 

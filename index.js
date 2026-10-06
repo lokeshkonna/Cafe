@@ -88,11 +88,51 @@ const feedbackSchema = new mongoose.Schema({
     }
 });
 
+
+
+
+const orderSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+
+  status: {
+    type: String,
+    required: true
+  },
+
+  date: {
+    type: String,
+    required: true
+  },
+
+  table: {
+    type: Number,
+    required: true
+  },
+
+  price: {
+    type: Number,
+    required: true
+  },
+
+  mail: {
+    type: String,
+    required: true
+  }
+});
+
+
+const history = mongoose.model("history", orderSchema, "history");
+
 const feedback = mongoose.model("feedback", feedbackSchema, "feedback");
+
 const tables = mongoose.model("tables", tablesSchema, "tables");
 const menu = mongoose.model("menu", menuSchema, "menu");
 const user = mongoose.model("user", userschema, "user");
 const emp = mongoose.model("emp", empSchema, "emp");
+const order = mongoose.model("order", orderSchema, "order");
 
 mongoose.connect(process.env.mongodb)
     .then(() => {
@@ -408,8 +448,13 @@ app.get("/staffMenu", async (req, res) => {
     const availableCount = data.filter(item => item.status === "in stock").length;
     const unavailableCount = data.filter(item => item.status === "out of stock").length;
    
+<<<<<<< HEAD
 
     res.render("staff_inventory", { data: data, TotalItems: TotalItems, availableCount: availableCount, unavailableCount: unavailableCount });
+=======
+    res.json({ data: data });
+    res.render("staff_inventory", { data: data });
+>>>>>>> 32721d7495996a92b483be89573df87ccfcf6003
 });
 
 app.post("/edit/:id", async (req, res) => {
@@ -457,13 +502,33 @@ app.post("/add", async (req, res) => {
 
 });
 
+// app.get("/transaction/:id", async (req, res) => {
+//     const itemId = req.params.id;
+//     const item = await menu.findById(itemId);
+//     res.render("transaction", { item: item });
+
+
+// });
 app.get("/transaction/:id", async (req, res) => {
-    const itemId = req.params.id;
-    const item = await menu.findById(itemId);
-    res.render("transaction", { item: item });
+    try {
+        const itemId = req.params.id;
 
+        const item = await menu.findById(itemId);
 
+        const tableNumber = req.query.tableNumber;
+
+        res.render("transaction", {
+            item: item,
+            tableNumber: tableNumber
+        });
+
+    } catch (err) {
+        console.error("Transaction Error:", err);
+        res.redirect("/menu");
+    }
 });
+
+
 app.post("/contact", async (req, res) => {
 
     const { name, email, message } = req.body;
@@ -483,11 +548,33 @@ app.get("/logoutStaff", (req, res) => {
 app.get("/addMenu", (req, res) => {
     res.render("addMenu");
 });
-app.get("/order-status", (req, res) => {
-    res.render("customer_order_status");
-});
-app.get("/history", (req, res) => {
-    res.render("previous-orders");
+
+
+
+
+
+app.get("/history", async (req, res) => {
+    const token = req.cookies.token;
+
+    console.log("Token:", token);
+
+    try {
+        const data = jwt.verify(token, process.env.jwtSecret);
+
+        const userData = await user.findById(data.id);
+
+        const orders = await history.find({
+            mail: userData.email
+        });
+
+        console.log("Orders:", orders);
+
+        res.render("previous-orders", { data: orders });
+
+    } catch (err) {
+        console.error("Error fetching order status:", err);
+        res.status(500).send("An error occurred while fetching order status.");
+    }
 });
 app.get("/reception_order_management", (req, res) => {
     res.render("reception_order_management");
@@ -610,6 +697,7 @@ app.get("/staff_analytics", (req, res) => {
 app.get("/profile", (req, res) => {
     res.render("customer_profile");
 });
+
 
 
 app.listen(5005, () => {

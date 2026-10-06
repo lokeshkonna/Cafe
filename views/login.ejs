@@ -107,7 +107,7 @@
             bottom: 0;
             height: 45%;
             z-index: 2;
-            pointer-events: none;
+            
             background: linear-gradient(
                 transparent,
                 rgba(25, 12, 9, 0.65)
@@ -123,7 +123,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            pointer-events: none;
+          
         }
 
         .brand {
@@ -541,6 +541,7 @@
                 font-size: 27px;
             }
         }
+    
     </style>
 </head>
 
@@ -576,8 +577,11 @@
             <!-- Fixed Content -->
             <div class="image-content">
                 <div class="brand">
-                    <i class="fa-solid fa-mug-hot"></i>
-                    <span>Our Cafe</span>
+                    <a href="/" style="text-decoration: none; color: inherit;">
+                        <i class="fa-solid fa-mug-hot"></i>
+                        
+                        <span>Our Cafe</span>
+                    </a>
                 </div>
 
                 <div class="welcome-text">
@@ -723,6 +727,7 @@
                         Login
                     </button>
 
+
                 </form>
 
                 <div class="divider" id="dividerBox">
@@ -730,14 +735,15 @@
                 </div>
 
                 <!-- Guest Button -->
-                <button
+               <a href="/register" style="text-decoration: none;"> <button
                     class="guest-button"
                     id="guestButton"
                     type="button"
                 >
                     <i class="fa-solid fa-user"></i>
-                    Continue as Guest
+                   Register 
                 </button>
+                </a>
 
             </div>
 

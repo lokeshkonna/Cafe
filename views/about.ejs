@@ -10,6 +10,175 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
+          * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --brown: #6a4034;
+    --dark-brown: #40251f;
+    --cream: #f8f5f0;
+    --white: #ffffff;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    color: var(--white);
+}
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.78) 0%,
+            rgba(0, 0, 0, 0.65) 42%,
+            rgba(0, 0, 0, 0.28) 100%
+        ),
+        url("img-1.png") center center / cover no-repeat;
+}
+
+.top-bar {
+    height: 50px;
+    padding: 0 13%;
+    background: #5a352b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 9px;
+}
+
+.top-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.top-left i {
+    font-size: 16px;
+}
+.top-left span{
+    font-size: 12px;;
+}
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+}
+.social-icons i{
+    font-size: 16px;
+}
+
+.social-icons a,
+.top-right a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.social-icons a:hover,
+.top-right a:hover {
+    color: #d5a48d;
+}
+
+.top-right {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+.top-right i{
+    font-size: 14px;
+}
+.login-top {
+    height: 100%;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    background: #3d241e;
+    font-size: 14px;
+}
+
+.navbar {
+    height: 67px;
+    padding: 0 13%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.logo > span:last-child {
+    color: #c18c70;
+}
+
+.logo-icon {
+    color: var(--brown);
+    font-size: 20px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-family: "Playfair Display", serif;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #c99378;
+}
+
+.nav-contact {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Playfair Display", serif;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.nav-contact i {
+    font-size: 16px;
+}
+.nav-contact span{
+    font-size: 16px;
+    font-family: sans-serif;
+}
+.menu-btn {
+    display: none;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+        
         .about-section {
             background: #f8f5f0;
             color: #3d241e;
@@ -76,32 +245,32 @@
             <span><i class="fa-solid fa-clock"></i> Mon - Fri: 9:00 - 19:00 / Closed on Weekends</span>
         </div>
         <div class="social-icons">
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i></a>
         </div>
         <div class="top-right">
-            <a href=" menu-item.html" title="Cart / Menu"><i class="fa-solid fa-cart-shopping"></i></a>
-            <a href=" customer_profile.html" title="Profile"><i class="fa-regular fa-user"></i></a>
-            <a href="login.html" class="login-top">LOGIN OR SIGN UP</a>
+            <a href="/menu" title="Cart / Menu"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="/profile" title="Profile"><i class="fa-regular fa-user"></i></a>
+            <a href="/login" class="login-top">LOGIN OR SIGN UP</a>
         </div>
     </div>
 
     <nav class="navbar" style="background:#3d241e; border-bottom: 1px solid rgba(255,255,255,0.1);">
-        <a href="index.html" class="logo" style="color:white;">
+        <a href="/index" class="logo" style="color:white;">
             <span class="logo-icon"><i class="fa-solid fa-mug-hot"></i></span> Our Cafe
         </a>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" class="active">About</a></li>
-            <li><a href=" menu-item.html">Menu</a></li>
-            <li><a href=" tables.html">Book Table</a></li>
-            <li><a href=" customer_order_status.html">Order Status</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/about" class="active">About</a></li>
+            <li><a href="/menu">Menu</a></li>
+            <li><a href="/tables">Book Table</a></li>
+            <li><a href="/order-status">Order Status</a></li>
+            <li><a href="/contact">Contact</a></li>
         </ul>
         <div class="nav-contact" style="color:white;">
-            <i class="fa-solid fa-phone-volume"></i> <span>+91 705 210-1786</span>
+            <i class="fa-solid fa-phone-volume"></i><a href="tel:+917052101786" style="text-decoration: none; color: white;"> <span type="tel" for="+91 705 210-1786">+91 705 210-1786</span></a>
         </div>
     </nav>
 

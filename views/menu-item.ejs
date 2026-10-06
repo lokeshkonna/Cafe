@@ -994,7 +994,7 @@ button{
 </head>
 
 <body>
-
+  
 <nav class="navbar">
     <div class="nav-container">
         <a href="../index.html" class="logo">
@@ -1005,10 +1005,10 @@ button{
         </a>
 
         <div class="nav-actions">
-            <a href="tables.html" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-chair"></i> Tables</a>
-            <a href="customer_order_status.html" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-clock-rotate-left"></i> Live Order</a>
-            <a href="previous-orders.html" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-receipt"></i> History</a>
-            <a href="customer_profile.html" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="tables.ejs" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-chair"></i> Tables</a>
+            <a href="customer_order_status.ejs" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-clock-rotate-left"></i> Live Order</a>
+            <a href="previous-orders.ejs" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-receipt"></i> History</a>
+            <a href="customer_profile.ejs" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-user"></i> Profile</a>
             <button class="nav-btn cart-nav" onclick="openCart()">
                 🛒 Cart
                 <span class="cart-count" id="cartCount">0</span>
@@ -1082,10 +1082,11 @@ button{
                 <div class="actions">
                 <button class="btn cart-btn" onclick="addToCart('<%= item.itemName %>','<%= item.price %>','<%= item.image %>','q<%= index %>')">Add to Cart</button>
 
-            
-                <a href="/transaction"class="btn buy-btn"onclick="buyNow('<%= item._id %>')"> Buy Now</a>
-                    
+            <a href="/transaction/<%= item._id %>" class="btn buy-btn">Buy Now</a>
+  
 </div>
+                 
+
                 </div>
             </div>  
         <% }); %>
@@ -1283,7 +1284,7 @@ function closeCart(event){
 }
 
 function buyNow(id){
-    window.location.href = `/transaction/${id}`;
+
 }
 
 // function checkout(){

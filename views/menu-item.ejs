@@ -997,18 +997,18 @@ button{
   
 <nav class="navbar">
     <div class="nav-container">
-        <a href="../index.html" class="logo">
+        <a href="/" class="logo">
             <span class="logo-iconn"> 
                 <i class="fa-solid fa-mug-hot"></i>
             </span>
-            Our Cafe
+            Our Cafe <%= tableNumber ? `- Table ${tableNumber}` : '' %>
         </a>
 
         <div class="nav-actions">
-            <a href="tables.ejs" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-chair"></i> Tables</a>
-            <a href="customer_order_status.ejs" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-clock-rotate-left"></i> Live Order</a>
-            <a href="previous-orders.ejs" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-receipt"></i> History</a>
-            <a href="customer_profile.ejs" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="/tables" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-chair"></i> Tables</a>
+            <a href="/customer_order_status" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-clock-rotate-left"></i> Live Order</a>
+            <a href="/history" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-receipt"></i> History</a>
+            <a href="/customer_profile" class="nav-btn" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;"><i class="fa-solid fa-user"></i> Profile</a>
             <button class="nav-btn cart-nav" onclick="openCart()">
                 🛒 Cart
                 <span class="cart-count" id="cartCount">0</span>
@@ -1059,11 +1059,11 @@ button{
 
     <div class="food-grid" id="foodGrid">
         <% data.forEach(function(item, index) { %>
-            <div class="food-card" data-category="<%= item.category %>" data-name="<%= item.name %>">
+            <div class="food-card" data-category="<%= item.category %>" data-name="<%= item.itemName %>">
                 <div class="image-box">
                   
                     <button class="wishlist" onclick="toggleWishlist(this)">♡</button>
-                    <img class="food-image" src="<%= item.image %>" alt="<%= item.name %>">
+                    <img class="food-image" src="<%= item.image %>" alt="<%= item.itemName %>">
                 </div>
                 <div class="details">
                     <span class="category"><%= item.category.charAt(0).toUpperCase() + item.category.slice(1) %> Cuisine</span>
@@ -1082,7 +1082,7 @@ button{
                 <div class="actions">
                 <button class="btn cart-btn" onclick="addToCart('<%= item.itemName %>','<%= item.price %>','<%= item.image %>','q<%= index %>')">Add to Cart</button>
 
-            <a href="/transaction/<%= item._id %>" class="btn buy-btn">Buy Now</a>
+            <a href="/transaction/<%= item._id %>?tableNumber=<%= encodeURIComponent(tableNumber || '') %>" class="btn buy-btn">Buy Now</a>
   
 </div>
                  

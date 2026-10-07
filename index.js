@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const methodOverride = require("method-override");
+const { table } = require("console");
 
 dotenv.config();
 
@@ -124,7 +125,39 @@ const orderSchema = new mongoose.Schema({
 });
 
 
+const liveSchema = new mongoose.Schema({
+    tableNumber: {
+        type: Number
+    },
+    itemName: {
+        type: String
+    },
+    price: {
+        type: Number
+    },
+    img: {
+        type: String
+    },
+    mail: {
+        type: String
+    },
+    status: {
+        type: String,
+        enum: ["pending", "accepted", "completed"],
+        default: "pending"
+    },
+    prepTime: {
+        type: String,
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now
+    }
+})
+
+
 const history = mongoose.model("history", orderSchema, "history");
+const live = mongoose.model("live", liveSchema, "live");
 
 const feedback = mongoose.model("feedback", feedbackSchema, "feedback");
 
@@ -157,12 +190,7 @@ app.get("/contact", (req, res) => {
 app.get("/customer_profile", (req, res) => {
     res.render("customer_profile");
 });
-app.get("/menu-item", (req, res) => {
-    res.render("menu-item");
-});
-app.get("/customer_order_status", (req, res) => {
-    res.render("customer_order_status");
-});
+
 app.get("/login", (req, res) => {
     const token = req.cookies.token;
 
@@ -179,10 +207,6 @@ app.get("/login", (req, res) => {
 });
 
 
-app.get("/dashboard", (req, res) => {
-    const token = req.cookies.token;
-    res.render("dashboard");
-});
 
 app.post("/loginStaff",async (req, res) => {
     const token = req.cookies.token; 
@@ -332,7 +356,12 @@ app.get("/tables", async (req, res) => {
 });
 
 app.post("/tables/:id", async (req, res) => {
+    const token = req.cookies.token;
+
     try {
+        const data = jwt.verify(token, process.env.jwtSecret);
+        const userData = await user.findById(data.id);
+
         const tableId = Number(req.params.id);
 
        
@@ -348,12 +377,15 @@ app.post("/tables/:id", async (req, res) => {
                 }
             },
             {
-                new: true
+                returnDocument: "after"
             }
         );
 
+        if (!updatedTable) {
+            return res.redirect("/tables");
+        }
 
-        res.redirect("/menu");
+        res.redirect(`/menu?tableNumber=${encodeURIComponent(updatedTable.tableNumber)}`);
 
     } catch (err) {
         console.error("Error updating table status:", err);
@@ -364,10 +396,17 @@ app.post("/tables/:id", async (req, res) => {
 
 
 app.get("/menu", async (req, res) => {
+    const token = req.cookies.token;
     try {
+    const data = jwt.verify(token, process.env.jwtSecret);
+
         const menuData = await menu.find();
 
-        res.render("menu-item", { data: menuData });
+        
+    res.render("menu-item", {
+        data: menuData,
+        tableNumber: req.query.tableNumber
+    });
     } catch (err) {
         console.error("Menu Error:", err);
         res.redirect("/tables");
@@ -441,20 +480,34 @@ app.post("/loginStaff", async (req, res) => {
 });
 
 app.get("/staffMenu", async (req, res) => {
+    try {
+        const token = req.cookies.token;
 
-    const  token = req.cookies.token;
-    const data= await menu.find();
-    const TotalItems = data.length;
-    const availableCount = data.filter(item => item.status === "in stock").length;
-    const unavailableCount = data.filter(item => item.status === "out of stock").length;
-   
-<<<<<<< HEAD
+        if (!token) {
+            return res.redirect("/login");
+        }
 
-    res.render("staff_inventory", { data: data, TotalItems: TotalItems, availableCount: availableCount, unavailableCount: unavailableCount });
-=======
-    res.json({ data: data });
-    res.render("staff_inventory", { data: data });
->>>>>>> 32721d7495996a92b483be89573df87ccfcf6003
+        const data = await menu.find();
+
+        const TotalItems = data.length;
+        const availableCount = data.filter(
+            item => item.status === "in stock"
+        ).length;
+        const unavailableCount = data.filter(
+            item => item.status === "out of stock"
+        ).length;
+
+        return res.render("staff_inventory", {
+            data,
+            TotalItems,
+            availableCount,
+            unavailableCount
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send("Server Error");
+    }
 });
 
 app.post("/edit/:id", async (req, res) => {
@@ -510,7 +563,9 @@ app.post("/add", async (req, res) => {
 
 // });
 app.get("/transaction/:id", async (req, res) => {
+    const token = req.cookies.token;
     try {
+        const data = jwt.verify(token, process.env.jwtSecret);
         const itemId = req.params.id;
 
         const item = await menu.findById(itemId);
@@ -527,6 +582,73 @@ app.get("/transaction/:id", async (req, res) => {
         res.redirect("/menu");
     }
 });
+
+app.post("/transaction/checkout/:id", async (req, res) => {
+        const token = req.cookies.token;
+        try {
+            const data = jwt.verify(token, process.env.jwtSecret);
+            const itemId = req.params.id;
+            const tableNumber  = req.query.tableNumber;
+            const item = await menu.findById(itemId);
+            const userData = await user.findById(data.id);
+
+            const newOrder = new live({
+                tableNumber: tableNumber,
+                itemName: item.itemName,
+                price: item.price,
+                img: item.image,
+                mail: userData.email
+            })
+            const c= await newOrder.save();
+            const order = await live.find({mail: userData.email});
+           res.render('customer_order_status',{order:order} );
+        } catch (err) {
+            console.error("Checkout Error:", err);
+            res.redirect("/menu");
+        }
+
+
+   
+});
+
+
+
+app.get("/customer_order_status", async (req, res) => {
+    const token = req.cookies.token;
+
+    if (!token) {
+        return res.redirect("/login");
+    }
+
+    let data;
+    try {
+        data = jwt.verify(token, process.env.jwtSecret);
+    } catch (error) {
+        console.error("Order status authentication error:", error);
+        res.clearCookie("token");
+        return res.redirect("/login");
+    }
+
+    try {
+        const userData = await user.findById(data.id);
+
+        if (!userData) {
+            res.clearCookie("token");
+            return res.redirect("/login");
+        }
+
+        const order = await live
+            .find({ mail: userData.email })
+            .sort({ timestamp: -1 })
+            .lean();
+
+        return res.render("customer_order_status", { order });
+    } catch (error) {
+        console.error("Error fetching customer order status:", error);
+        return res.status(500).send("Unable to load your order status.");
+    }
+});
+
 
 
 app.post("/contact", async (req, res) => {
@@ -556,7 +678,7 @@ app.get("/addMenu", (req, res) => {
 app.get("/history", async (req, res) => {
     const token = req.cookies.token;
 
-    console.log("Token:", token);
+    res.json({"Token": token});
 
     try {
         const data = jwt.verify(token, process.env.jwtSecret);
@@ -567,7 +689,7 @@ app.get("/history", async (req, res) => {
             mail: userData.email
         });
 
-        console.log("Orders:", orders);
+        
 
         res.render("previous-orders", { data: orders });
 
@@ -576,8 +698,63 @@ app.get("/history", async (req, res) => {
         res.status(500).send("An error occurred while fetching order status.");
     }
 });
-app.get("/reception_order_management", (req, res) => {
-    res.render("reception_order_management");
+app.get("/reception_order_management", async (req, res) => {
+    try {
+        const orders = await live
+            .find({ status: { $ne: "completed" } })
+            .sort({ timestamp: 1 })
+            .lean();
+
+        return res.render("reception_order_management", { orders });
+    } catch (error) {
+        console.error("Error fetching reception orders:", error);
+        return res.status(500).send("Unable to load reception orders.");
+    }
+});
+
+app.post("/reception_order_management/:id/accept", async (req, res) => {
+    const validPrepTimes = ["5", "10", "15", "20+"];
+    const { prepTime } = req.body;
+
+    if (!validPrepTimes.includes(prepTime)) {
+        return res.status(400).send("Select a valid preparation time.");
+    }
+
+    try {
+        const updatedOrder = await live.findOneAndUpdate(
+            { _id: req.params.id, status: { $ne: "completed" } },
+            { $set: { status: "accepted", prepTime } },
+            { returnDocument: "after", runValidators: true }
+        );
+
+        if (!updatedOrder) {
+            return res.status(404).send("Order not found.");
+        }
+
+        return res.redirect("/reception_order_management");
+    } catch (error) {
+        console.error("Error accepting reception order:", error);
+        return res.status(500).send("Unable to accept this order.");
+    }
+});
+
+app.post("/reception_order_management/:id/complete", async (req, res) => {
+    try {
+        const completedOrder = await live.findOneAndUpdate(
+            { _id: req.params.id, status: "accepted" },
+            { $set: { status: "completed" } },
+            { returnDocument: "after", runValidators: true }
+        );
+
+        if (!completedOrder) {
+            return res.status(404).send("Accepted order not found.");
+        }
+
+        return res.redirect("/reception_order_management");
+    } catch (error) {
+        console.error("Error completing reception order:", error);
+        return res.status(500).send("Unable to complete this order.");
+    }
 });
 
 
@@ -618,7 +795,7 @@ app.get("/staff_tables", async (req, res) => {
     }
 });
 
-// PATCH: Update a table's status
+
 app.patch("/staff_tables/:id/status", async (req, res) => {
     try {
         const { status } = req.body;

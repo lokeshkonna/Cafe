@@ -126,114 +126,91 @@
 </a>
 <div class="flex items-center gap-4">
 <a href="/tables" class="text-primary font-medium hover:underline text-sm hidden sm:inline">Select Table</a>
-<a href="/menu-item" class="text-primary font-medium hover:underline text-sm hidden sm:inline">Menu</a>
+<a href="/menu" class="text-primary font-medium hover:underline text-sm hidden sm:inline">Menu</a>
 <a href="/previous-orders" class="text-primary font-medium hover:underline text-sm hidden sm:inline">Order History</a>
 <a href="/customer_profile" title="My Profile" class="text-primary cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">
     <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
 </a>
-<a href="/menu-item" title="Cart / Menu" class="text-primary cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">
+<a href="/menu" title="Cart / Menu" class="text-primary cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">
     <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_bag</span>
 </a>
 </div>
 </div>
 </header>
 <!-- Main Content Canvas -->
-<main class="flex-grow flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop max-w-5xl mx-auto w-full gap-lg">
-<!-- Status Header -->
+<main class="flex-grow flex flex-col items-center p-margin-mobile md:p-margin-desktop max-w-5xl mx-auto w-full gap-lg">
 <div class="text-center space-y-4">
-<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary">
-                Brewing your moment
-            </h1>
-<p class="font-title-lg text-title-lg text-on-surface-variant">
-                Order #A892
-            </p>
+    <h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary">
+        Your live orders
+    </h1>
+    <p class="font-title-lg text-title-lg text-on-surface-variant">
+        Track the items you've ordered from our cafe.
+    </p>
 </div>
-<!-- Main Status Card (Glassmorphism / Bento style) -->
-<div class="w-full max-w-2xl bg-surface-container/60 backdrop-blur-md rounded-xl p-md shadow-[0_4px_24px_rgba(75,54,33,0.08)] border border-surface-container-high relative overflow-hidden">
-<!-- Subtle background texture/image for warmth -->
-<div class="absolute inset-0 opacity-10 pointer-events-none mix-blend-multiply" data-alt="A warm, highly detailed top-down view of roasted coffee beans scattered loosely over a textured beige linen cloth. Soft morning sunlight streams across the scene, creating long, gentle shadows. The palette is rich with deep browns, warm tans, and creamy off-whites, establishing an inviting, artisanal, and slow-living atmosphere. High resolution, organic texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5BFGYvmOr7E1Fqao3nNXTs6OeFImLvEukVPmUhSL4WLm5Bx8GaaelpjSP5RqQ9FCMnmyzk3CH3ssPlUDSpUwepquP20ZaDsBWOC2yGaTPb8J4QyUunqyomFcbsz6JZPFS-QFigz8Gp9KgNicXB-bByO_t-ufVM7trvOm9X2b5SsrOt9G-g59JpQ9jqzTKvE3UpLA35rnBM9aCNawmLGejCVhyjVt7PajYzZYSmzpQHHdDGipejH_3TQ')"></div>
-<div class="relative z-10 flex flex-col items-center gap-lg py-md">
-<!-- Countdown/Progress Ring -->
-<div class="relative w-48 h-48 flex items-center justify-center rounded-full progress-pulse border-4 border-primary-container bg-surface shadow-inner">
-<div class="text-center">
-<div class="font-display-lg-mobile text-display-lg-mobile text-primary leading-none" id="countdown">8</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-2">mins</div>
-</div>
-</div>
-<!-- Status Stages -->
-<div class="w-full px-md mt-md">
-<div class="relative flex justify-between">
-<!-- Connecting Line -->
-<div class="absolute top-1/2 left-4 right-4 h-[2px] bg-outline-variant -translate-y-1/2 z-0"></div>
-<!-- Active Progress Line -->
-<div class="absolute top-1/2 left-4 w-1/2 h-[2px] bg-primary -translate-y-1/2 z-0 transition-all duration-1000 ease-in-out"></div>
-<!-- Stage 1 -->
-<div class="relative z-10 flex flex-col items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
-</div>
-<span class="font-label-sm text-label-sm text-primary">Received</span>
-</div>
-<!-- Stage 2 (Current) -->
-<div class="relative z-10 flex flex-col items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm ring-4 ring-primary/20">
-<span class="material-symbols-outlined text-sm animate-spin-slow" style="font-variation-settings: 'FILL' 1;">sync</span>
-</div>
-<span class="font-label-sm text-label-sm text-primary">Preparing</span>
-</div>
-<!-- Stage 3 -->
-<div class="relative z-10 flex flex-col items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-surface border-2 border-outline-variant flex items-center justify-center text-outline">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">local_cafe</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Ready</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Order Summary Card -->
-<div class="w-full max-w-2xl bg-surface rounded-lg p-md border border-outline-variant/50 shadow-sm flex flex-col gap-sm">
-<h3 class="font-title-lg text-title-lg text-primary border-b border-outline-variant/30 pb-sm mb-sm">Order Summary</h3>
-<div class="flex justify-between items-center">
-<div class="flex items-center gap-md">
-<div class="w-16 h-16 rounded-md overflow-hidden shadow-sm bg-surface-container-high">
-<img class="w-full h-full object-cover" data-alt="A perfectly poured artisan oat milk flat white in a beautifully crafted matte ceramic mug, resting on a raw wooden saucer. Soft natural window light illuminates the intricate latte art fern on the surface. The background is softly out of focus, suggesting a warm, quiet, independent cafe interior. High quality, comforting aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsmlJD_RLHjz35ynmFm6dd5KNUdtGSpWwWhH_QMBNsfYrQ2fI0DabN9b3ekkRbVPD_M0U1qFx7PPZeXdVi7kCbedzb3iLEcux_ZbPn76H0gyr5HD_FrgFth6gLurFi2Lf8Xu2dJlqvQbxVSsvIWRqPyKt0kGjANsfu_cqbA1seh61NibjZYgM4YjmmiPomzZ_ra6IjHBr601jkHw7esCF84a6cgRnGksxdhI4Indfnlpi-Ge6PZPmABg"/>
-</div>
-<div>
-<div class="font-body-lg text-body-lg text-on-surface">Oat Milk Flat White</div>
-<div class="font-body-md text-body-md text-on-surface-variant">Large • Extra Hot</div>
-</div>
-</div>
-<div class="font-body-lg text-body-lg text-on-surface">1</div>
-</div>
-<div class="flex justify-between items-center pt-sm">
-<div class="flex items-center gap-md">
-<div class="w-16 h-16 rounded-md overflow-hidden shadow-sm bg-surface-container-high flex items-center justify-center">
-<span class="material-symbols-outlined text-tertiary-container text-3xl">bakery_dining</span>
-</div>
-<div>
-<div class="font-body-lg text-body-lg text-on-surface">Almond Croissant</div>
-<div class="font-body-md text-body-md text-on-surface-variant">Warmed</div>
-</div>
-</div>
-<div class="font-body-lg text-body-lg text-on-surface">1</div>
-</div>
-</div>
+
+<% if (order.length === 0) { %>
+    <section class="w-full max-w-2xl bg-surface rounded-xl p-lg border border-outline-variant/50 shadow-sm text-center">
+        <span class="material-symbols-outlined text-primary text-5xl">receipt_long</span>
+        <h2 class="font-title-lg text-title-lg text-primary mt-3">No active orders</h2>
+        <p class="text-on-surface-variant mt-2">When you place an order, its status will appear here.</p>
+        <a href="/menu" class="inline-block mt-6 rounded-lg bg-primary px-5 py-3 text-on-primary font-semibold hover:opacity-90">Browse the menu</a>
+    </section>
+<% } else { %>
+    <div class="w-full max-w-2xl flex flex-col gap-md">
+        <% order.forEach(function(item) { %>
+            <article class="bg-surface rounded-xl p-md md:p-lg border border-outline-variant/50 shadow-sm">
+                <div class="flex flex-wrap justify-between items-start gap-3 border-b border-outline-variant/30 pb-md">
+                    <div>
+                        <p class="font-label-sm text-label-sm uppercase text-on-surface-variant">Order received</p>
+                        <h2 class="font-title-lg text-title-lg text-primary mt-1">Table <%= item.tableNumber || "—" %></h2>
+                    </div>
+                    <% if (item.status === "completed") { %>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-tertiary-container/30 px-3 py-2 text-sm font-semibold text-tertiary">
+                            <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                            Order completed
+                        </span>
+                    <% } else if (item.status === "accepted") { %>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-tertiary-container/30 px-3 py-2 text-sm font-semibold text-tertiary">
+                            <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                            Accepted · <%= item.prepTime %> mins
+                        </span>
+                    <% } else { %>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-surface-container px-3 py-2 text-sm font-semibold text-primary">
+                            <span class="w-2 h-2 rounded-full bg-primary"></span>
+                            Received by cafe
+                        </span>
+                    <% } %>
+                </div>
+
+                <div class="flex justify-between items-center gap-4 py-md">
+                    <div class="flex items-center gap-md min-w-0">
+                        <% if (item.img) { %>
+                            <img class="w-16 h-16 rounded-md object-cover bg-surface-container-high" src="<%= item.img %>" alt="<%= item.itemName %>">
+                        <% } else { %>
+                            <div class="w-16 h-16 rounded-md bg-surface-container-high flex items-center justify-center">
+                                <span class="material-symbols-outlined text-primary text-3xl">restaurant</span>
+                            </div>
+                        <% } %>
+                        <div class="min-w-0">
+                            <h3 class="font-body-lg text-body-lg text-on-surface break-words"><%= item.itemName %></h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">Placed <%= item.timestamp ? new Date(item.timestamp).toLocaleString() : "recently" %></p>
+                        </div>
+                    </div>
+                    <p class="font-body-lg text-body-lg text-primary font-semibold whitespace-nowrap">₹<%= Number(item.price || 0).toFixed(2) %></p>
+                </div>
+
+                <p class="text-sm text-on-surface-variant border-t border-outline-variant/30 pt-md">
+                    <% if (item.status === "completed") { %>
+                        Your order has been completed. Thank you for visiting!
+                    <% } else if (item.status === "accepted") { %>
+                        Your order has been accepted. Estimated preparation time: <strong><%= item.prepTime %> mins</strong>.
+                    <% } else { %>
+                        Your order has been received. The cafe will confirm an estimated preparation time shortly.
+                    <% } %>
+                </p>
+            </article>
+        <% }); %>
+    </div>
+<% } %>
 </main>
-<!-- BottomNavBar (Mobile Only) - Suppressed as per context rules since this is a transactional status screen -->
-<script>
-        // Simple timer decrement simulation for effect
-        document.addEventListener('DOMContentLoaded', () => {
-            const countdownEl = document.getElementById('countdown');
-            let time = 8;
-            setInterval(() => {
-                if(time > 1) {
-                    // Just to show some interactivity, normally this would be real-time data
-                    // time--;
-                    // countdownEl.innerText = time;
-                }
-            }, 60000); // 1 minute
-        });
-    </script>
 </body></html>

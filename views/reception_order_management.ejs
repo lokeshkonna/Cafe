@@ -237,87 +237,85 @@
 <h2 class="font-display-lg-mobile text-display-lg-mobile text-on-background mb-xs md:hidden">Active Orders</h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant">Manage and update current queue</p>
 </div>
-<div class="flex gap-sm items-center bg-surface-container-high rounded-full px-4 py-2 border border-outline-variant">
-<span class="material-symbols-outlined text-primary">sync</span>
-<span class="font-label-sm text-label-sm text-primary">Live</span>
-</div>
-</div>
-<!-- Orders Grid / List -->
-<div class="flex flex-col gap-md">
-<!-- New Order Card -->
-<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col gap-md shadow-sm transition-shadow hover:shadow-md">
-<div class="flex justify-between items-center border-b border-surface-variant pb-sm">
-<div class="flex items-baseline gap-sm">
-<h3 class="font-headline-md text-headline-md text-primary">Table 04</h3>
-<span class="font-label-sm text-label-sm text-on-surface-variant px-2 py-1 bg-surface-container-high rounded-md">Order #1042</span>
-</div>
-<div class="flex items-center gap-xs text-error">
-<span class="material-symbols-outlined text-[18px]">schedule</span>
-<span class="font-label-sm text-label-sm">4m elapsed</span>
-</div>
-</div>
-<ul class="flex flex-col gap-sm">
-<li class="flex gap-md items-start">
-<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-label-sm shrink-0 mt-1">2x</div>
-<div>
-<span class="font-title-lg text-title-lg text-on-surface block font-headline-md">Artisanal Pour Over</span>
-<p class="font-body-md text-body-md text-on-surface-variant">Ethiopian Yirgacheffe, Light Roast</p>
-</div>
-</li>
-<li class="flex gap-md items-start">
-<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-label-sm shrink-0 mt-1">1x</div>
-<div>
-<span class="font-title-lg text-title-lg text-on-surface block font-headline-md">Almond Croissant</span>
-<p class="font-body-md text-body-md text-on-surface-variant">Warmed</p>
-</div>
-</li>
-</ul>
-<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-sm mt-sm pt-sm border-t border-surface-variant">
-<div class="relative flex-1 max-w-[240px]">
-<select class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none outline-none cursor-pointer">
-<option>Prep Time: 5 mins</option>
-<option selected="">Prep Time: 10 mins</option>
-<option>Prep Time: 15 mins</option>
-<option>Prep Time: 20+ mins</option>
-</select>
-<span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant">expand_more</span>
-</div>
-<button class="bg-primary text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[18px]">check_circle</span>
-                            Accept Order
+                        <div class="flex gap-sm items-center bg-surface-container-high rounded-full px-4 py-2 border border-outline-variant">
+                        <span class="material-symbols-outlined text-primary">sync</span>
+                        <span class="font-label-sm text-label-sm text-primary">Live · <%= orders.length %> orders</span>
+                        </div>
+                        </div>
+                        <!-- Orders Grid / List -->
+                        <div class="flex flex-col gap-md">
+                        <% if (orders.length === 0) { %>
+                        <section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg text-center shadow-sm">
+                        <span class="material-symbols-outlined text-primary text-4xl">receipt_long</span>
+                        <h3 class="font-title-lg text-title-lg text-primary mt-2">No active orders</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant mt-1">New customer orders will appear here.</p>
+                        </section>
+                        <% } %>
+                        <% orders.forEach(function(order) { %>
+                        <article class="<%= order.status === 'accepted' ? 'bg-surface-container border border-primary/20' : 'bg-surface-container-lowest border border-outline-variant' %> rounded-xl p-md flex flex-col gap-md shadow-sm transition-shadow hover:shadow-md">
+                        <div class="flex justify-between items-center border-b border-surface-variant pb-sm">
+                        <div class="flex items-baseline gap-sm">
+                        <h3 class="font-headline-md text-headline-md text-primary">Table <%= order.tableNumber || "—" %></h3>
+                        <span class="font-label-sm text-label-sm text-on-surface-variant px-2 py-1 bg-surface-container-high rounded-md">Order #<%= String(order._id).slice(-6) %></span>
+                        <% if (order.status === "accepted") { %>
+                        <span class="bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm px-2 py-1 rounded-full ml-2">Accepted · <%= order.prepTime %> mins</span>
+                        <% } else { %>
+                        <span class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm px-2 py-1 rounded-full ml-2">New</span>
+                        <% } %>
+                        </div>
+                        <div class="flex items-center gap-xs text-on-surface-variant">
+                        <span class="material-symbols-outlined text-[18px]">schedule</span>
+                        <span class="font-label-sm text-label-sm"><%= order.timestamp ? new Date(order.timestamp).toLocaleString() : "Time unavailable" %></span>
+                        </div>
+                        </div>
+                        <ul class="flex flex-col gap-sm">
+                        <li class="flex gap-md items-start">
+                        <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary font-label-sm shrink-0 mt-1">1x</div>
+                        <% if (order.img) { %>
+                        <img class="w-16 h-16 rounded-lg object-cover bg-surface-container-high shrink-0" src="<%= order.img %>" alt="<%= order.itemName || 'Ordered item' %>">
+                        <% } else { %>
+                        <div class="w-16 h-16 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-primary text-3xl">restaurant</span>
+                        </div>
+                        <% } %>
+                        <div class="min-w-0">
+                        <span class="font-title-lg text-title-lg text-on-surface block font-headline-md"><%= order.itemName || "Unnamed item" %></span>
+                        <p class="font-body-md text-body-md text-on-surface-variant"><%= order.mail || "Customer unavailable" %></p>
+                        <p class="font-body-md text-body-md text-on-surface-variant">₹<%= Number(order.price || 0).toFixed(2) %></p>
+                        </div>
+                        </li>
+                        </ul>
+                        <% if (order.status !== "completed") { %>
+                        <form action="/reception_order_management/<%= order._id %>/accept" method="POST" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-sm mt-sm pt-sm border-t border-surface-variant">
+                        <div class="relative flex-1 max-w-[240px]">
+                        <select name="prepTime" required class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none outline-none cursor-pointer">
+                        <option value="5" <%= order.prepTime === "5" ? "selected" : "" %>>Prep Time: 5 mins</option>
+                        <option value="10" <%= order.prepTime === "10" || !order.prepTime ? "selected" : "" %>>Prep Time: 10 mins</option>
+                        <option value="15" <%= order.prepTime === "15" ? "selected" : "" %>>Prep Time: 15 mins</option>
+                        <option value="20+" <%= order.prepTime === "20+" ? "selected" : "" %>>Prep Time: 20+ mins</option>
+                        </select>
+                        <span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant">expand_more</span>
+                        </div>
+                        <button type="submit" class="<%= order.status === 'accepted' ? 'bg-tertiary text-on-tertiary' : 'bg-primary text-on-primary' %> font-label-sm text-label-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                        <%= order.status === "accepted" ? "Update Prep Time" : "Accept Order" %>
                         </button>
-</div>
-</article>
-<!-- In Progress Order Card -->
-<article class="bg-surface-container border border-primary/20 rounded-xl p-md flex flex-col gap-md shadow-sm">
-<div class="flex justify-between items-center border-b border-primary/10 pb-sm">
-<div class="flex items-baseline gap-sm">
-<h3 class="font-headline-md text-headline-md text-primary">Table 12</h3>
-<span class="font-label-sm text-label-sm text-on-surface-variant px-2 py-1 bg-surface-container-high rounded-md">Order #1038</span>
-<span class="bg-tertiary-container/30 text-tertiary font-label-sm text-label-sm px-2 py-1 rounded-full ml-2">In Progress</span>
-</div>
-<div class="flex items-center gap-xs text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]">schedule</span>
-<span class="font-label-sm text-label-sm">12m elapsed</span>
-</div>
-</div>
-<ul class="flex flex-col gap-sm">
-<li class="flex gap-md items-start">
-<div class="w-8 h-8 rounded-full bg-surface flex items-center justify-center text-primary font-label-sm shrink-0 mt-1">1x</div>
-<div>
-<span class="font-title-lg text-title-lg text-on-surface block font-headline-md">Matcha Latte</span>
-<p class="font-body-md text-body-md text-on-surface-variant">Oat Milk, Iced</p>
-</div>
-</li>
-</ul>
-<div class="flex items-center gap-sm mt-sm pt-sm border-t border-primary/10 justify-end">
-<button class="bg-tertiary text-on-tertiary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-sm">
-<span class="material-symbols-outlined text-[18px]">room_service</span>
-                            Mark Ready
+                        <% if (order.status === "accepted") { %>
+                        <span class="font-body-md text-on-surface-variant">Customer has been notified.</span>
+                        <% } %>
+                        </form>
+                        <% if (order.status === "accepted") { %>
+                        <form action="/reception_order_management/<%= order._id %>/complete" method="POST" class="flex justify-end">
+                        <button type="submit" class="bg-tertiary text-on-tertiary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">task_alt</span>
+                        Mark Completed
                         </button>
-</div>
-</article>
-</div>
+                        </form>
+                        <% } %>
+                        <% } %>
+                        </article>
+                        <% }); %>
+                        </div>
 </div>
 </main>
 <!-- Mobile BottomNavBar -->

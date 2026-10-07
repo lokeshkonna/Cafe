@@ -799,6 +799,8 @@
 
                 <h2>Payment Method</h2>
 
+                <form action="/transaction/checkout/<%= item._id %>?tableNumber=<%= tableNumber || '' %>" method="POST">
+                    <input type="hidden" name="tableNumber" value="<%= tableNumber || '' %>">
 
                 <div class="payment-methods">
 
@@ -903,13 +905,14 @@
 
                 <button
                     class="pay-btn"
-                    onclick="makePayment()">
+                    type="submit">
 
                     <i class="fa-solid fa-lock"></i>
 
                     <%= item.price %> - Pay Now
 
                 </button>
+                </form>
 
 
                 <p class="note">

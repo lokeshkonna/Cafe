@@ -1075,33 +1075,9 @@
            DEMO PAYMENT
         ========================= */
 
-        // function makePayment() {
-
-        //     const button =
-        //         document.querySelector(".pay-btn");
-
-
-        //     button.innerHTML =
-        //         '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
-
-
-        //     button.disabled = true;
-
-
-        //     setTimeout(() => {
-
-        //         document
-        //             .getElementById("successOverlay")
-        //             .style.display = "flex";
-
-
-        //         button.innerHTML =
-        //             '<i class="fa-solid fa-check"></i> Payment Completed';
-
-
-        //     }, 1800);
-
-        // }
+        function makePayment() {
+            window.location.href = "/liveOrder/<%= item._id %>";
+        }
 
 
         // /* =========================

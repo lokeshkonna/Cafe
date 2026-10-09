@@ -1,239 +1,1369 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Artisanal Brews - Order Status</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&amp;family=EB+Garamond:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "surface-variant": "#eee0d6",
-                        "on-surface": "#211a14",
-                        "inverse-surface": "#372f28",
-                        "on-primary-container": "#bd9f83",
-                        "outline": "#80756c",
-                        "on-primary-fixed": "#291806",
-                        "tertiary-container": "#253f32",
-                        "on-primary": "#ffffff",
-                        "secondary-fixed-dim": "#c9c6bf",
-                        "surface-container-highest": "#eee0d6",
-                        "primary-fixed-dim": "#e1c1a4",
-                        "on-error": "#ffffff",
-                        "outline-variant": "#d2c4ba",
-                        "on-background": "#211a14",
-                        "tertiary-fixed": "#ccead6",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-dim": "#e5d8ce",
-                        "background": "#fff8f5",
-                        "on-primary-fixed-variant": "#59422c",
-                        "on-secondary": "#ffffff",
-                        "surface-tint": "#725a42",
-                        "primary-fixed": "#fedcbe",
-                        "surface-container": "#faebe1",
-                        "on-error-container": "#93000a",
-                        "secondary-container": "#e6e2da",
-                        "on-tertiary": "#ffffff",
-                        "surface": "#fff8f5",
-                        "surface-container-low": "#fff1e7",
-                        "surface-container-high": "#f4e6db",
-                        "surface-bright": "#fff8f5",
-                        "tertiary": "#0f291d",
-                        "secondary-fixed": "#e6e2da",
-                        "error": "#ba1a1a",
-                        "secondary": "#605e58",
-                        "inverse-primary": "#e1c1a4",
-                        "error-container": "#ffdad6",
-                        "on-tertiary-fixed": "#062014",
-                        "primary-container": "#4b3621",
-                        "primary": "#33210d",
-                        "on-surface-variant": "#4e453d",
-                        "on-secondary-fixed-variant": "#484741",
-                        "on-tertiary-container": "#8eaa99",
-                        "on-secondary-container": "#66645e",
-                        "tertiary-fixed-dim": "#b0cdbb",
-                        "on-tertiary-fixed-variant": "#324c3e",
-                        "on-secondary-fixed": "#1c1c17",
-                        "inverse-on-surface": "#fceee4"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "xs": "4px",
-                        "lg": "48px",
-                        "margin-mobile": "16px",
-                        "sm": "12px",
-                        "margin-desktop": "64px",
-                        "xl": "80px",
-                        "md": "24px",
-                        "gutter": "20px",
-                        "base": "8px"
-                    },
-                    "fontFamily": {
-                        "body-lg": ["Be Vietnam Pro"],
-                        "headline-md-mobile": ["EB Garamond"],
-                        "label-sm": ["Be Vietnam Pro"],
-                        "body-md": ["Be Vietnam Pro"],
-                        "title-lg": ["Be Vietnam Pro"],
-                        "display-lg-mobile": ["EB Garamond"],
-                        "headline-md": ["EB Garamond"],
-                        "display-lg": ["EB Garamond"]
-                    },
-                    "fontSize": {
-                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-                        "headline-md-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
-                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
-                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }],
-                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
-                    }
-                }
-            }
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Order Status | Café</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    </script>
-<style>
-        .progress-pulse {
-            animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.55),
+                    rgba(0, 0, 0, 0.65)
+                ),
+                url("/images/cafe-bg.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            color: #fff;
         }
-        @keyframes pulse-border {
-            0%, 100% {
-                border-color: rgba(75, 54, 33, 0.2);
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 20px 50px;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 30px;
+
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(12px);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 18px;
+
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #f5c77a;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 38px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #ddd;
+            font-size: 15px;
+        }
+
+        /* =========================
+           MAIN CARD
+        ========================= */
+
+        .order-card {
+            background: rgba(255, 255, 255, 0.11);
+
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+
+            border-radius: 25px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.35);
+
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           ORDER TOP
+        ========================= */
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .order-number {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .order-number strong {
+            color: white;
+            font-size: 17px;
+        }
+
+        .status-badge {
+            padding: 8px 15px;
+
+            border-radius: 50px;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            background: #f5c77a;
+            color: #2b1a0e;
+        }
+
+        /* =========================
+           COUNTDOWN
+        ========================= */
+
+        .timer-section {
+            text-align: center;
+
+            padding: 30px 10px;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .timer-title {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .timer {
+            font-size: 50px;
+            font-weight: bold;
+
+            color: #f5c77a;
+
+            margin-bottom: 5px;
+        }
+
+        .timer-text {
+            font-size: 13px;
+            color: #bbb;
+        }
+
+        /* =========================
+           STATUS TRACKER
+        ========================= */
+
+        .status-section {
+            padding: 35px 5px;
+        }
+
+        .status-section h2 {
+            text-align: center;
+
+            font-size: 22px;
+
+            margin-bottom: 35px;
+        }
+
+        .status-tracker {
+            display: flex;
+            justify-content: space-between;
+
+            position: relative;
+
+            max-width: 700px;
+
+            margin: auto;
+        }
+
+        .status-line {
+            position: absolute;
+
+            top: 20px;
+            left: 12%;
+
+            width: 76%;
+
+            height: 4px;
+
+            background: rgba(255, 255, 255, 0.18);
+
+            z-index: 0;
+        }
+
+        .status-progress {
+            position: absolute;
+
+            top: 20px;
+            left: 12%;
+
+            height: 4px;
+
+            background: #f5c77a;
+
+            z-index: 1;
+
+            transition: width 0.5s ease;
+        }
+
+        .status-item {
+            position: relative;
+
+            z-index: 2;
+
+            width: 33.33%;
+
+            text-align: center;
+        }
+
+        .status-circle {
+            width: 40px;
+            height: 40px;
+
+            margin: 0 auto 12px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #555;
+
+            border: 3px solid rgba(255, 255, 255, 0.3);
+
+            font-size: 16px;
+
+            transition: 0.4s;
+        }
+
+        .status-item.active .status-circle {
+            background: #f5c77a;
+
+            color: #2b1a0e;
+
+            border-color: #f5c77a;
+
+            box-shadow:
+                0 0 20px rgba(245, 199, 122, 0.4);
+        }
+
+        .status-item.completed .status-circle {
+            background: #f5c77a;
+
+            color: #2b1a0e;
+
+            border-color: #f5c77a;
+        }
+
+        .status-name {
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 4px;
+        }
+
+        .status-description {
+            font-size: 11px;
+
+            color: #aaa;
+
+            padding: 0 5px;
+        }
+
+        /* =========================
+           ORDER DETAILS
+        ========================= */
+
+        .details-title {
+            font-size: 21px;
+
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            padding: 15px;
+
+            background: rgba(255, 255, 255, 0.07);
+
+            border-radius: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .item-image {
+            width: 85px;
+            height: 85px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .item-placeholder {
+            width: 85px;
+            height: 85px;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            font-size: 32px;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 18px;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        .item-category {
+            font-size: 13px;
+
+            color: #aaa;
+        }
+
+        .item-price {
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #f5c77a;
+        }
+
+        /* =========================
+           INFORMATION GRID
+        ========================= */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+        .info-box {
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            padding: 18px;
+
+            border-radius: 14px;
+        }
+
+        .info-label {
+            font-size: 12px;
+
+            color: #aaa;
+
+            margin-bottom: 7px;
+        }
+
+        .info-value {
+            font-size: 16px;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 13px 25px;
+
+            border-radius: 10px;
+
+            border: none;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #f5c77a;
+
+            color: #2b1a0e;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(245, 199, 122, 0.25);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.12);
+
+            color: white;
+
+            border: 1px solid
+                rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background:
+                rgba(255, 255, 255, 0.18);
+        }
+
+        /* =========================
+           EMPTY ORDER
+        ========================= */
+
+        .empty-order {
+            text-align: center;
+
+            padding: 60px 20px;
+        }
+
+        .empty-icon {
+            font-size: 55px;
+
+            margin-bottom: 20px;
+        }
+
+        .empty-order h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty-order p {
+            color: #aaa;
+
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .container {
+                padding: 15px;
             }
-            50% {
-                border-color: rgba(75, 54, 33, 1);
+
+            .navbar {
+                padding: 15px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .header h1 {
+                font-size: 30px;
+            }
+
+            .order-card {
+                padding: 20px;
+            }
+
+            .order-top {
+                gap: 15px;
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .status-tracker {
+                max-width: 100%;
+            }
+
+            .status-name {
+                font-size: 12px;
+            }
+
+            .status-description {
+                font-size: 9px;
+            }
+
+            .status-line,
+            .status-progress {
+                left: 16%;
+                width: 68%;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .order-item {
+                align-items: flex-start;
+            }
+
+            .item-price {
+                font-size: 15px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
             }
         }
     </style>
 </head>
-<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
-<!-- TopAppBar -->
-<header class="bg-surface dark:bg-surface-dim w-full top-0 sticky border-b border-outline-variant dark:border-outline shadow-sm z-40">
-<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base w-full">
-<a href="/index" class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim flex items-center gap-2 no-underline">
-    <span class="material-symbols-outlined">coffee</span> Our Cafe
-</a>
-<div class="flex items-center gap-4">
-<a href="/tables" class="text-primary font-medium hover:underline text-sm hidden sm:inline">Select Table</a>
-<a href="/menu-item" class="text-primary font-medium hover:underline text-sm hidden sm:inline">Menu</a>
-<a href="/previous-orders" class="text-primary font-medium hover:underline text-sm hidden sm:inline">Order History</a>
-<a href="/customer_profile" title="My Profile" class="text-primary cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">
-    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
-</a>
-<a href="/menu-item" title="Cart / Menu" class="text-primary cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">
-    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_bag</span>
-</a>
-</div>
-</div>
-</header>
-<!-- Main Content Canvas -->
-<main class="flex-grow flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop max-w-5xl mx-auto w-full gap-lg">
-<!-- Status Header -->
-<div class="text-center space-y-4">
-<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary">
-                Brewing your moment
+
+
+<body>
+
+    <div class="container">
+
+
+        <!-- =========================
+             NAVBAR
+        ========================== -->
+
+        <nav class="navbar">
+
+            <div class="logo">
+                ☕ CAFÉ
+            </div>
+
+            <div class="nav-links">
+
+                <a href="/menu">
+                    Menu
+                </a>
+
+                <a href="/history">
+                    Order History
+                </a>
+
+                <a href="/tables">
+                    Tables
+                </a>
+
+                <a href="/logout">
+                    Logout
+                </a>
+
+            </div>
+
+        </nav>
+
+
+        <% if (orderData) { %>
+
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+
+        <div class="header">
+
+            <h1>
+                Your Order
             </h1>
-<p class="font-title-lg text-title-lg text-on-surface-variant">
-                Order #A892
+
+            <p>
+                Track your order in real time
             </p>
-</div>
-<!-- Main Status Card (Glassmorphism / Bento style) -->
-<div class="w-full max-w-2xl bg-surface-container/60 backdrop-blur-md rounded-xl p-md shadow-[0_4px_24px_rgba(75,54,33,0.08)] border border-surface-container-high relative overflow-hidden">
-<!-- Subtle background texture/image for warmth -->
-<div class="absolute inset-0 opacity-10 pointer-events-none mix-blend-multiply" data-alt="A warm, highly detailed top-down view of roasted coffee beans scattered loosely over a textured beige linen cloth. Soft morning sunlight streams across the scene, creating long, gentle shadows. The palette is rich with deep browns, warm tans, and creamy off-whites, establishing an inviting, artisanal, and slow-living atmosphere. High resolution, organic texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5BFGYvmOr7E1Fqao3nNXTs6OeFImLvEukVPmUhSL4WLm5Bx8GaaelpjSP5RqQ9FCMnmyzk3CH3ssPlUDSpUwepquP20ZaDsBWOC2yGaTPb8J4QyUunqyomFcbsz6JZPFS-QFigz8Gp9KgNicXB-bByO_t-ufVM7trvOm9X2b5SsrOt9G-g59JpQ9jqzTKvE3UpLA35rnBM9aCNawmLGejCVhyjVt7PajYzZYSmzpQHHdDGipejH_3TQ')"></div>
-<div class="relative z-10 flex flex-col items-center gap-lg py-md">
-<!-- Countdown/Progress Ring -->
-<div class="relative w-48 h-48 flex items-center justify-center rounded-full progress-pulse border-4 border-primary-container bg-surface shadow-inner">
-<div class="text-center">
-<div class="font-display-lg-mobile text-display-lg-mobile text-primary leading-none" id="countdown">8</div>
-<div class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-2">mins</div>
-</div>
-</div>
-<!-- Status Stages -->
-<div class="w-full px-md mt-md">
-<div class="relative flex justify-between">
-<!-- Connecting Line -->
-<div class="absolute top-1/2 left-4 right-4 h-[2px] bg-outline-variant -translate-y-1/2 z-0"></div>
-<!-- Active Progress Line -->
-<div class="absolute top-1/2 left-4 w-1/2 h-[2px] bg-primary -translate-y-1/2 z-0 transition-all duration-1000 ease-in-out"></div>
-<!-- Stage 1 -->
-<div class="relative z-10 flex flex-col items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
-</div>
-<span class="font-label-sm text-label-sm text-primary">Received</span>
-</div>
-<!-- Stage 2 (Current) -->
-<div class="relative z-10 flex flex-col items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm ring-4 ring-primary/20">
-<span class="material-symbols-outlined text-sm animate-spin-slow" style="font-variation-settings: 'FILL' 1;">sync</span>
-</div>
-<span class="font-label-sm text-label-sm text-primary">Preparing</span>
-</div>
-<!-- Stage 3 -->
-<div class="relative z-10 flex flex-col items-center gap-2">
-<div class="w-8 h-8 rounded-full bg-surface border-2 border-outline-variant flex items-center justify-center text-outline">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">local_cafe</span>
-</div>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Ready</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Order Summary Card -->
-<div class="w-full max-w-2xl bg-surface rounded-lg p-md border border-outline-variant/50 shadow-sm flex flex-col gap-sm">
-<h3 class="font-title-lg text-title-lg text-primary border-b border-outline-variant/30 pb-sm mb-sm">Order Summary</h3>
-<div class="flex justify-between items-center">
-<div class="flex items-center gap-md">
-<div class="w-16 h-16 rounded-md overflow-hidden shadow-sm bg-surface-container-high">
-<img class="w-full h-full object-cover" data-alt="A perfectly poured artisan oat milk flat white in a beautifully crafted matte ceramic mug, resting on a raw wooden saucer. Soft natural window light illuminates the intricate latte art fern on the surface. The background is softly out of focus, suggesting a warm, quiet, independent cafe interior. High quality, comforting aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsmlJD_RLHjz35ynmFm6dd5KNUdtGSpWwWhH_QMBNsfYrQ2fI0DabN9b3ekkRbVPD_M0U1qFx7PPZeXdVi7kCbedzb3iLEcux_ZbPn76H0gyr5HD_FrgFth6gLurFi2Lf8Xu2dJlqvQbxVSsvIWRqPyKt0kGjANsfu_cqbA1seh61NibjZYgM4YjmmiPomzZ_ra6IjHBr601jkHw7esCF84a6cgRnGksxdhI4Indfnlpi-Ge6PZPmABg"/>
-</div>
-<div>
-<div class="font-body-lg text-body-lg text-on-surface">Oat Milk Flat White</div>
-<div class="font-body-md text-body-md text-on-surface-variant">Large • Extra Hot</div>
-</div>
-</div>
-<div class="font-body-lg text-body-lg text-on-surface">1</div>
-</div>
-<div class="flex justify-between items-center pt-sm">
-<div class="flex items-center gap-md">
-<div class="w-16 h-16 rounded-md overflow-hidden shadow-sm bg-surface-container-high flex items-center justify-center">
-<span class="material-symbols-outlined text-tertiary-container text-3xl">bakery_dining</span>
-</div>
-<div>
-<div class="font-body-lg text-body-lg text-on-surface">Almond Croissant</div>
-<div class="font-body-md text-body-md text-on-surface-variant">Warmed</div>
-</div>
-</div>
-<div class="font-body-lg text-body-lg text-on-surface">1</div>
-</div>
-</div>
-</main>
-<!-- BottomNavBar (Mobile Only) - Suppressed as per context rules since this is a transactional status screen -->
-<script>
-        // Simple timer decrement simulation for effect
-        document.addEventListener('DOMContentLoaded', () => {
-            const countdownEl = document.getElementById('countdown');
-            let time = 8;
-            setInterval(() => {
-                if(time > 1) {
-                    // Just to show some interactivity, normally this would be real-time data
-                    // time--;
-                    // countdownEl.innerText = time;
+
+        </div>
+
+
+        <!-- =========================
+             ORDER CARD
+        ========================== -->
+
+        <div class="order-card">
+
+
+            <!-- =========================
+                 ORDER TOP
+            ========================== -->
+
+            <div class="order-top">
+
+                <div class="order-number">
+
+                    Order ID:
+
+                    <strong>
+                        #<%= orderData._id %>
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="status-badge"
+                    id="statusBadge"
+                >
+                    <%= orderData.status || "Received" %>
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 TIMER
+            ========================== -->
+
+            <div class="timer-section">
+
+                <div class="timer-title">
+                    Estimated preparation time
+                </div>
+
+                <div
+                    class="timer"
+                    id="timer"
+                >
+                    --
+                </div>
+
+                <div class="timer-text">
+                    minutes remaining
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 STATUS TRACKER
+            ========================== -->
+
+            <div class="status-section">
+
+                <h2>
+                    Order Progress
+                </h2>
+
+
+                <div class="status-tracker">
+
+
+                    <div class="status-line"></div>
+
+                    <div
+                        class="status-progress"
+                        id="statusProgress"
+                    ></div>
+
+
+                    <!-- RECEIVED -->
+
+                    <div
+                        class="status-item"
+                        id="statusReceived"
+                    >
+
+                        <div class="status-circle">
+                            ✓
+                        </div>
+
+                        <div class="status-name">
+                            Received
+                        </div>
+
+                        <div class="status-description">
+                            Order received
+                        </div>
+
+                    </div>
+
+
+                    <!-- PREPARING -->
+
+                    <div
+                        class="status-item"
+                        id="statusPreparing"
+                    >
+
+                        <div class="status-circle">
+                            🍳
+                        </div>
+
+                        <div class="status-name">
+                            Preparing
+                        </div>
+
+                        <div class="status-description">
+                            Being prepared
+                        </div>
+
+                    </div>
+
+
+                    <!-- READY -->
+
+                    <div
+                        class="status-item"
+                        id="statusReady"
+                    >
+
+                        <div class="status-circle">
+                            ✓
+                        </div>
+
+                        <div class="status-name">
+                            Ready
+                        </div>
+
+                        <div class="status-description">
+                            Ready to collect
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 ORDER DETAILS
+            ========================== -->
+
+            <div>
+
+                <h2 class="details-title">
+                    Order Summary
+                </h2>
+
+
+                <div class="order-item">
+
+
+                    <% if (
+                        menuItem &&
+                        menuItem.image
+                    ) { %>
+
+                        <img
+                            src="<%= menuItem.image %>"
+                            alt="<%= orderData.itemName %>"
+                            class="item-image"
+                        >
+
+                    <% } else if (
+                        orderData.image
+                    ) { %>
+
+                        <img
+                            src="<%= orderData.image %>"
+                            alt="<%= orderData.itemName %>"
+                            class="item-image"
+                        >
+
+                    <% } else { %>
+
+                        <div class="item-placeholder">
+                            ☕
+                        </div>
+
+                    <% } %>
+
+
+                    <div class="item-info">
+
+                        <div class="item-name">
+
+                            <%= orderData.itemName ||
+                                "Order Item" %>
+
+                        </div>
+
+
+                        <% if (
+                            menuItem &&
+                            menuItem.category
+                        ) { %>
+
+                            <div class="item-category">
+
+                                <%= menuItem.category %>
+
+                            </div>
+
+                        <% } %>
+
+                    </div>
+
+
+                    <div class="item-price">
+
+                        ₹<%= Number(
+                            orderData.price || 0
+                        ).toFixed(2) %>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =========================
+                     ORDER INFORMATION
+                ========================== -->
+
+                <div class="info-grid">
+
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Table Number
+                        </div>
+
+                        <div class="info-value">
+
+                            Table
+                            <%= orderData.table %>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Order Date
+                        </div>
+
+                        <div class="info-value">
+
+                            <%= orderData.date %>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Current Status
+                        </div>
+
+                        <div
+                            class="info-value"
+                            id="currentStatus"
+                        >
+
+                            <%= orderData.status ||
+                                "Received" %>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <div class="info-label">
+                            Total Amount
+                        </div>
+
+                        <div
+                            class="info-value"
+                            style="color:#f5c77a;"
+                        >
+
+                            ₹<%= Number(
+                                orderData.price || 0
+                            ).toFixed(2) %>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =========================
+                 BUTTONS
+            ========================== -->
+
+            <div class="buttons">
+
+                <a
+                    href="/menu"
+                    class="btn btn-primary"
+                >
+                    Order More
+                </a>
+
+
+                <a
+                    href="/history"
+                    class="btn btn-secondary"
+                >
+                    View Order History
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <% } else { %>
+
+
+        <!-- =========================
+             NO ORDER
+        ========================== -->
+
+        <div class="order-card">
+
+            <div class="empty-order">
+
+                <div class="empty-icon">
+                    ☕
+                </div>
+
+                <h2>
+                    No Order Found
+                </h2>
+
+                <p>
+                    We couldn't find an active order.
+                </p>
+
+                <a
+                    href="/menu"
+                    class="btn btn-primary"
+                >
+                    Browse Menu
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <% } %>
+
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /*
+         * Current order status
+         */
+
+        const orderStatus =
+            "<%= orderData ? (orderData.status || 'Received') : 'Received' %>"
+            .trim()
+            .toLowerCase();
+
+
+        /*
+         * DOM elements
+         */
+
+        const received =
+            document.getElementById(
+                "statusReceived"
+            );
+
+        const preparing =
+            document.getElementById(
+                "statusPreparing"
+            );
+
+        const ready =
+            document.getElementById(
+                "statusReady"
+            );
+
+        const progress =
+            document.getElementById(
+                "statusProgress"
+            );
+
+        const timer =
+            document.getElementById(
+                "timer"
+            );
+
+        const statusBadge =
+            document.getElementById(
+                "statusBadge"
+            );
+
+        const currentStatus =
+            document.getElementById(
+                "currentStatus"
+            );
+
+
+        /*
+         * Update order status UI
+         */
+
+        function updateStatus(status) {
+
+            status =
+                String(status)
+                    .toLowerCase()
+                    .trim();
+
+
+            /*
+             * Remove previous classes
+             */
+
+            if (received) {
+
+                received.classList.remove(
+                    "active",
+                    "completed"
+                );
+
+            }
+
+            if (preparing) {
+
+                preparing.classList.remove(
+                    "active",
+                    "completed"
+                );
+
+            }
+
+            if (ready) {
+
+                ready.classList.remove(
+                    "active",
+                    "completed"
+                );
+
+            }
+
+
+            /*
+             * RECEIVED
+             */
+
+            if (
+                status === "received" ||
+                status === "pending"
+            ) {
+
+                received.classList.add(
+                    "active"
+                );
+
+                if (progress) {
+
+                    progress.style.width =
+                        "0%";
+
                 }
-            }, 60000); // 1 minute
-        });
+
+            }
+
+
+            /*
+             * PREPARING
+             */
+
+            else if (
+                status === "preparing" ||
+                status === "processing"
+            ) {
+
+                received.classList.add(
+                    "completed"
+                );
+
+                preparing.classList.add(
+                    "active"
+                );
+
+                if (progress) {
+
+                    progress.style.width =
+                        "50%";
+
+                }
+
+            }
+
+
+            /*
+             * READY / COMPLETED
+             */
+
+            else if (
+                status === "ready" ||
+                status === "completed" ||
+                status === "complete"
+            ) {
+
+                received.classList.add(
+                    "completed"
+                );
+
+                preparing.classList.add(
+                    "completed"
+                );
+
+                ready.classList.add(
+                    "active"
+                );
+
+                if (progress) {
+
+                    progress.style.width =
+                        "100%";
+
+                }
+
+            }
+
+
+            /*
+             * Unknown status
+             */
+
+            else {
+
+                received.classList.add(
+                    "active"
+                );
+
+                if (progress) {
+
+                    progress.style.width =
+                        "0%";
+
+                }
+
+            }
+
+
+            /*
+             * Update text
+             */
+
+            if (currentStatus) {
+
+                currentStatus.textContent =
+                    status
+                        .charAt(0)
+                        .toUpperCase() +
+                    status.slice(1);
+
+            }
+
+            if (statusBadge) {
+
+                statusBadge.textContent =
+                    status
+                        .charAt(0)
+                        .toUpperCase() +
+                    status.slice(1);
+
+            }
+
+        }
+
+
+        /*
+         * Set initial status
+         */
+
+        updateStatus(orderStatus);
+
+
+        /*
+         * =========================
+         * COUNTDOWN TIMER
+         * =========================
+         *
+         * Received  -> 8 minutes
+         * Preparing -> 5 minutes
+         * Ready     -> 0 minutes
+         */
+
+        let remainingMinutes = 8;
+
+
+        if (
+            orderStatus === "preparing" ||
+            orderStatus === "processing"
+        ) {
+
+            remainingMinutes = 5;
+
+        }
+
+
+        if (
+            orderStatus === "ready" ||
+            orderStatus === "completed" ||
+            orderStatus === "complete"
+        ) {
+
+            remainingMinutes = 0;
+
+        }
+
+
+        /*
+         * Display timer
+         */
+
+        function displayTimer() {
+
+            if (!timer) {
+                return;
+            }
+
+            timer.textContent =
+                remainingMinutes;
+
+        }
+
+
+        displayTimer();
+
+
+        /*
+         * Countdown every minute
+         */
+
+        const countdown =
+            setInterval(
+                function () {
+
+                    if (
+                        remainingMinutes <= 0
+                    ) {
+
+                        clearInterval(
+                            countdown
+                        );
+
+                        return;
+
+                    }
+
+
+                    remainingMinutes--;
+
+                    displayTimer();
+
+
+                },
+                60000
+            );
+
+
     </script>
-</body></html>
+
+
+</body>
+
+</html>
